@@ -38,6 +38,12 @@ void Scene::init()
 	//to make right space
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH + 180), float(SCREEN_HEIGHT + 10), 0.f);
 	currentTime = 0.0f;
+
+	// Select which font you want to use
+	if (!text.init("fonts/OpenSans-Regular.ttf"))
+		//if(!text.init("fonts/OpenSans-Bold.ttf"))
+		//if(!text.init("fonts/DroidSerif.ttf"))
+		cout << "Could not load font!!!" << endl;
 }
 
 void Scene::update(int deltaTime)
@@ -58,6 +64,8 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
 	player->render();
+
+	text.render("Videogames!!!", glm::vec2(10, SCREEN_HEIGHT - 450), 32, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()
