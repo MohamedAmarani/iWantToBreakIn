@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include "ShaderProgram.h"
 #include "TexturedQuad.h"
-#include "Instructions.h"
+#include "Info.h"
 #include "Scene.h"
 #include "Credits.h"
 #include "Menu.h"
@@ -48,7 +48,7 @@ public:
 	void setState(int state);
 
 private:
-	Instructions instructions;
+	Info info;
 	Menu menu;
 	int state;
 	Credits credits;
