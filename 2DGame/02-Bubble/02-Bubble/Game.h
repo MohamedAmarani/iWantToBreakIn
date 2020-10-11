@@ -3,7 +3,7 @@
 
 
 #include "Scene.h"
-
+#include "Credits.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -43,6 +43,7 @@ public:
 	bool getSpecialKey(int key) const;
 
 private:
+	Credits credits;
 	bool bPlay;                       // Continue to play game?
 	Scene scene;                      // Scene to render
 	bool keys[256], specialKeys[256]; // Store key states so that 
