@@ -5,11 +5,11 @@
 #include "Game.h"
 
 
-#define SCREEN_X 32
-#define SCREEN_Y 16
+#define SCREEN_X 10
+#define SCREEN_Y 0
 
-#define INIT_PLAYER_X_TILES 17.5
-#define INIT_PLAYER_Y_TILES 25
+#define INIT_PLAYER_X_TILES 11.5
+#define INIT_PLAYER_Y_TILES 21
 
 
 Scene::Scene()
@@ -36,7 +36,8 @@ void Scene::init()
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 	//to make right space
-	projection = glm::ortho(0.f, float(SCREEN_WIDTH + 180), float(SCREEN_HEIGHT + 10), 0.f);
+	//projection = glm::ortho(0.f, float(SCREEN_WIDTH + 180), float(SCREEN_HEIGHT + 10), 0.f);
+	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
 
 	// Select which font you want to use
