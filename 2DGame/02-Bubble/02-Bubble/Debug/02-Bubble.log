@@ -1,5 +1,27 @@
-﻿  Text.cpp
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\text.h(5): fatal error C1083: Cannot open include file: 'ft2build.h': No such file or directory
+﻿  Scene.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(31): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Info.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Game.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Generating Code...
+  Compiling...
   Credits.cpp
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\credits.cpp(31): error C3688: invalid literal suffix 'ff'; literal operator or literal operator template 'operator ""ff' not found
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Generating Code...
+  Compiling...
+  main.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Generating Code...
+  Compiling...
+  Menu.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
+  Generating Code...
+  Compiling...
+  Player.cpp
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(29): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(31): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\game.h(7): fatal error C1083: Cannot open include file: 'Instructions.h': No such file or directory
   Generating Code...

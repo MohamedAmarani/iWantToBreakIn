@@ -26,11 +26,14 @@ public:
 	void render() const;
 	void free();
 	
-	int getTileSize() const { return tileSize; }
+	int getTileSizeX() const { return tileSize.x; }
+
+	int getTileSizeY() const { return tileSize.y; }
 
 	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) const;
-	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const;
+	bool collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size) const;
+	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -41,7 +44,8 @@ private:
 	GLuint vbo;
 	GLint posLocation, texCoordLocation;
 	glm::ivec2 position, mapSize, tilesheetSize;
-	int tileSize, blockSize;
+	glm::vec2 blockSize;
+	glm::vec2 tileSize;
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
 	int *map;
