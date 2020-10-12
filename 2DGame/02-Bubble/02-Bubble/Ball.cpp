@@ -37,14 +37,15 @@ void Ball::update(int deltaTime)
 {
 	sprite->update(deltaTime);
 
-	if (map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32)))
-		xSpeed = 1;
-	if (map->collisionMoveRight(posPlayer, glm::ivec2(32, 32)))
-		xSpeed = -1;
-	if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32)))
+	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(32, 32)))
 		ySpeed = 1;
-	if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32)))
+	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(32, 32)))
 		ySpeed = -1;
+	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x - 1, posPlayer.y), glm::ivec2(32, 32)))
+		xSpeed = 1;
+	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + 1, posPlayer.y), glm::ivec2(32, 32)))
+		xSpeed = -1;
+
 
 
 	posPlayer.x += xSpeed;
