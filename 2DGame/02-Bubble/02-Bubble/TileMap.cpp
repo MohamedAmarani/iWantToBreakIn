@@ -168,6 +168,21 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) c
 
 	return false;
 }
+//pos=position of the ball, size = ball size
+bool TileMap::collisionMoveLeft2(const glm::ivec2 &pos, const glm::ivec2 &size) const
+{
+	int x, y0, y1;
+	x = pos.x / tileSize.x;
+	y0 = pos.y / tileSize.y;
+	y1 = (pos.y + size.y - 1) / tileSize.y;
+	for (int y = y0; y <= y1; y++)
+	{
+		if (map[y*mapSize.x + x] != 0)
+			return true;
+	}
+
+	return false;
+}
 
 bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) const
 {
