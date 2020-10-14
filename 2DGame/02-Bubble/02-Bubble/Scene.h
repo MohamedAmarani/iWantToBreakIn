@@ -4,6 +4,7 @@
 
 #include <glm/glm.hpp>
 #include "ShaderProgram.h"
+#include "Paddle.h"
 #include "TileMap.h"
 #include "Player.h"
 #include "Ball.h"
@@ -31,6 +32,7 @@ private:
 	TileMap *map;
 	Player *player;
 	Ball *ball;
+	Paddle *paddle;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;

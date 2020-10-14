@@ -217,6 +217,25 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size) c
 	return false;
 }
 
+bool TileMap::collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const
+{
+	if ((paddlePos.y - 16) == pos.y)
+		if ((pos.x >= paddlePos.x) && (pos.x <= paddlePos.x + 32))
+			return true;
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize.x;
+	x1 = (pos.x + size.x - 1) / tileSize.x;
+	y = (pos.y + size.y - 1) / tileSize.y;
+	for (int x = x0; x <= x1; x++)
+	{
+		if (map[y*mapSize.x + x] != 0)
+			return true;
+	}
+
+	return false;
+}
+
 
 
 
