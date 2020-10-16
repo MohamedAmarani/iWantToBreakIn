@@ -155,11 +155,11 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 // Method collisionMoveDown also corrects Y coordinate if the box is
 // already intersecting a tile below.
 
-bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, bool b)
+bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b)
 {
 
 	int x, x1, y0, y1;
-	if (!b){
+	if (b == 2){
 		xPos = pos.x;
 		yPos = pos.y;
 	}
@@ -168,24 +168,27 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, b
 	y0 = pos.y / tileSize.y;
 	y1 = (pos.y + size.y - 1) / tileSize.y;
 
-	if (b)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (32 + yPos > pos.y))
+	if (b == 1)
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
 			return true;
 
 	for (int y = y0; y <= y1; y++)
 	{
-		if (map[y*mapSize.x + x] != 0)
+		if (map[y*mapSize.x + x] != 0) {
+			if(b == 1)
+				map[y*mapSize.x + x] = 0;
 			return true;
+		}
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) 
+bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) 
 {
 	int i = pos.x;
 
-	if (!b) {
+	if (b == 2) {
 		xPos = pos.x;
 		yPos = pos.y;
 	}
@@ -197,24 +200,27 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	y0 = pos.y / tileSize.y;
 	y1 = (pos.y + size.y - 1) / tileSize.y;
 
-	if (b)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (32 + yPos > pos.y))
+	if (b == 1)
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
 			return true;
 
 	for (int y = y0; y <= y1; y++)
 	{
-		if (map[y*mapSize.x + x] != 0)
+		if (map[y*mapSize.x + x] != 0){
+			if (b == 1)
+				map[y*mapSize.x + x] = 0;
 			return true;
+		}
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) 
+bool TileMap::collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, int b) 
 {
 
 	int x0, x1, y, y1;
-	if (!b) {
+	if (b == 2) {
 		xPos = pos.x;
 		yPos = pos.y;
 	}
@@ -223,24 +229,27 @@ bool TileMap::collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, boo
 	y = (pos.y) / tileSize.y;
 	y1 = (pos.y + size.y - 1) / tileSize.y;
 
-	if (b)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (32 + yPos > pos.y))
+	if (b == 1)
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
 			return true;
 
 	for (int x = x0; x <= x1; x++)
 	{
-		if (map[y*mapSize.x + x] != 0)
+		if (map[y*mapSize.x + x] != 0){
+			if (b == 1)
+				map[y*mapSize.x + x] = 0;
 			return true;
+		}
 	}
 
 	return false;
 }
 
-bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) 
+bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) 
 {
 
 	int x0, x1, y, y0;
-	if (!b) {
+	if (b == 2) {
 		xPos = pos.x;
 		yPos = pos.y;
 	}
@@ -249,14 +258,37 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, b
 	y = (pos.y + size.y - 1) / tileSize.y;
 	y0 = pos.y / tileSize.y;
 
-	if (b)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (32 + yPos > pos.y))
+	if (b == 1)
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
 			return true;
 
 	for (int x = x0; x <= x1; x++)
 	{
-		if (map[y*mapSize.x + x] != 0)
+		if (map[y*mapSize.x + x] != 0) {
+			if (b == 1)
+				map[y*mapSize.x + x] = 0;
 			return true;
+		}
+	}
+
+	return false;
+}
+
+bool TileMap::collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const
+{
+	if ((paddlePos.y - 16) == pos.y)
+		if ((pos.x >= paddlePos.x) && (pos.x <= paddlePos.x + 32))
+			return true;
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize.x;
+	x1 = (pos.x + size.x - 1) / tileSize.x;
+	y = (pos.y + size.y - 1) / tileSize.y;
+	for (int x = x0; x <= x1; x++)
+	{
+		if (map[y*mapSize.x + x] != 0) {
+			return true;
+		}
 	}
 
 	return false;

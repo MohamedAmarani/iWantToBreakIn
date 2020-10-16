@@ -17,6 +17,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	ball = NULL;
+	paddle = NULL;
 }
 
 Scene::~Scene()
@@ -27,6 +28,8 @@ Scene::~Scene()
 		delete player;
 	if (ball != NULL)
 		delete ball;
+	if (paddle != NULL)
+		delete paddle;
 }
 
 
@@ -36,12 +39,16 @@ void Scene::init()
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	ball->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	ball->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX()+8, INIT_PLAYER_Y_TILES * map->getTileSizeY()-16));
 	ball->setTileMap(map);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	player->setTileMap(map);
+	paddle = new Paddle();
+	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	paddle->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	paddle->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
 }
@@ -50,7 +57,9 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
-	ball->update(deltaTime);
+	paddle->update(deltaTime);
+	glm::vec2 a = paddle->getPosition();
+	ball->update(deltaTime, a);
 	if (Game::instance().getKey(27)) //ESC
 		Game::instance().setState(0);
 }
@@ -65,9 +74,11 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	map->render();
 	player->render();
 	ball->render();
+	paddle->render();
 }
 
 void Scene::initShaders()

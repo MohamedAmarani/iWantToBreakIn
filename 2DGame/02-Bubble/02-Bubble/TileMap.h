@@ -35,14 +35,17 @@ public:
 
 	void setYPos(int a)  { yPos = a; }
 
-	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) ;
-	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) ;
-	bool collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) ;
-	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, bool b) ;
+	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+	bool collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+
+	bool collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const;
+	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
+
 	
 private:
 	bool loadLevel(const string &levelFile);
-	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 
 private:
 	GLuint vao;

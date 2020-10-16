@@ -20,8 +20,10 @@ enum PlayerAnims
 void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	xSpeed = ySpeed = -1;
-	spritesheet.loadFromFile("images/ball.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(1.f, 1.f), &spritesheet, &shaderProgram);
+
+	spritesheet.loadFromFile("images/grayBall.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(1, 1), &spritesheet, &shaderProgram);
+
 	sprite->setNumberAnimations(1);
 
 	sprite->setAnimationSpeed(STAND_LEFT, 8);
@@ -33,17 +35,19 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Ball::update(int deltaTime)
+void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 {
 	sprite->update(deltaTime);
 
-	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(16, 16), true))
+
+	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(16, 16), 1))
 		ySpeed = 1;
-	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(16, 16), true))
+	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(16, 16), 1))
 		ySpeed = -1;
-	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x - 1, posPlayer.y), glm::ivec2(16, 16), true))
+	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x - 1, posPlayer.y), glm::ivec2(16, 16), 1))
 		xSpeed = 1;
-	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + 1, posPlayer.y), glm::ivec2(16, 16), true))
+	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + 1, posPlayer.y), glm::ivec2(16, 16), 1))
+
 		xSpeed = -1;
 
 	posPlayer.x += xSpeed;
