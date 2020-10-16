@@ -6,9 +6,7 @@
 #include "Game.h"
 
 
-#define JUMP_ANGLE_STEP 4
-#define JUMP_HEIGHT 96
-#define FALL_STEP 4
+
 
 
 enum PlayerAnims
@@ -69,7 +67,59 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	{
+			if (sprite->animation() != MOVE_DOWN)
+				sprite->changeAnimation(MOVE_DOWN);
+			posPlayer.y += 2;
+			posPlayer.x -= 2;
+			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
+			{
+				posPlayer.y -= 2;
+				posPlayer.x += 2;
+				sprite->changeAnimation(STAND_DOWN);
+			}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPlayer.y += 2;
+		posPlayer.x += 2;
+		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
+		{
+			posPlayer.y -= 2;
+			posPlayer.x -= 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPlayer.y -= 2;
+		posPlayer.x -= 2;
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
+		{
+			posPlayer.y += 2;
+			posPlayer.x += 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPlayer.y -= 2;
+		posPlayer.x += 2;
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
+		{
+			posPlayer.y += 2;
+			posPlayer.x -= 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	else if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
 		if (sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);

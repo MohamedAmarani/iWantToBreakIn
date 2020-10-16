@@ -32,7 +32,59 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Paddle::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPaddle.y += 2;
+		posPaddle.x -= 2;
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 0))
+		{
+			posPaddle.y -= 2;
+			posPaddle.x += 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPaddle.y += 2;
+		posPaddle.x += 2;
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 0))
+		{
+			posPaddle.y -= 2;
+			posPaddle.x -= 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPaddle.y -= 2;
+		posPaddle.x -= 2;
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 0))
+		{
+			posPaddle.y += 2;
+			posPaddle.x += 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	{
+		if (sprite->animation() != MOVE_DOWN)
+			sprite->changeAnimation(MOVE_DOWN);
+		posPaddle.y -= 2;
+		posPaddle.x += 2;
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 0))
+		{
+			posPaddle.y += 2;
+			posPaddle.x -= 2;
+			sprite->changeAnimation(STAND_DOWN);
+		}
+	}
+	else if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
 		posPaddle.x -= 2;
 		if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))

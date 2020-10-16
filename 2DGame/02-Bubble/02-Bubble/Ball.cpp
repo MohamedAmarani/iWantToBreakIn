@@ -19,7 +19,7 @@ enum PlayerAnims
 
 void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
-	xSpeed = ySpeed = -1;
+	xSpeed = ySpeed = -2;
 
 	spritesheet.loadFromFile("images/grayBall.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(1, 1), &spritesheet, &shaderProgram);
@@ -41,14 +41,13 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 
 
 	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(16, 16), 1))
-		ySpeed = 1;
+		ySpeed = 2;
 	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(16, 16), 1))
-		ySpeed = -1;
+		ySpeed = -2;
 	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x - 1, posPlayer.y), glm::ivec2(16, 16), 1))
-		xSpeed = 1;
+		xSpeed = 2;
 	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + 1, posPlayer.y), glm::ivec2(16, 16), 1))
-
-		xSpeed = -1;
+		xSpeed = -2;
 
 	posPlayer.x += xSpeed;
 	posPlayer.y += ySpeed;
