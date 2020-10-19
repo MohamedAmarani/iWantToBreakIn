@@ -5,7 +5,7 @@
 #include "Game.h"
 
 
-#define SCREEN_X 32
+#define SCREEN_X 16
 #define SCREEN_Y 16
 
 #define INIT_PLAYER_X_TILES 4
@@ -51,6 +51,12 @@ void Scene::init()
 	paddle->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
+
+	// Select which font you want to use
+	//if (!text.init("fonts/OpenSans-Regular.ttf"))
+	if (!text.init("fonts/joystixMonospace.ttf"))
+		//if(!text.init("fonts/DroidSerif.ttf"))
+		cout << "Could not load font!!!" << endl;
 }
 
 void Scene::update(int deltaTime)
@@ -79,6 +85,25 @@ void Scene::render()
 	player->render();
 	ball->render();
 	paddle->render();
+
+	//The vec4 is color
+	text.render("MONEY:", glm::vec2(516, 40), 24, glm::vec4(1, 1, 1, 1));
+	text.render("0000000", glm::vec2(502, 64), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("POINTS:", glm::vec2(502, 136), 24, glm::vec4(1, 1, 1, 1));
+	text.render("0000000", glm::vec2(502, 160), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("LIVES:", glm::vec2(516, 232), 24, glm::vec4(1, 1, 1, 1));
+	text.render("00", glm::vec2(576, 256), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("BANK:", glm::vec2(532, 304), 24, glm::vec4(1, 1, 1, 1));
+	text.render("00", glm::vec2(576, 328), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("BATMODE", glm::vec2(502, 376), 24, glm::vec4(1, 1, 1, 1));
+	text.render("SMALL", glm::vec2(520, 400), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("ROOM:", glm::vec2(532, 436), 24, glm::vec4(1, 1, 1, 1));
+	text.render("00", glm::vec2(576, 460), 24, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()
