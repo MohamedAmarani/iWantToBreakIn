@@ -38,7 +38,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y += 2;
 		posPaddle.x -= 2;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
 		{
 			posPaddle.y -= 2;
 			posPaddle.x += 2;
@@ -51,7 +51,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y += 2;
 		posPaddle.x += 2;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
 		{
 			posPaddle.y -= 2;
 			posPaddle.x -= 2;
@@ -64,7 +64,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y -= 2;
 		posPaddle.x -= 2;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
 		{
 			posPaddle.y += 2;
 			posPaddle.x += 2;
@@ -77,7 +77,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y -= 2;
 		posPaddle.x += 2;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
 		{
 			posPaddle.y += 2;
 			posPaddle.x -= 2;

@@ -38,12 +38,12 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 {
 	sprite->update(deltaTime);
-
-
+	int aux;
 	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y - 1), glm::ivec2(16, 16), 1))
 		ySpeed = 2;
-	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(16, 16), 1))
+	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + 1), glm::ivec2(16, 16), 1)) {
 		ySpeed = -2;
+	}
 	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x - 1, posPlayer.y), glm::ivec2(16, 16), 1))
 		xSpeed = 2;
 	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + 1, posPlayer.y), glm::ivec2(16, 16), 1))

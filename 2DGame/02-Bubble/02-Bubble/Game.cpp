@@ -31,7 +31,6 @@ bool Game::update(int deltaTime)
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	if (state == 0)
 		menu.render();
 	else if (state == 1)
