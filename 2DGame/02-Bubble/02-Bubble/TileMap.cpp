@@ -18,7 +18,8 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
-	offset = offsetR = 0;
+	offset = 1;
+	offsetR = 32;
 	xPos = 0;
 	yPos = 0;
 	loadLevel(levelFile);
@@ -69,8 +70,8 @@ bool TileMap::loadLevel(const string &levelFile)
 	getline(fin, line);
 	sstream.str(line);
 	//sstream >> tileSize.x >> tileSize.x >> blockSize;
-	tileSize = glm::vec2(16, 8);
-	blockSize = glm::vec2(16, 16);
+	tileSize = glm::vec2(32, 16);
+	blockSize = glm::vec2(32, 32);
 	cout << tileSize.x << " " << tileSize.x;
 	getline(fin, line);
 	sstream.str(line);
@@ -114,8 +115,8 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 	
 	halfTexel = glm::vec2(0.5f / tilesheet.width(), 0.5f / tilesheet.height());
 
-	if (offset == 1 && offsetR != 32)
-		++offsetR;
+	if (offset == 0 && offsetR != 0)
+		--offsetR;
 
 	for(int j=offsetR; j<32 + offsetR; j++)
 	{
@@ -126,11 +127,9 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 			{
 				// Non-empty tile
 				nTiles++;
-				if(offset>0)
-					posTile = glm::vec2(minCoords.x + i * tileSize.x, minCoords.y + (j - 32) * tileSize.y);
-				else
-					posTile = glm::vec2(minCoords.x + i * tileSize.x, minCoords.y + j * tileSize.y);
-				texCoordTile[0] = glm::vec2(float((tile-1)%2) / tilesheetSize.x, float((tile-1)/2) / tilesheetSize.y);
+				posTile = glm::vec2(minCoords.x + i * tileSize.x, minCoords.y + (j - offsetR) * tileSize.y);
+
+				texCoordTile[0] = glm::vec2(float((tile-1)%4) / tilesheetSize.x, float((tile-1)/4) / tilesheetSize.y);
 				texCoordTile[1] = texCoordTile[0] + tileTexSize;
 				//texCoordTile[0] += halfTexel;
 				texCoordTile[1] -= halfTexel;
@@ -184,7 +183,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		if (map[(y + (offset * 32))*mapSize.x + x] != 0) {
 			if(b == 1 && map[(y + (offset * 32))*mapSize.x + x] != 8)
 				map[(y + (offset * 32))*mapSize.x + x] = 0;
-			offset = 1;
+			offset = 0;
 			return true;
 		}
 	}
