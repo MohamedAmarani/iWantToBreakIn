@@ -69,8 +69,8 @@ bool TileMap::loadLevel(const string &levelFile)
 	getline(fin, line);
 	sstream.str(line);
 	//sstream >> tileSize.x >> tileSize.x >> blockSize;
-	tileSize = glm::vec2(32, 8);
-	blockSize = glm::vec2(32, 32);
+	tileSize = glm::vec2(16, 8);
+	blockSize = glm::vec2(16, 16);
 	cout << tileSize.x << " " << tileSize.x;
 	getline(fin, line);
 	sstream.str(line);

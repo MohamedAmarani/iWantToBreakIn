@@ -1,7 +1,7 @@
 TILEMAP
 13 65 							-- Size of tile map in tiles
 128 32 32						-- Tile size & block size
-images/bloques.png 	-- Tilesheet
+images/bloques3.png 	-- Tilesheet
 1 8 								-- Number of tiles in tilesheet
 8888888888888
 8           8

@@ -86,34 +86,46 @@ void Paddle::update(int deltaTime)
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
-		posPaddle.x -= 2;
-		if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
-		{
-			posPaddle.x += 2;
+		if (Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
+			Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
+			posPaddle.x -= 2;
+			if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
+			{
+				posPaddle.x += 2;
+			}
 		}
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
 	{
-		posPaddle.x += 2;
-		if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
-		{
-			posPaddle.x -= 2;
+		if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
+			Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
+			posPaddle.x += 2;
+			if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
+			{
+				posPaddle.x -= 2;
+			}
 		}
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 	{
-		posPaddle.y -= 2;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2))
-		{
-			posPaddle.y += 2;
+		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
+			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
+			posPaddle.y -= 2;
+			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2))
+			{
+				posPaddle.y += 2;
+			}
 		}
 	}
 	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
 	{
-		posPaddle.y += 2;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2))
-		{
-			posPaddle.y -= 2;
+		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
+			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
+			posPaddle.y += 2;
+			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2))
+			{
+				posPaddle.y -= 2;
+			}
 		}
 	}
 
