@@ -60,6 +60,7 @@ private:
 	glm::vec2 tileTexSize;
 	int *map;
 	int offset, offsetR;
+	int levelTile;
 
 };
 
