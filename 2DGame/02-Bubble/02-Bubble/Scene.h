@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Ball.h"
 #include "Text.h"
+#include "Winnie.h"
 
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
@@ -29,6 +30,7 @@ private:
 	void initShaders();
 
 private:
+	Winnie *winnie;
 	TileMap *map;
 	Player *player;
 	Ball *ball;

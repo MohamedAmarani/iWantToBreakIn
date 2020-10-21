@@ -16,6 +16,7 @@ Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
+	winnie = NULL;
 	ball = NULL;
 	paddle = NULL;
 }
@@ -45,6 +46,10 @@ void Scene::init()
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	player->setTileMap(map);
+	winnie = new Winnie();
+	winnie->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
+	winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	winnie->setTileMap(map);
 	paddle = new Paddle();
 	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	paddle->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
@@ -63,6 +68,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	winnie->update(deltaTime);
 	paddle->update(deltaTime);
 	glm::vec2 a = paddle->getPosition();
 	ball->update(deltaTime, a);
@@ -82,6 +88,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	map->render();
+	winnie->render();
 	player->render();
 	ball->render();
 	paddle->render();
