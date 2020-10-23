@@ -36,6 +36,7 @@ public:
 	void setYPos(int a)  { yPos = a; }
 
 	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+	int amITr(const glm::ivec2 &pos);
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
 	bool collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
 	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;

@@ -18,7 +18,6 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
-	snitch = 0;
 	offset = 2;
 	offsetR = 56;
 	xPos = 0;
@@ -178,6 +177,25 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 // Method collisionMoveDown also corrects Y coordinate if the box is
 // already intersecting a tile below.
 
+int TileMap::amITr(const glm::ivec2 &pos) {
+	if (pos.y < 15 && offset>0) {
+		--offset;
+		return 0;
+	}
+	else if (pos.y > 27 * 16 && offset<2) {
+		++offset;
+		return 1;
+	}
+	if (offset == 0 && offsetR == 0)
+		return 2;
+	else if (offset == 1 && offsetR == 28)
+		return 2;
+	else if (offset == 2 && offsetR == 56)
+		return 2;
+
+	return 3;
+}
+
 bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b)
 {
 
@@ -244,22 +262,6 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 	x1 = (pos.x + size.x - 1) / tileSize.x;
 	y = (pos.y) / tileSize.y;
 	y1 = (pos.y + size.y - 1) / tileSize.y;
-
-	if (b == 1)
-		if (pos.y < 15 && snitch == 0) {
-			pos.x = 150;
-			pos.y = 432;
-			--offset;
-			snitch = -1;
-		}
-		else if (pos.y > 27 * 16 && snitch == 0) {
-			pos.x = 150;
-			pos.y = 432;
-			++offset;
-			snitch = 1;
-		}
-	if (pos.y >= 15 && pos.y <= 27 * 16)
-		snitch = 0;
 
 	for (int x = x0; x <= x1; x++)
 	{
