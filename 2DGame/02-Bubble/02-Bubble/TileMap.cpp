@@ -3,7 +3,7 @@
 #include <sstream>
 #include <vector>
 #include "TileMap.h"
-
+#include "cmath"
 
 using namespace std;
 
@@ -142,7 +142,7 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 				nTiles++;
 				posTile = glm::vec2(minCoords.x + i * tileSize.x, minCoords.y + (j - offsetR) * tileSize.y);
 
-				texCoordTile[0] = glm::vec2(float((tile-1)%4) / tilesheetSize.x, float((tile-1)/4) / tilesheetSize.y);
+				texCoordTile[0] = glm::vec2(float((tile-1)% tilesheetSize.x) / tilesheetSize.x, float((tile-1)/ tilesheetSize.y) / tilesheetSize.y);
 				texCoordTile[1] = texCoordTile[0] + tileTexSize;
 				//texCoordTile[0] += halfTexel;
 				texCoordTile[1] -= halfTexel;
@@ -288,10 +288,6 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	y = (pos.y + size.y - 1) / tileSize.y;
 	y0 = pos.y / tileSize.y;
 
-	if (b == 1)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
-			return true;
-
 	for (int x = x0; x <= x1; x++)
 	{
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
@@ -304,7 +300,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	return false;
 }
 
-int TileMap::collisionMoveDownBall(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed)
+int TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed)
 {
 
 	int x0, x1, y, y0;
@@ -317,16 +313,64 @@ int TileMap::collisionMoveDownBall(const glm::ivec2 &pos, const glm::ivec2 &size
 	y = (pos.y + size.y - 1) / tileSize.y;
 	y0 = pos.y / tileSize.y;
 
+	double ballWidth = 16;
+	double ballCenterX = pos.x + ballWidth / 2;
+	double paddleWidth = 32;
+	double paddleCenterX = xPos + paddleWidth / 2;
+	double speedX = -2;
+	double speedY = -2;
+
+	double speedXY = sqrt(speedX*speedX + speedY*speedY);
+
+	double posX = (ballCenterX - paddleCenterX) / ((paddleWidth+1) / 2);
+
+	double influenceX = 1;
+
+	speedX = speedXY * posX * influenceX;
 	if (b == 1)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y)) {
-			if (xPos + 5 > pos.x)//mitad izquerda
-				return -2;
-			else if (xPos + 18 < pos.x)//mitad derecha
-				return 2;
-			else
-				return 0;
-		}
-	return -1;
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
+			return (int)speedX;
+		return -100;
+
+}
+
+int TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed)
+{
+
+	int x0, x1, y, y0;
+	if (b == 2) {
+		xPos = pos.x;
+		yPos = pos.y;
+	}
+	x0 = pos.x / tileSize.x;
+	x1 = (pos.x + size.x - 1) / tileSize.x;
+	y = (pos.y + size.y - 1) / tileSize.y;
+	y0 = pos.y / tileSize.y;
+
+	double ballWidth = 16;
+	double ballCenterX = pos.x + ballWidth / 2;
+	double paddleWidth = 32;
+	double paddleCenterX = xPos + paddleWidth / 2;
+	double speedX = -2;
+	double speedY = -2;
+
+
+	double speedXY = sqrt(speedX*speedX + speedY*speedY);
+
+	double posX = (ballCenterX - paddleCenterX) / ((paddleWidth + 1) / 2);
+
+	double influenceX = 1;
+
+	speedX = speedXY * posX * influenceX;
+
+	speedY = sqrt(speedXY*speedXY - speedX*speedX) *
+		(speedY > 0 ? -1 : 1);
+
+	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (8 + yPos > pos.y))
+		return (int)speedY;
+	else
+		return -100;
+
 }
 
 bool TileMap::collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const
@@ -348,35 +392,3 @@ bool TileMap::collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &s
 
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
