@@ -129,9 +129,6 @@ void Paddle::update(int deltaTime)
 		}
 	}
 
-	map->collisionMoveDownBallX(posPaddle, glm::ivec2(32, 32), 2, 1);
-	map->collisionMoveDownBallY(posPaddle, glm::ivec2(16, 16), 2, 1);
-
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPaddle.x), float(tileMapDispl.y + posPaddle.y)));
 }
 

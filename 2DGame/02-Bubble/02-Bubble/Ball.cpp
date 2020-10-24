@@ -39,15 +39,16 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 {
 	sprite->update(deltaTime);
-	int aux;
+	double aux;
 	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1))
 		ySpeedA = ySpeed = ySpeed * (-1);
 	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1))
 		ySpeedA = ySpeed = ySpeed*(-1);
-	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed)) != -100)
+	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		xSpeedA = xSpeed = aux; 
-	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed)) != -100)
+	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100) {
 		ySpeedA = ySpeed = aux;
+	}
 	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))
 		xSpeedA = xSpeed = xSpeed*(-1);
 	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))

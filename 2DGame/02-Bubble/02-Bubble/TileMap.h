@@ -40,8 +40,8 @@ public:
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
 	bool collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
 	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
-	int collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed);
-	int collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed);
+	double collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
+	double collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
 	bool collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const;
 	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 
