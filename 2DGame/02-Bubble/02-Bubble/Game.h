@@ -9,6 +9,11 @@
 #include "Credits.h"
 #include "Menu.h"
 
+#include <stdio.h>
+#include <irrKlang.h>
+#include <conio.h>
+using namespace irrklang;
+
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
@@ -56,7 +61,7 @@ private:
 	Scene scene;                      // Scene to render
 	bool keys[256], specialKeys[256]; // Store key states so that 
 									  // we can have access at any time
-
+	ISoundEngine* engine;
 };
 
 

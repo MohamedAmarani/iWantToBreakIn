@@ -12,6 +12,19 @@ void Game::init()
 	menu.init();
 	info.init();
 	state = 0;
+	engine = createIrrKlangDevice();
+
+	if (!engine)
+	{
+		printf("Could not startup engine\n");
+		return; // error starting up the engine
+	}
+
+	// To play a sound, we only to call play2D(). The second parameter
+	// tells the engine to play it looped.
+
+	// play some sound stream, looped
+	engine->play2D("sounds/getout.ogg", true);
 }
 
 bool Game::update(int deltaTime)
@@ -45,6 +58,8 @@ void Game::keyPressed(int key)
 {
 	//if(key == 27) // Escape code
 	//bPlay = false;
+	if(key == '1')
+			engine->drop(); // delete engine
 	keys[key] = true;
 }
 
