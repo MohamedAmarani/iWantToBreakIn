@@ -337,6 +337,15 @@ double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &
 	double influenceX = 1;
 
 	speedX = speedXY * posX * influenceX;
+
+	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
+
+	if (speedY < 1) {
+		if (speedX >= 0)
+			--speedX;
+		else
+			++speedX;
+	}
 	if (b == 1)
 		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y))
 			return speedX;
@@ -369,6 +378,9 @@ double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &
 	speedX = speedXY * posX * influenceX;
 
 	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
+
+	if (speedY < 1)
+		speedY-=0.1;
 
 	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y))
 		return speedY;
