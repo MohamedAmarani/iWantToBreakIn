@@ -62,6 +62,8 @@ void Scene::init()
 	if (!text.init("fonts/joystixMonospace.ttf"))
 		//if(!text.init("fonts/DroidSerif.ttf"))
 		cout << "Could not load font!!!" << endl;
+
+
 }
 
 void Scene::update(int deltaTime)

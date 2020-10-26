@@ -12,19 +12,20 @@ void Game::init()
 	menu.init();
 	info.init();
 	state = 0;
-	engine = createIrrKlangDevice();
+	SoundEngine = createIrrKlangDevice();
 
-	if (!engine)
+	if (!SoundEngine)
 	{
 		printf("Could not startup engine\n");
 		return; // error starting up the engine
 	}
 
-	// To play a sound, we only to call play2D(). The second parameter
-	// tells the engine to play it looped.
+	if (CurrentPlayingSound)
+		CurrentPlayingSound->drop();
+	CurrentPlayingSound = 0;
 
-	// play some sound stream, looped
-	engine->play2D("sounds/getout.ogg", true);
+	playSoundBGM("sounds/getout.ogg");
+
 }
 
 bool Game::update(int deltaTime)
@@ -46,8 +47,10 @@ void Game::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (state == 0)
 		menu.render();
-	else if (state == 1)
+	else if (state == 1) {
 		scene.render();
+		SoundEngine->removeSoundSource("sounds/getout.ogg");
+	}
 	else if (state == 2)
 		info.render();
 	else if (state == 3)
@@ -59,7 +62,7 @@ void Game::keyPressed(int key)
 	//if(key == 27) // Escape code
 	//bPlay = false;
 	if(key == '1')
-			engine->drop(); // delete engine
+		SoundEngine->removeSoundSource("sounds/getout.ogg");
 	keys[key] = true;
 }
 
@@ -102,4 +105,19 @@ bool Game::getSpecialKey(int key) const
 
 void Game::setState(int s) {
 	state = s;
+}
+
+void Game::playSoundBGM(const char * sound)
+{
+
+	// To play a sound, we only to call play2D(). The second parameter
+	// tells the engine to play it looped.
+
+	// play some sound stream, looped
+	SoundEngine->play2D(sound, true);
+}
+
+void Game::playSound(const char * sound)
+{
+	CurrentPlayingSound = SoundEngine->play2D(sound, false);
 }

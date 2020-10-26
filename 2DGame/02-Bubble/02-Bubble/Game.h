@@ -52,6 +52,9 @@ public:
 	bool getSpecialKey(int key) const;
 	void setState(int state);
 
+	void playSoundBGM(const char* sound);
+	void playSound(const char* sound);
+
 private:
 	Info info;
 	Menu menu;
@@ -61,7 +64,8 @@ private:
 	Scene scene;                      // Scene to render
 	bool keys[256], specialKeys[256]; // Store key states so that 
 									  // we can have access at any time
-	ISoundEngine* engine;
+	ISoundEngine* SoundEngine;
+	ISound* CurrentPlayingSound;
 };
 
 
