@@ -78,6 +78,7 @@ void Scene::update(int deltaTime)
 		Game::instance().playSoundBGM("sounds/breakout.mp3");
 	}
 	if (Game::instance().getKey(27)) { //ESC
+		firstTime = false;
 		Game::instance().playSoundBGM("sounds/getout.ogg");
 		Game::instance().setState(0);
 	}

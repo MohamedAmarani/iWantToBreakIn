@@ -415,7 +415,6 @@ double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &
 
 
 	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y)) {
-		Game::instance().playSound("sounds/paddle.wav");
 		return speedY;
 	}
 	else
