@@ -33,10 +33,8 @@ bool Game::update(int deltaTime)
 {
 	if (state == 0)
 		menu.update(deltaTime);
-	else if (state == 1) {
-		SoundEngine->removeSoundSource("sounds/getout.ogg");
+	else if (state == 1) 
 		scene.update(deltaTime);
-	}
 	else if (state == 2)
 		info.update(deltaTime);
 	else if (state == 3)
@@ -116,7 +114,11 @@ void Game::playSoundBGM(const char * sound)
 	// tells the engine to play it looped.
 
 	// play some sound stream, looped
+	if (CurrentPlayingSound)
+		CurrentPlayingSound->drop();
+	SoundEngine->removeAllSoundSources();
 	CurrentPlayingSound = SoundEngine->play2D(sound, true);
+	SoundEngine->setSoundVolume(0.3);
 }
 
 void Game::playSound(const char * sound)
