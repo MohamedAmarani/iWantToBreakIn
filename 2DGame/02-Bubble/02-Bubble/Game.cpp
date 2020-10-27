@@ -25,7 +25,7 @@ void Game::init()
 	info.init();
 	state = 0;
 
-	playSoundBGM("sounds/getout.ogg");
+	playSoundBGM("sounds/summer.mp3");
 
 }
 
@@ -62,7 +62,7 @@ void Game::keyPressed(int key)
 	//if(key == 27) // Escape code
 	//bPlay = false;
 	if(key == '1')
-		SoundEngine->removeSoundSource("sounds/getout.ogg");
+		SoundEngine->removeSoundSource("sounds/summer.mp3");
 	keys[key] = true;
 }
 
@@ -118,7 +118,7 @@ void Game::playSoundBGM(const char * sound)
 		CurrentPlayingSound->drop();
 	SoundEngine->removeAllSoundSources();
 	CurrentPlayingSound = SoundEngine->play2D(sound, true);
-	SoundEngine->setSoundVolume(0.3);
+	SoundEngine->setSoundVolume(0.5);
 }
 
 void Game::playSound(const char * sound)

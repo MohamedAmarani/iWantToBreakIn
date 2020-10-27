@@ -75,11 +75,11 @@ void Scene::update(int deltaTime)
 
 	if (!firstTime) {
 		firstTime = true;
-		Game::instance().playSoundBGM("sounds/breakout.mp3");
+		Game::instance().playSoundBGM("sounds/scene.wav");
 	}
 	if (Game::instance().getKey(27)) { //ESC
 		firstTime = false;
-		Game::instance().playSoundBGM("sounds/getout.ogg");
+		Game::instance().playSoundBGM("sounds/summer.mp3");
 		Game::instance().setState(0);
 	}
 }
