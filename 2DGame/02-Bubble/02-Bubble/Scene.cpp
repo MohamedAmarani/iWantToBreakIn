@@ -77,8 +77,10 @@ void Scene::update(int deltaTime)
 		firstTime = true;
 		Game::instance().playSoundBGM("sounds/breakout.mp3");
 	}
-	if (Game::instance().getKey(27)) //ESC
+	if (Game::instance().getKey(27)) { //ESC
+		Game::instance().playSoundBGM("sounds/getout.ogg");
 		Game::instance().setState(0);
+	}
 }
 
 void Scene::render()

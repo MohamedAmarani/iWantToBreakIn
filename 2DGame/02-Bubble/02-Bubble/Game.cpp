@@ -118,10 +118,10 @@ void Game::playSoundBGM(const char * sound)
 		CurrentPlayingSound->drop();
 	SoundEngine->removeAllSoundSources();
 	CurrentPlayingSound = SoundEngine->play2D(sound, true);
-	SoundEngine->setSoundVolume(0.3);
+	SoundEngine->setSoundVolume(0.5);
 }
 
 void Game::playSound(const char * sound)
 {
-	ISound* aSong = SoundEngine->play2D(sound, false);
+	ISound* aSound = SoundEngine->play2D(sound, false);
 }

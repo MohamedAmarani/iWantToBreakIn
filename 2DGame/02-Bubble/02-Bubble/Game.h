@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <irrKlang.h>
+#include <ik_ISound.h>
 #include <conio.h>
 using namespace irrklang;
 
