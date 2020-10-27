@@ -20,7 +20,8 @@ enum PlayerAnims
 void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	visible = true;
-	xSpeedA = ySpeedA = xSpeed = ySpeed = -2;
+	xSpeedA = xSpeed = 1.6850204147424113;
+	ySpeedA = ySpeed = -2.2717187770279388;
 
 	spritesheet.loadFromFile("images/grayBall.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(1, 1), &spritesheet, &shaderProgram);
@@ -46,9 +47,8 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 		ySpeedA = ySpeed = ySpeed*(-1);
 	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		xSpeedA = xSpeed = aux; 
-	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100) {
+	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		ySpeedA = ySpeed = aux;
-	}
 	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))
 		xSpeedA = xSpeed = xSpeed*(-1);
 	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))
@@ -59,13 +59,11 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 	if (a == 0) {
 		visible = false;
 		xSpeed = ySpeed = 0;
-		posPlayer.x = 200;
 		posPlayer.y = 432;
 	}
 	else if (a == 1) {
 		visible = false;
 		xSpeed = ySpeed = 0;
-		posPlayer.x = 200;
 		posPlayer.y = 16;
 	}
 	else if (a == 2){
