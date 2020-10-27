@@ -7,11 +7,6 @@ void Game::init()
 {
 	bPlay = true;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
-	scene.init();
-	credits.init();
-	menu.init();
-	info.init();
-	state = 0;
 	SoundEngine = createIrrKlangDevice();
 
 	if (!SoundEngine)
@@ -24,6 +19,12 @@ void Game::init()
 		CurrentPlayingSound->drop();
 	CurrentPlayingSound = 0;
 
+	scene.init();
+	credits.init();
+	menu.init();
+	info.init();
+	state = 0;
+
 	playSoundBGM("sounds/getout.ogg");
 
 }
@@ -32,8 +33,10 @@ bool Game::update(int deltaTime)
 {
 	if (state == 0)
 		menu.update(deltaTime);
-	else if (state == 1)
+	else if (state == 1) {
+		SoundEngine->removeSoundSource("sounds/getout.ogg");
 		scene.update(deltaTime);
+	}
 	else if (state == 2)
 		info.update(deltaTime);
 	else if (state == 3)
@@ -49,7 +52,6 @@ void Game::render()
 		menu.render();
 	else if (state == 1) {
 		scene.render();
-		SoundEngine->removeSoundSource("sounds/getout.ogg");
 	}
 	else if (state == 2)
 		info.render();
@@ -114,10 +116,10 @@ void Game::playSoundBGM(const char * sound)
 	// tells the engine to play it looped.
 
 	// play some sound stream, looped
-	SoundEngine->play2D(sound, true);
+	CurrentPlayingSound = SoundEngine->play2D(sound, true);
 }
 
 void Game::playSound(const char * sound)
 {
-	CurrentPlayingSound = SoundEngine->play2D(sound, false);
+	ISound* aSong = SoundEngine->play2D(sound, false);
 }

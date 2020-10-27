@@ -39,6 +39,7 @@ private:
 	float currentTime;
 	glm::mat4 projection;
 	Text text;
+	int k = 8;
 
 };
 
