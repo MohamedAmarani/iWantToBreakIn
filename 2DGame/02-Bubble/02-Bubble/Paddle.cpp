@@ -32,7 +32,7 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Paddle::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPaddle.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -45,7 +45,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && (posPaddle.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -58,7 +58,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && posPaddle.y >= 17)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -71,7 +71,7 @@ void Paddle::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && posPaddle.y >= 17)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -106,7 +106,7 @@ void Paddle::update(int deltaTime)
 			}
 		}
 	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_UP))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_UP) && posPaddle.y >= 17)
 	{
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
@@ -117,7 +117,7 @@ void Paddle::update(int deltaTime)
 			}
 		}
 	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && (posPaddle.y + 32) <= 27 * 16 - 2)
 	{
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {

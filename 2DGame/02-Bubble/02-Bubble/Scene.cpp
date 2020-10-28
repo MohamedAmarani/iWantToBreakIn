@@ -78,6 +78,7 @@ void Scene::update(int deltaTime)
 		Game::instance().playSoundBGM("sounds/scene.wav");
 	}
 	if (Game::instance().getKey(27)) { //ESC
+		init();
 		firstTime = false;
 		Game::instance().playSoundBGM("sounds/summer.mp3");
 		Game::instance().setState(0);

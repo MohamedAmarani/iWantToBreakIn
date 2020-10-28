@@ -68,7 +68,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Player::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPlayer.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -81,7 +81,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && (posPlayer.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -94,7 +94,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && posPlayer.y >= 17)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -107,7 +107,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && posPlayer.y >= 17)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
@@ -148,7 +148,7 @@ void Player::update(int deltaTime)
 			}
 		}
 	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_UP))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_UP) && posPlayer.y >= 17)
 	{
 		if (sprite->animation() != MOVE_UP)
 			sprite->changeAnimation(MOVE_UP);
@@ -162,7 +162,7 @@ void Player::update(int deltaTime)
 			}
 		}
 	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && (posPlayer.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
