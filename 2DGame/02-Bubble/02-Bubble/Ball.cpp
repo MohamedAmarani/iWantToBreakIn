@@ -94,5 +94,3 @@ void Ball::setPosition(const glm::vec2 &pos)
 	posPlayer = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
-
-

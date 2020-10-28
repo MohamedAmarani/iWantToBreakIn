@@ -9,6 +9,12 @@
 #include "Credits.h"
 #include "Menu.h"
 
+#include <stdio.h>
+#include <irrKlang.h>
+#include <ik_ISound.h>
+#include <conio.h>
+using namespace irrklang;
+
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
 
@@ -47,6 +53,9 @@ public:
 	bool getSpecialKey(int key) const;
 	void setState(int state);
 
+	void playSoundBGM(const char* sound);
+	void playSound(const char* sound);
+
 private:
 	Info info;
 	Menu menu;
@@ -56,7 +65,8 @@ private:
 	Scene scene;                      // Scene to render
 	bool keys[256], specialKeys[256]; // Store key states so that 
 									  // we can have access at any time
-
+	ISoundEngine* SoundEngine;
+	ISound* CurrentPlayingSound;
 };
 
 

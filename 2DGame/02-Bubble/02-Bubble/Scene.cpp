@@ -72,8 +72,16 @@ void Scene::update(int deltaTime)
 	paddle->update(deltaTime);
 	glm::vec2 a = paddle->getPosition();
 	ball->update(deltaTime, a);
-	if (Game::instance().getKey(27)) //ESC
+
+	if (!firstTime) {
+		firstTime = true;
+		Game::instance().playSoundBGM("sounds/scene.wav");
+	}
+	if (Game::instance().getKey(27)) { //ESC
+		firstTime = false;
+		Game::instance().playSoundBGM("sounds/summer.mp3");
 		Game::instance().setState(0);
+	}
 }
 
 void Scene::render()
