@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <glm/gtc/matrix_transform.hpp>
+#include <string>
 #include "Scene.h"
 #include "Game.h"
 
@@ -103,11 +104,16 @@ void Scene::render()
 	paddle->render();
 
 	//The vec4 is color
-	text.render("MONEY:", glm::vec2(516, 40), 24, glm::vec4(1, 1, 1, 1));
+	text.render("HONEY:", glm::vec2(516, 40), 24, glm::vec4(1, 1, 1, 1));
 	text.render("0000000", glm::vec2(502, 64), 24, glm::vec4(1, 1, 1, 1));
 
 	text.render("POINTS:", glm::vec2(502, 136), 24, glm::vec4(1, 1, 1, 1));
-	text.render("0000000", glm::vec2(502, 160), 24, glm::vec4(1, 1, 1, 1));
+	string pointValue = to_string(map->getPoints());
+	string zero = "";
+	for (int i = pointValue.length(); i < 7; ++i) {
+		zero += "0";
+	}
+	text.render((zero + pointValue), glm::vec2(502, 160), 24, glm::vec4(1, 1, 1, 1));
 
 	text.render("LIVES:", glm::vec2(516, 232), 24, glm::vec4(1, 1, 1, 1));
 	text.render("00", glm::vec2(576, 256), 24, glm::vec4(1, 1, 1, 1));
@@ -115,11 +121,8 @@ void Scene::render()
 	text.render("BANK:", glm::vec2(532, 304), 24, glm::vec4(1, 1, 1, 1));
 	text.render("00", glm::vec2(576, 328), 24, glm::vec4(1, 1, 1, 1));
 
-	text.render("BATMODE", glm::vec2(502, 376), 24, glm::vec4(1, 1, 1, 1));
-	text.render("SMALL", glm::vec2(520, 400), 24, glm::vec4(1, 1, 1, 1));
-
-	text.render("ROOM:", glm::vec2(532, 436), 24, glm::vec4(1, 1, 1, 1));
-	text.render("00", glm::vec2(576, 460), 24, glm::vec4(1, 1, 1, 1));
+	text.render("ROOM:", glm::vec2(532, 376), 24, glm::vec4(1, 1, 1, 1));
+	text.render("00", glm::vec2(576, 400), 24, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()

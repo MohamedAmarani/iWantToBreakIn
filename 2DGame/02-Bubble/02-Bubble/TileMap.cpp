@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
 	TileMap *map = new TileMap(levelFile, minCoords, program);
@@ -246,6 +245,10 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					u = x % 2;
 					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
@@ -308,6 +311,10 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					u = x % 2;
 					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
@@ -366,6 +373,10 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					u = x % 2;
 					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
@@ -425,6 +436,10 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					u = x % 2;
 					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;

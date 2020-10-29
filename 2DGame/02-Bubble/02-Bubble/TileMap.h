@@ -45,6 +45,9 @@ public:
 	bool collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const;
 	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 
+	int getPoints() {
+		return points;
+	};
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -64,6 +67,7 @@ private:
 	int offset, offsetR;
 	int levelTile;
 	int snitch;
+	int points = 0;
 
 };
 
