@@ -32,7 +32,7 @@ void Menu::init()
 	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 480.f) };
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	fondo = TexturedQuad::createTexturedQuad(geom, texCoords, texProgram);
-	menu.loadFromFile("images/menu.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
+	menu.loadFromFile("images/background2.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	pos = 0;
 	texto.init("fonts/DroidSerif.ttf");
 	a = false;
@@ -82,19 +82,19 @@ void Menu::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(menu);
 	if (pos == 0) {
-		texto.render("PLAY ", glm::vec2(230, 130), 70, glm::vec4(1, 0.5, 1, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(120, 250), 55, glm::vec4(1, 0.5, 1, 1));
-		texto.render("CREDITS ", glm::vec2(210, 370), 55, glm::vec4(1, 0.5, 1, 1));
+		texto.render("PLAY ", glm::vec2(230, 240), 70, glm::vec4(1, 0.5, 0, 1));
+		texto.render("INSTRUCTIONS ", glm::vec2(120, 340), 55, glm::vec4(1, 0.5, 0, 1));
+		texto.render("CREDITS ", glm::vec2(210, 440), 55, glm::vec4(1, 0.5, 0, 1));
 	}
 	else if (pos == 1) {
-		texto.render("PLAY ", glm::vec2(250, 130), 55, glm::vec4(1, 0.5, 1, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(65, 250), 70, glm::vec4(1, 0.5, 1, 1));
-		texto.render("CREDITS ", glm::vec2(210, 370), 55, glm::vec4(1, 0.5, 1, 1));
+		texto.render("PLAY ", glm::vec2(250, 240), 55, glm::vec4(1, 0.5, 0, 1));
+		texto.render("INSTRUCTIONS ", glm::vec2(65, 340), 70, glm::vec4(1, 0.5, 0, 1));
+		texto.render("CREDITS ", glm::vec2(210, 440), 55, glm::vec4(1, 0.5, 0, 1));
 	}
 	else if (pos == 2) {
-		texto.render("PLAY ", glm::vec2(250, 130), 55, glm::vec4(1, 0.5, 1, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(120, 250), 55, glm::vec4(1, 0.5, 1, 1));
-		texto.render("CREDITS ", glm::vec2(180, 370), 70, glm::vec4(1, 0.5, 1, 1));
+		texto.render("PLAY ", glm::vec2(250, 240), 55, glm::vec4(1, 0.5, 0, 1));
+		texto.render("INSTRUCTIONS ", glm::vec2(120, 340), 55, glm::vec4(1, 0.5, 0, 1));
+		texto.render("CREDITS ", glm::vec2(180, 440), 70, glm::vec4(1, 0.5, 0, 1));
 	}
 
 }
