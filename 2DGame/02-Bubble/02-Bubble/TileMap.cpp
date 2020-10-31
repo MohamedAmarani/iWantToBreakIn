@@ -19,6 +19,7 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
+	key = false;
 	offset = 3;
 	offsetR = 93;
 	xPos = 0;
@@ -219,35 +220,95 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	int u;
 	for (int y = y0; y <= y1; y++)
 	{
+		if (key) {
+			map[(3 * offset + (offset * levelTile))*mapSize.x + 5] = 0;
+			map[(3 * offset + (offset * levelTile))*mapSize.x + 6] = 0;
+			map[(3 * offset + (offset * levelTile))*mapSize.x + 7] = 0;
+			map[(3 * offset + (offset * levelTile))*mapSize.x + 8] = 0;
+			key = false;
+		}
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
 			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
 				Game::instance().playSound("sounds/choc.wav");
 			}
 			if (map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3)
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y + 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y - 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 - 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 8 || map[(y + (offset * levelTile))*mapSize.x + x] == 10
@@ -278,7 +339,6 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	y0 += offset*3;
 	y1 = (pos.y + size.y - 1) / tileSize.y; 
 	y1 += offset*3;
-	int u;
 	for (int y = y0; y <= y1; y++)
 	{
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
@@ -287,29 +347,82 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 			}
 			if (map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3)
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y + 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y - 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 - 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 8 || map[(y + (offset * levelTile))*mapSize.x + x] == 10
@@ -345,29 +458,82 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 			}
 			if (map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3)
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17){
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y + 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y - 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 - 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 8 || map[(y + (offset * levelTile))*mapSize.x + x] == 10
@@ -404,29 +570,82 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 			}
 			if (map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3)
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y + 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
+					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					key = true;
+				}
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
+					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
+					u = x % 2;
+					if ((y + offset + 1 + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+					u = 0;
 					u = x % 2;
-					(((y - 1 + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					if ((y + offset + 1 - 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
-					u = x % 2;
-					(((y + (offset * levelTile))*mapSize.x) % 2 == 1 ? u += 0 : u += 2);
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					int u = x % 2;
+					if ((y + offset + 1) % 2 == 0)
+						u += 2;
+					else
+						u += 0;
 					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 8 || map[(y + (offset * levelTile))*mapSize.x + x] == 10

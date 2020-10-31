@@ -64,6 +64,7 @@ private:
 	int offset, offsetR;
 	int levelTile;
 	int snitch;
+	bool key;
 
 };
 
