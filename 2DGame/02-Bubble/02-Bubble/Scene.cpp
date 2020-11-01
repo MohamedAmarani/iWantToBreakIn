@@ -38,7 +38,11 @@ Scene::~Scene()
 void Scene::init()
 {
 	initShaders();
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	string myLevel = "levels/level0";
+	village = 1;
+	myLevel = myLevel + to_string(village) + ".txt";
+	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX()+8, INIT_PLAYER_Y_TILES * map->getTileSizeY()-16));
@@ -105,7 +109,13 @@ void Scene::render()
 
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(516, 40), 24, glm::vec4(1, 1, 1, 1));
-	text.render("0000000", glm::vec2(502, 64), 24, glm::vec4(1, 1, 1, 1));
+
+	string honeyValue = to_string(map->getHoney());
+	string honeyZero = "";
+	for (int i = honeyValue.length(); i < 7; ++i) {
+		honeyZero += "0";
+	}
+	text.render((honeyZero + honeyValue), glm::vec2(502, 64), 24, glm::vec4(1, 1, 1, 1));
 
 	text.render("POINTS:", glm::vec2(502, 136), 24, glm::vec4(1, 1, 1, 1));
 	string pointValue = to_string(map->getPoints());
@@ -115,14 +125,18 @@ void Scene::render()
 	}
 	text.render((zero + pointValue), glm::vec2(502, 160), 24, glm::vec4(1, 1, 1, 1));
 
+	string livesValue = "0" + to_string(map->getLives());
 	text.render("LIVES:", glm::vec2(516, 232), 24, glm::vec4(1, 1, 1, 1));
-	text.render("00", glm::vec2(576, 256), 24, glm::vec4(1, 1, 1, 1));
+	text.render(livesValue, glm::vec2(576, 256), 24, glm::vec4(1, 1, 1, 1));
 
-	text.render("BANK:", glm::vec2(532, 304), 24, glm::vec4(1, 1, 1, 1));
-	text.render("00", glm::vec2(576, 328), 24, glm::vec4(1, 1, 1, 1));
+	string villageValue = "0" + to_string(village);
+	text.render("VILLAGE:", glm::vec2(490, 304), 24, glm::vec4(1, 1, 1, 1));
+	text.render(villageValue, glm::vec2(576, 328), 24, glm::vec4(1, 1, 1, 1));
 
-	text.render("ROOM:", glm::vec2(532, 376), 24, glm::vec4(1, 1, 1, 1));
-	text.render("00", glm::vec2(576, 400), 24, glm::vec4(1, 1, 1, 1));
+	string houseValue = "0" + to_string(map->getHouse());
+
+	text.render("HOUSE:", glm::vec2(520, 376), 24, glm::vec4(1, 1, 1, 1));
+	text.render(houseValue, glm::vec2(576, 400), 24, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()

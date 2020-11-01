@@ -183,19 +183,25 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 
 int TileMap::amITr(const glm::ivec2 &pos) {
 	if (pos.y < 15 && offset>0) {
+		++house;
 		--offset;
 		return 0;
 	}
 	else if (pos.y > 27 * 16 && offset<3) {
+		--house;
 		++offset;
 		return 1;
+	}
+	if (pos.y > 26 * 16 && offset == 3) {
+		//--lives;
 	}
 	if (offset == 0 && offsetR == 0)
 		return 2;
 	else if (offset == 1 && offsetR == 31)
 		return 2;
-	else if (offset == 2 && offsetR == 62)
+	else if (offset == 2 && offsetR == 62) {
 		return 2;
+	}
 	else if (offset == 3 && offsetR == 93)
 		return 2;
 
@@ -273,6 +279,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					key = true;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -288,6 +295,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -306,6 +314,10 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -390,6 +402,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 					key = true;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -405,6 +418,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -423,6 +437,10 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -504,6 +522,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 					key = true;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -519,6 +538,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -537,6 +557,10 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -619,6 +643,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					key = true;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -634,6 +659,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
+					honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -652,6 +678,10 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+
+					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
+						points += 100;
+
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;

@@ -45,9 +45,13 @@ public:
 	bool collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const;
 	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 
-	int getPoints() {
-		return points;
-	};
+	int getPoints() { return points;}
+
+	int getHouse() { return house; }
+
+	int getLives() { return lives; }
+
+	int getHoney() { return honey; }
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -69,6 +73,9 @@ private:
 	int snitch;
 	bool key;
 	int points = 0;
+	int house = 1;
+	int lives = 4;
+	int honey = 0;
 
 };
 
