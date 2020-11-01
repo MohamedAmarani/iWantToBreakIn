@@ -41,6 +41,8 @@ private:
 	Text text;
 	int k = 8;
 	bool firstTime = false;
+
+	int village = 1;
 };
 
 
