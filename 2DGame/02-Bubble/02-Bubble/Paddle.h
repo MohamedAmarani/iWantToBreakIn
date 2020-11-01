@@ -30,7 +30,7 @@ private:
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
-
+	int speed = 3;
 };
 
 

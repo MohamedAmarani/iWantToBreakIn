@@ -72,12 +72,12 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
-		posPlayer.y += 2;
-		posPlayer.x -= 2;
+		posPlayer.y += speed;
+		posPlayer.x -= speed;
 		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
 		{
-			posPlayer.y -= 2;
-			posPlayer.x += 2;
+			posPlayer.y -= speed;
+			posPlayer.x += speed;
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
@@ -85,12 +85,12 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
-		posPlayer.y += 2;
-		posPlayer.x += 2;
+		posPlayer.y += speed;
+		posPlayer.x += speed;
 		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
 		{
-			posPlayer.y -= 2;
-			posPlayer.x -= 2;
+			posPlayer.y -= speed;
+			posPlayer.x -= speed;
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
@@ -98,12 +98,12 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
-		posPlayer.y -= 2;
-		posPlayer.x -= 2;
+		posPlayer.y -= speed;
+		posPlayer.x -= speed;
 		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
 		{
-			posPlayer.y += 2;
-			posPlayer.x += 2;
+			posPlayer.y += speed;
+			posPlayer.x += speed;
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
@@ -111,12 +111,12 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
-		posPlayer.y -= 2;
-		posPlayer.x += 2;
+		posPlayer.y -= speed;
+		posPlayer.x += speed;
 		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
 		{
-			posPlayer.y += 2;
-			posPlayer.x -= 2;
+			posPlayer.y += speed;
+			posPlayer.x -= speed;
 			sprite->changeAnimation(STAND_DOWN);
 		}
 	}
@@ -126,10 +126,10 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(MOVE_LEFT);
 		if (!Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) &&
 			!Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
-			posPlayer.x -= 2;
+			posPlayer.x -= speed;
 			if (map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
 			{
-				posPlayer.x += 2;
+				posPlayer.x += speed;
 				sprite->changeAnimation(STAND_LEFT);
 			}
 		}
@@ -140,10 +140,10 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(MOVE_RIGHT);
 		if (!Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			!Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT)) {
-			posPlayer.x += 2;
+			posPlayer.x += speed;
 			if (map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
 			{
-				posPlayer.x -= 2;
+				posPlayer.x -= speed;
 				sprite->changeAnimation(STAND_RIGHT);
 			}
 		}
@@ -154,10 +154,10 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(MOVE_UP);
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
-			posPlayer.y -= 2;
+			posPlayer.y -= speed;
 			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0))
 			{
-				posPlayer.y += 2;
+				posPlayer.y += speed;
 				sprite->changeAnimation(STAND_UP);
 			}
 		}
@@ -168,10 +168,10 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(MOVE_DOWN);
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
-			posPlayer.y += 2;
+			posPlayer.y += speed;
 			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0))
 			{
-				posPlayer.y -= 2;
+				posPlayer.y -= speed;
 				sprite->changeAnimation(STAND_DOWN);
 			}
 		}
