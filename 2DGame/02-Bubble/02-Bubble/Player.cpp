@@ -62,12 +62,28 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->changeAnimation(MOVE_DOWN);
 	tileMapDispl = tileMapPos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	posPlayer.x = 212;
+	posPlayer.y = 400;
 
 }
 
-void Player::update(int deltaTime)
+void Player::update(int deltaTime, bool restart)
 {
+	if (restart) {
+		posPlayer.x = 212;
+		posPlayer.y = 400;
+	}
+	if (Game::instance().getKey(27)) { //ESC
+		count = 0;
+		didStart = false;
+	}
 	sprite->update(deltaTime);
+	if (!didStart) {
+		++count;
+		if (count == 150) {
+			didStart = true;
+		}
+	}
 	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPlayer.y + 32) <= 27 * 16 - 2)
 	{
 		if (sprite->animation() != MOVE_DOWN)
@@ -98,6 +114,7 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
+		didStart = true;
 		posPlayer.y -= speed;
 		posPlayer.x -= speed;
 		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
@@ -111,6 +128,7 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_DOWN)
 			sprite->changeAnimation(MOVE_DOWN);
+		didStart = true;
 		posPlayer.y -= speed;
 		posPlayer.x += speed;
 		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
@@ -155,6 +173,7 @@ void Player::update(int deltaTime)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPlayer.y -= speed;
+			didStart = true;
 			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0))
 			{
 				posPlayer.y += speed;
@@ -186,6 +205,11 @@ void Player::render()
 	sprite->render();
 }
 
+bool Player::getDidStart()
+{
+	return didStart;
+}
+
 void Player::setTileMap(TileMap *tileMap)
 {
 	map = tileMap;
@@ -197,3 +221,14 @@ void Player::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
+int Player::getX()
+{
+	return posPlayer.x;
+}
+
+
+void Player::restartCount()
+{
+	didStart = false;
+	count = 0;
+}

@@ -16,6 +16,8 @@
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Info.h" />
+    <ClInclude Include="Key.h" />
+    <ClInclude Include="LevelSelection.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="Player.h" />
@@ -34,6 +36,8 @@
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Info.cpp" />
+    <ClCompile Include="Key.cpp" />
+    <ClCompile Include="LevelSelection.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Paddle.cpp" />

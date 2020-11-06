@@ -24,6 +24,8 @@ Text texto;
 int pos;
 bool a;
 bool b;
-
+int cont = 0;
+string password = "";
+bool keys[256];
 };
 

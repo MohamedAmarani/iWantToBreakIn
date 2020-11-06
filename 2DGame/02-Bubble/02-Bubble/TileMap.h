@@ -23,6 +23,10 @@ public:
 	TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program);
 	~TileMap();
 
+	int getOffset();
+
+	int getOffseR();
+
 	void render() const;
 	void free();
 	
@@ -68,7 +72,7 @@ private:
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
 	int *map;
-	int offset, offsetR;
+	int offset = 3, offsetR = 93;
 	int levelTile;
 	int snitch;
 	bool key;

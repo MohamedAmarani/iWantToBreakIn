@@ -19,8 +19,6 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
 	key = false;
-	offset = 3;
-	offsetR = 93;
 	xPos = 0;
 	yPos = 0;
 	loadLevel(levelFile);
@@ -33,6 +31,13 @@ TileMap::~TileMap()
 		delete map;
 }
 
+int TileMap::getOffset() {
+	return offset;
+}
+
+int TileMap::getOffseR() {
+	return offsetR;
+}
 
 void TileMap::render() const
 {
@@ -187,14 +192,16 @@ int TileMap::amITr(const glm::ivec2 &pos) {
 		--offset;
 		return 0;
 	}
-	else if (pos.y > 27 * 16 && offset<3) {
+	else if (pos.y > 26 * 16 && offset == 3) {
+		--lives;
+		return 4;
+	}
+	else if (pos.y > 27 * 16 && offset < 3) {
 		--house;
 		++offset;
 		return 1;
 	}
-	if (pos.y > 26 * 16 && offset == 3) {
-		//--lives;
-	}
+
 	if (offset == 0 && offsetR == 0)
 		return 2;
 	else if (offset == 1 && offsetR == 31)
@@ -216,6 +223,15 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		xPos = pos.x;
 		yPos = pos.y;
 	}
+
+		//checkear collision de pelota con winnie
+	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+		return true;
+	}
+	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+		return true;
+	}
+
 	x = pos.x / tileSize.x;
 	x1 = (pos.x + size.x - 1) / tileSize.x;
 	y0 = pos.y / tileSize.y;
@@ -345,6 +361,13 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 		yPos = pos.y;
 	}
 
+	//checkear collision de pelota con winnie
+	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+		return true;
+	}
+	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+		return true;
+	}
 	int x0, x, y0, y1;
 
 	x0 = pos.x / tileSize.x;
@@ -466,6 +489,15 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 		xPos = pos.x;
 		yPos = pos.y;
 	}
+
+	//checkear collision de pelota con winnie
+	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+		return true;
+	}
+	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+		return true;
+	}
+
 	x0 = pos.x / tileSize.x;
 	x1 = (pos.x + size.x - 1) / tileSize.x;
 	y = (pos.y) / tileSize.y;
@@ -587,6 +619,15 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		xPos = pos.x;
 		yPos = pos.y;
 	}
+
+	//checkear collision de pelota con winnie
+	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+		return true;
+	}
+	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+		return true;
+	}
+
 	x0 = pos.x / tileSize.x;
 	x1 = (pos.x + size.x - 1) / tileSize.x;
 	y = (pos.y + size.y - 1) / tileSize.y;

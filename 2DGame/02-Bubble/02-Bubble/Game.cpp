@@ -19,10 +19,10 @@ void Game::init()
 		CurrentPlayingSound->drop();
 	CurrentPlayingSound = 0;
 
-	scene.init();
 	credits.init();
 	menu.init();
 	info.init();
+	levelSelection.init();
 	state = 0;
 
 	playSoundBGM("sounds/summer.mp3");
@@ -31,15 +31,24 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
+	if (Game::instance().getKey(49)) { //1
+		scene.init(1);
+		state = 1;
+	}
+	if (Game::instance().getKey(50)) { //2
+		scene.init(2);
+		state = 1;
+	}
 	if (state == 0)
 		menu.update(deltaTime);
 	else if (state == 1) 
-		scene.update(deltaTime);
+		levelSelection.update(deltaTime);
 	else if (state == 2)
 		info.update(deltaTime);
 	else if (state == 3)
 		credits.update(deltaTime);
-
+	else if (state > 3)
+		scene.update(deltaTime);
 	return bPlay;
 }
 
@@ -48,13 +57,14 @@ void Game::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (state == 0)
 		menu.render();
-	else if (state == 1) {
-		scene.render();
-	}
+	else if (state == 1) 
+		levelSelection.render();
 	else if (state == 2)
 		info.render();
 	else if (state == 3)
 		credits.render();
+	else if (state > 3)
+		scene.render();
 }
 
 void Game::keyPressed(int key)
@@ -105,6 +115,12 @@ bool Game::getSpecialKey(int key) const
 
 void Game::setState(int s) {
 	state = s;
+	if (s > 3)
+		scene.init(s - 3);
+	if (state == 1) {
+		levelSelection.setReleased(false);
+		levelSelection.setReleasedESC(false);
+	}
 }
 
 void Game::playSoundBGM(const char * sound)

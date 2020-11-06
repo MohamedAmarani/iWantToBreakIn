@@ -15,12 +15,14 @@ class Player
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime);
+	void update(int deltaTime, bool restart);
 	void render();
-	
+	bool getDidStart();
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
-	
+	int getX();
+	void restartCount();
+
 private:
 	bool bJumping;
 	glm::ivec2 tileMapDispl, posPlayer;
@@ -29,6 +31,8 @@ private:
 	Sprite *sprite;
 	TileMap *map;
 	int speed = 3;
+	bool didStart = false;
+	int count = 0;
 };
 
 

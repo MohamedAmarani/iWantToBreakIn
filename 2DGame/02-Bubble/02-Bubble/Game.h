@@ -8,6 +8,7 @@
 #include "Scene.h"
 #include "Credits.h"
 #include "Menu.h"
+#include "LevelSelection.h"
 
 #include <stdio.h>
 #include <irrKlang.h>
@@ -57,6 +58,7 @@ public:
 	void playSound(const char* sound);
 
 private:
+	LevelSelection levelSelection;
 	Info info;
 	Menu menu;
 	int state;

@@ -29,8 +29,12 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Paddle::update(int deltaTime)
+void Paddle::update(int deltaTime, bool restart)
 {
+	if (restart) {
+		posPaddle.x = 212;
+		posPaddle.y = 400;
+	}
 	sprite->update(deltaTime);
 	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPaddle.y + 32) <= 27 * 16 - 2)
 	{

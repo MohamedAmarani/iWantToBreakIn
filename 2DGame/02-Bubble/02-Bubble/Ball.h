@@ -15,11 +15,12 @@ class Ball
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, const glm::vec2 &posPaddle);
+	void update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	bool getRestart();
 
 private:
 	bool bJumping, visible;
@@ -30,7 +31,7 @@ private:
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
-
+	bool restart = false;
 };
 
 

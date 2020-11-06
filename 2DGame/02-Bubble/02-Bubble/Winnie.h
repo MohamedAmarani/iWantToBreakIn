@@ -15,7 +15,7 @@ class Winnie
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime);
+	void update(int deltaTime, int offset, int offsetR);
 	void render();
 
 	void setTileMap(TileMap *tileMap);

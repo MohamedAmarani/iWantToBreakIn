@@ -20,8 +20,6 @@ enum PlayerAnims
 void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	visible = true;
-	xSpeedA = xSpeed = 1.6850204147424113;
-	ySpeedA = ySpeed = -2.2717187770279388;
 
 	spritesheet.loadFromFile("images/grayBall.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(1, 1), &spritesheet, &shaderProgram);
@@ -37,8 +35,21 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
+void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee)
 {
+	if (didStart){
+		xSpeedA = xSpeed = 4.3329096379090570;
+		ySpeedA = ySpeed = -3.6367422330589796;
+	}
+	if (xBee >= 0) {
+		posPlayer.x = xBee + 8;
+		posPlayer.y = 384;
+		xSpeedA = xSpeed = 0;
+		ySpeedA = ySpeed = 0;
+	}
+
+	//Seguir abeja
+
 	sprite->update(deltaTime);
 	double aux;
 	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1))
@@ -59,17 +70,20 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle)
 	if (a == 0) {
 		visible = false;
 		xSpeed = ySpeed = 0;
-		posPlayer.y = 432;
+		posPlayer.y = 382;
 	}
 	else if (a == 1) {
 		visible = false;
 		xSpeed = ySpeed = 0;
-		posPlayer.y = 16;
+		posPlayer.y = 34;
 	}
 	else if (a == 2){
 		visible = true;
 		xSpeed = xSpeedA;
 		ySpeed = ySpeedA;
+	}
+	else if (a == 4) {
+		restart = true;
 	}
 
 	posPlayer.x += xSpeed;
@@ -93,4 +107,13 @@ void Ball::setPosition(const glm::vec2 &pos)
 {
 	posPlayer = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+}
+
+
+bool Ball::getRestart()
+{
+	bool aux = restart;
+	if (restart)
+		restart = false;
+	return aux;
 }

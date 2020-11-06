@@ -10,6 +10,7 @@
 #include "Ball.h"
 #include "Text.h"
 #include "Winnie.h"
+#include "Key.h"
 
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
@@ -22,7 +23,7 @@ public:
 	Scene();
 	~Scene();
 
-	void init();
+	void init(int level);
 	void update(int deltaTime);
 	void render();
 
@@ -30,6 +31,7 @@ private:
 	void initShaders();
 
 private:
+	Key *key;
 	Winnie *winnie;
 	TileMap *map;
 	Player *player;
@@ -41,8 +43,9 @@ private:
 	Text text;
 	int k = 8;
 	bool firstTime = false;
-
 	int village = 1;
+	bool bAnt = false;
+	bool r = false;
 };
 
 

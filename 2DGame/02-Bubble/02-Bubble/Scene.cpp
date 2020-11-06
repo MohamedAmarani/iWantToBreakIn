@@ -20,6 +20,7 @@ Scene::Scene()
 	winnie = NULL;
 	ball = NULL;
 	paddle = NULL;
+	key = NULL;
 }
 
 Scene::~Scene()
@@ -35,12 +36,12 @@ Scene::~Scene()
 }
 
 
-void Scene::init()
+void Scene::init(int level)
 {
 	initShaders();
 	string myLevel = "levels/level0";
 	village = 1;
-	myLevel = myLevel + to_string(village) + ".txt";
+	myLevel = myLevel + to_string(level) + ".txt";
 	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
@@ -55,6 +56,10 @@ void Scene::init()
 	winnie->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
 	winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	winnie->setTileMap(map);
+	key = new Key();
+	key->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
+	key->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	key->setTileMap(map);
 	paddle = new Paddle();
 	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	paddle->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
@@ -72,18 +77,35 @@ void Scene::init()
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
-	player->update(deltaTime);
-	winnie->update(deltaTime);
-	paddle->update(deltaTime);
+	player->update(deltaTime, r);
+	bool b = player->getDidStart();
+	int xBee = player->getX();
+	if (b)
+		xBee = -1;
+	if (bAnt && !b)
+		bAnt = false;
+	if (bAnt && b)
+		b = false;
+	if(!bAnt)
+		bAnt = b;
+	winnie->update(deltaTime, map->getOffset(), map->getOffseR());
+
+	key->update(deltaTime, map->getOffset(), map->getOffseR());
+	paddle->update(deltaTime, r);
 	glm::vec2 a = paddle->getPosition();
-	ball->update(deltaTime, a);
+
+	ball->update(deltaTime, a, b, xBee);
+	bool restart = ball->getRestart();
+	r = restart;
+
+	if (restart)
+		player->restartCount();
 
 	if (!firstTime) {
 		firstTime = true;
 		Game::instance().playSoundBGM("sounds/scene.wav");
 	}
 	if (Game::instance().getKey(27)) { //ESC
-		init();
 		firstTime = false;
 		Game::instance().playSoundBGM("sounds/summer.mp3");
 		Game::instance().setState(0);
@@ -103,6 +125,7 @@ void Scene::render()
 	map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	map->render();
 	winnie->render();
+	key->render();
 	player->render();
 	ball->render();
 	paddle->render();

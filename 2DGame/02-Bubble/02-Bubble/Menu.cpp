@@ -34,7 +34,7 @@ void Menu::init()
 	fondo = TexturedQuad::createTexturedQuad(geom, texCoords, texProgram);
 	menu.loadFromFile("images/background2.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	pos = 0;
-	texto.init("fonts/DroidSerif.ttf");
+	texto.init("fonts/joystixMonospace.ttf");
 	a = false;
 	b = false;
 	projection = glm::ortho(0.f, float(CAMERA_WIDTH - 1), float(CAMERA_HEIGHT - 1), 0.f);
@@ -46,28 +46,48 @@ void Menu::update(int deltaTime)
 	currentTime += deltaTime;
 
 	if (Game::instance().getKey(13)) //ENTER
-		Game::instance().setState(pos + 1);
+		if (password == "EASY")
+			Game::instance().setState(3 + 2);
+		else if (password == "ANGRY")
+			Game::instance().setState(3 + 3);
+		else
+			password = "";
 
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP)) { //UP
-		if (pos > 0 && !a) {
-			--pos;
-		}
-		else if (!a)
-			pos = 2;
-		a = true;
+	if (Game::instance().getKey(112) || Game::instance().getKey(80)) { //P
+		if (pos == 0)
+			keys[80] = false;
+		pos = 1;
+		cont = 0;
 	}
-	else 
-		a = false;
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN)) { //DOWN
-		if (pos < 2 && !b) {
-			++pos;
-		}
-		else if (!b)
+	if (Game::instance().getKey(32)) { //SPACE
+		Game::instance().setState(3 + 1);
+	}
+	if (Game::instance().getKey(27)) { //ESC
+		if (pos == 1) {
 			pos = 0;
-		b = true;
+			cont = 0;
+			password = "";
+		}
 	}
-	else
-		b = false;
+
+	if (pos == 1) { //leer input de password
+		for (int i = 65; i <= 90; ++i)
+			if (Game::instance().getKey(i) && keys[i]) {
+				keys[i] = false;
+				if (password.size() < 4)
+					password += i;
+			}
+			else if (!Game::instance().getKey(i))
+				keys[i] = true;
+		for (int i = 97; i <= 122; ++i)
+			if (Game::instance().getKey(i) && keys[i]) {
+				keys[i] = false;
+				if (password.size() < 4)
+					password += i - 32;
+			}
+			else if (!Game::instance().getKey(i))
+				keys[i] = true;
+	}
 }
 
 void Menu::render()
@@ -81,22 +101,23 @@ void Menu::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(menu);
+	++cont;
 	if (pos == 0) {
-		texto.render("PLAY ", glm::vec2(230, 240), 70, glm::vec4(1, 0.5, 0, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(120, 340), 55, glm::vec4(1, 0.5, 0, 1));
-		texto.render("CREDITS ", glm::vec2(210, 440), 55, glm::vec4(1, 0.5, 0, 1));
+		if (cont >= 20) {
+			texto.render("PRESS FIRE TO START", glm::vec2(170, 400), 20, glm::vec4(1, 1, 1, 1));
+		}
+		if (cont >= 50)
+			cont = 0;
+		texto.render("OR P FOR PASSWORD", glm::vec2(186, 420), 20, glm::vec4(1, 1, 1, 1));
 	}
-	else if (pos == 1) {
-		texto.render("PLAY ", glm::vec2(250, 240), 55, glm::vec4(1, 0.5, 0, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(65, 340), 70, glm::vec4(1, 0.5, 0, 1));
-		texto.render("CREDITS ", glm::vec2(210, 440), 55, glm::vec4(1, 0.5, 0, 1));
+	else {
+		texto.render("ENTER PASSWORD : " + password, glm::vec2(130, 400), 20, glm::vec4(1, 1, 1, 1));
+		if (cont >= 20) {
+			texto.render("_", glm::vec2(415 + password.size()*16, 400), 20, glm::vec4(1, 1, 1, 1));
+		}
+		if (cont >= 50)
+			cont = 0;
 	}
-	else if (pos == 2) {
-		texto.render("PLAY ", glm::vec2(250, 240), 55, glm::vec4(1, 0.5, 0, 1));
-		texto.render("INSTRUCTIONS ", glm::vec2(120, 340), 55, glm::vec4(1, 0.5, 0, 1));
-		texto.render("CREDITS ", glm::vec2(180, 440), 70, glm::vec4(1, 0.5, 0, 1));
-	}
-
 }
 
 
