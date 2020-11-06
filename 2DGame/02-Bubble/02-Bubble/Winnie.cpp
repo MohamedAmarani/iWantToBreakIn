@@ -72,7 +72,7 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	tileMapDispl = tileMapPos;
 }
 
-void Winnie::update(int deltaTime, int offset, int offsetR)
+void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp)
 {
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
@@ -82,6 +82,25 @@ void Winnie::update(int deltaTime, int offset, int offsetR)
 	}
 	else if(map->getOffset() != 2)
 		sprite->changeAnimation(NOTHING);
+
+	/*
+	sprite->update(deltaTime);
+	float speedX = posWasp.x - posPlayer.x;
+	float speedY = posWasp.y - posPlayer.y;
+	float maxSpeed = 2 * 0.5f;
+	if (speedX > maxSpeed)
+		speedX = maxSpeed;
+	if (speedX < -maxSpeed)
+		speedX = -maxSpeed;
+
+	if (speedY > maxSpeed)
+		speedY = maxSpeed;
+	if (speedY < -maxSpeed)
+		speedY = -maxSpeed;
+
+	posPlayer.x += speedX;
+	posPlayer.y += speedY;
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));*/
 }
 
 

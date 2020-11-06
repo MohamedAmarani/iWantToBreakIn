@@ -88,7 +88,7 @@ void Scene::update(int deltaTime)
 		b = false;
 	if(!bAnt)
 		bAnt = b;
-	winnie->update(deltaTime, map->getOffset(), map->getOffseR());
+	winnie->update(deltaTime, map->getOffset(), map->getOffseR(), player->getPosition());
 
 	key->update(deltaTime, map->getOffset(), map->getOffseR());
 	paddle->update(deltaTime, r);
