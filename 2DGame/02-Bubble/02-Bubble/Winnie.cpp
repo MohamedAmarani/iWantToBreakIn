@@ -74,32 +74,34 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 {
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
-	if (!chase) {
+
+	if(chase && (map->getOffset() == 0)) {
+			float speedX = posWasp.x - posPlayer.x;
+			float speedY = posWasp.y - posPlayer.y;
+			float maxSpeed = 2 * 0.5f;
+			if (speedX > maxSpeed)
+				speedX = maxSpeed;
+			if (speedX < -maxSpeed)
+				speedX = -maxSpeed;
+
+			if (speedY > maxSpeed)
+				speedY = maxSpeed;
+			if (speedY < -maxSpeed)
+				speedY = -maxSpeed;
+
+			posPlayer.x += speedX;
+			posPlayer.y += speedY;
+
+			sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+		}
+
+	else {
 		if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
 			sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
 			sprite->changeAnimation(SLEEPING);
 		}
 		else if (map->getOffset() != 0)
 			sprite->changeAnimation(NOTHING);
-	}
-	else {
-		float speedX = posWasp.x - posPlayer.x;
-		float speedY = posWasp.y - posPlayer.y;
-		float maxSpeed = 2 * 0.5f;
-		if (speedX > maxSpeed)
-			speedX = maxSpeed;
-		if (speedX < -maxSpeed)
-			speedX = -maxSpeed;
-
-		if (speedY > maxSpeed)
-			speedY = maxSpeed;
-		if (speedY < -maxSpeed)
-			speedY = -maxSpeed;
-
-		posPlayer.x += speedX;
-		posPlayer.y += speedY;
-
-		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 	}
 }
 

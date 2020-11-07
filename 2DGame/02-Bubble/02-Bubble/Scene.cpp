@@ -96,12 +96,12 @@ void Scene::update(int deltaTime)
 		bAnt = false;
 	if (bAnt && b)
 		b = false;
-	if(!bAnt)
+	if (!bAnt)
 		bAnt = b;
 	winnie->update(deltaTime, map->getOffset(), map->getOffseR(), player->getPosition(), chase);
 
 	if (map->getKey()) {
-		if(map->getOffset() == 1)
+		if (map->getOffset() == 1)
 			key1->setVisible(true);
 		else if (map->getOffset() == 2)
 			key2->setVisible(true);
@@ -114,7 +114,7 @@ void Scene::update(int deltaTime)
 	paddle->update(deltaTime, r);
 	glm::vec2 a = paddle->getPosition();
 
-	if(map->getOffset() == 1)
+	if (map->getOffset() == 1)
 		ball->update(deltaTime, a, b, xBee, key1->getVisible());
 	else if (map->getOffset() == 2)
 		ball->update(deltaTime, a, b, xBee, key2->getVisible());
@@ -132,7 +132,8 @@ void Scene::update(int deltaTime)
 	if (Game::instance().getKey('3')) {
 		chase = true;
 	}
-	if (Game::instance().getKey('4')) {
+
+	if (map->getOffset() != 0) {
 		chase = false;
 	}
 
