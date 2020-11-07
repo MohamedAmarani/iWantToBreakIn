@@ -229,3 +229,8 @@ void Player::restartCount()
 	didStart = false;
 	count = 0;
 }
+
+glm::ivec2 Player::getPosition()
+{
+	return posPlayer;
+}

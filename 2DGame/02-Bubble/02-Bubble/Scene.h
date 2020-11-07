@@ -46,6 +46,7 @@ private:
 	int village = 1;
 	bool bAnt = false;
 	bool r = false;
+	bool chase = false;
 };
 
 

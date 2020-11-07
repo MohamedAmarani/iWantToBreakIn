@@ -19,19 +19,19 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 
-	spritesheet.loadFromFile("images/myWinnie.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheet.loadFromFile("images/myWinnie2.png", TEXTURE_PIXEL_FORMAT_RGBA);
 
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.0625, 0.33333), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(3);
+	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.0625, 0.25), &spritesheet, &shaderProgram);
+	sprite->setNumberAnimations(5);
 
 	sprite->setAnimationSpeed(SLEEPING, 2);
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.375f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.3125f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.25f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.1875f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.125f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.0625f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.f, 0.3333f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.375f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.3125f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.25f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.1875f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.125f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.0625f, 0.25f));
+	sprite->addKeyframe(SLEEPING, glm::vec2(0.f, 0.25f));
 
 	sprite->setAnimationSpeed(WAKING_UP, 7);
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.9375f, 0.f));
@@ -51,22 +51,56 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.f, 0.f));
 
 	sprite->setAnimationSpeed(NOTHING, 7);
-	sprite->addKeyframe(NOTHING, glm::vec2(0.9375f, 0.666f));
+	sprite->addKeyframe(NOTHING, glm::vec2(0.9375f, 0.5f));
+
+	sprite->setAnimationSpeed(MOVE_LEFT, 2);
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.25f, 0.75f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.3125f, 0.75f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.375f, 0.75f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.4375f, 0.75f));
+
+	sprite->setAnimationSpeed(MOVE_RIGHT, 2);
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.f, 0.75f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.0625f, 0.75f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.125f, 0.75f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.1875f, 0.75f));
 
 	sprite->changeAnimation(NOTHING);
 	tileMapDispl = tileMapPos;
+	speed = 0;
 }
 
-void Winnie::update(int deltaTime, int offset, int offsetR)
+void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase)
 {
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
-	if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
-		sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
-		sprite->changeAnimation(SLEEPING);
+	if (!chase) {
+		if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
+			sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
+			sprite->changeAnimation(SLEEPING);
+		}
+		else if (map->getOffset() != 0)
+			sprite->changeAnimation(NOTHING);
 	}
-	else if(map->getOffset() != 0)
-		sprite->changeAnimation(NOTHING);
+	else {
+		float speedX = posWasp.x - posPlayer.x;
+		float speedY = posWasp.y - posPlayer.y;
+		float maxSpeed = 2 * 0.5f;
+		if (speedX > maxSpeed)
+			speedX = maxSpeed;
+		if (speedX < -maxSpeed)
+			speedX = -maxSpeed;
+
+		if (speedY > maxSpeed)
+			speedY = maxSpeed;
+		if (speedY < -maxSpeed)
+			speedY = -maxSpeed;
+
+		posPlayer.x += speedX;
+		posPlayer.y += speedY;
+
+		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
+	}
 }
 
 

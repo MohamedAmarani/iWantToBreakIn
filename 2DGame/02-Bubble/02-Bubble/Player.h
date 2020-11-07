@@ -22,6 +22,7 @@ public:
 	void setPosition(const glm::vec2 &pos);
 	int getX();
 	void restartCount();
+	glm::ivec2 Player::getPosition();
 
 private:
 	bool bJumping;

@@ -15,7 +15,7 @@ class Winnie
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, int offset, int offsetR);
+	void update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
@@ -28,6 +28,7 @@ private:
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
+	int speed;
 
 };
 

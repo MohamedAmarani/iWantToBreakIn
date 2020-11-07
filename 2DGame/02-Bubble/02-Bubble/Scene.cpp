@@ -55,7 +55,7 @@ void Scene::init(int level)
 	player->setPosition(glm::vec2(212, 400));
 	player->setTileMap(map);
 	winnie = new Winnie();
-	winnie->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
+	winnie->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	winnie->setTileMap(map);
 	key1 = new Key();
@@ -98,7 +98,7 @@ void Scene::update(int deltaTime)
 		b = false;
 	if(!bAnt)
 		bAnt = b;
-	winnie->update(deltaTime, map->getOffset(), map->getOffseR());
+	winnie->update(deltaTime, map->getOffset(), map->getOffseR(), player->getPosition(), chase);
 
 	if (map->getKey()) {
 		if(map->getOffset() == 1)
@@ -128,6 +128,13 @@ void Scene::update(int deltaTime)
 
 	if (restart)
 		player->restartCount();
+
+	if (Game::instance().getKey('3')) {
+		chase = true;
+	}
+	if (Game::instance().getKey('4')) {
+		chase = false;
+	}
 
 	if (!firstTime) {
 		firstTime = true;
@@ -167,35 +174,38 @@ void Scene::render()
 	paddle->render();
 
 	//The vec4 is color
-	text.render("HONEY:", glm::vec2(516, 40), 24, glm::vec4(1, 1, 1, 1));
+	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
 
 	string honeyValue = to_string(map->getHoney());
 	string honeyZero = "";
 	for (int i = honeyValue.length(); i < 7; ++i) {
 		honeyZero += "0";
 	}
-	text.render((honeyZero + honeyValue), glm::vec2(502, 64), 24, glm::vec4(1, 1, 1, 1));
+	text.render((honeyZero + honeyValue), glm::vec2(484, 64), 24, glm::vec4(1, 1, 1, 1));
 
-	text.render("POINTS:", glm::vec2(502, 136), 24, glm::vec4(1, 1, 1, 1));
+	text.render("POINTS:", glm::vec2(488, 136), 24, glm::vec4(1, 1, 1, 1));
 	string pointValue = to_string(map->getPoints());
 	string zero = "";
 	for (int i = pointValue.length(); i < 7; ++i) {
 		zero += "0";
 	}
-	text.render((zero + pointValue), glm::vec2(502, 160), 24, glm::vec4(1, 1, 1, 1));
+	text.render((zero + pointValue), glm::vec2(484, 160), 24, glm::vec4(1, 1, 1, 1));
 
 	string livesValue = "0" + to_string(map->getLives());
-	text.render("LIVES:", glm::vec2(516, 232), 24, glm::vec4(1, 1, 1, 1));
-	text.render(livesValue, glm::vec2(576, 256), 24, glm::vec4(1, 1, 1, 1));
+	text.render("LIVES:", glm::vec2(506, 232), 24, glm::vec4(1, 1, 1, 1));
+	text.render(livesValue, glm::vec2(580, 256), 24, glm::vec4(1, 1, 1, 1));
 
 	string villageValue = "0" + to_string(village);
-	text.render("VILLAGE:", glm::vec2(490, 304), 24, glm::vec4(1, 1, 1, 1));
-	text.render(villageValue, glm::vec2(576, 328), 24, glm::vec4(1, 1, 1, 1));
+	text.render("VILLAGE:", glm::vec2(466, 304), 24, glm::vec4(1, 1, 1, 1));
+	text.render(villageValue, glm::vec2(580, 328), 24, glm::vec4(1, 1, 1, 1));
 
 	string houseValue = "0" + to_string(map->getHouse());
 
-	text.render("HOUSE:", glm::vec2(520, 376), 24, glm::vec4(1, 1, 1, 1));
-	text.render(houseValue, glm::vec2(576, 400), 24, glm::vec4(1, 1, 1, 1));
+	text.render("HOUSE:", glm::vec2(506, 376), 24, glm::vec4(1, 1, 1, 1));
+	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));
+
+	text.render("GOD MODE:", glm::vec2(504, 440), 16, glm::vec4(1, 1, 1, 1));
+	text.render("FALSE", glm::vec2(566, 456), 12, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()
