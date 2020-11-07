@@ -32,21 +32,6 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(SLEEPING, glm::vec2(0.125f, 0.3333f));
 	sprite->addKeyframe(SLEEPING, glm::vec2(0.0625f, 0.3333f));
 	sprite->addKeyframe(SLEEPING, glm::vec2(0.f, 0.3333f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.9375f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.8125f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.75f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.6875f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.625f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.5625f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.5f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.4375f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.375f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.3125f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.25f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.1875f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.125f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.0625f, 0.f));
-	sprite->addKeyframe(SLEEPING, glm::vec2(0.f, 0.f));
 
 	sprite->setAnimationSpeed(WAKING_UP, 7);
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.9375f, 0.f));
