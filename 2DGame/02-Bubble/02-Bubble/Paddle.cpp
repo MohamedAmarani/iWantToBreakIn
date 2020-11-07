@@ -31,6 +31,7 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void Paddle::update(int deltaTime, bool restart)
 {
+	map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false);
 	if (restart) {
 		posPaddle.x = 212;
 		posPaddle.y = 400;
@@ -42,7 +43,7 @@ void Paddle::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y += speed;
 		posPaddle.x -= speed;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
 		{
 			posPaddle.y -= speed;
 			posPaddle.x += speed;
@@ -55,7 +56,7 @@ void Paddle::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y += speed;
 		posPaddle.x += speed;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
+		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
 		{
 			posPaddle.y -= speed;
 			posPaddle.x -= speed;
@@ -68,7 +69,7 @@ void Paddle::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y -= speed;
 		posPaddle.x -= speed;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
 		{
 			posPaddle.y += speed;
 			posPaddle.x += speed;
@@ -81,7 +82,7 @@ void Paddle::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPaddle.y -= speed;
 		posPaddle.x += speed;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
+		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
 		{
 			posPaddle.y += speed;
 			posPaddle.x -= speed;
@@ -93,7 +94,7 @@ void Paddle::update(int deltaTime, bool restart)
 		if (Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
 			Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
 			posPaddle.x -= speed;
-			if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2))
+			if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
 			{
 				posPaddle.x += speed;
 			}
@@ -104,7 +105,7 @@ void Paddle::update(int deltaTime, bool restart)
 		if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
 			Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
 			posPaddle.x += speed;
-			if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2))
+			if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
 			{
 				posPaddle.x -= speed;
 			}
@@ -115,7 +116,7 @@ void Paddle::update(int deltaTime, bool restart)
 		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPaddle.y -= speed;
-			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2))
+			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false))
 			{
 				posPaddle.y += speed;
 			}
@@ -126,7 +127,7 @@ void Paddle::update(int deltaTime, bool restart)
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPaddle.y += speed;
-			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2))
+			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false))
 			{
 				posPaddle.y -= speed;
 			}

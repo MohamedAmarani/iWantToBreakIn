@@ -20,7 +20,9 @@ Scene::Scene()
 	winnie = NULL;
 	ball = NULL;
 	paddle = NULL;
-	key = NULL;
+	key1 = NULL;
+	key2 = NULL;
+	key3 = NULL;
 }
 
 Scene::~Scene()
@@ -50,19 +52,27 @@ void Scene::init(int level)
 	ball->setTileMap(map);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	player->setPosition(glm::vec2(212, 400));
 	player->setTileMap(map);
 	winnie = new Winnie();
 	winnie->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
 	winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	winnie->setTileMap(map);
-	key = new Key();
-	key->init(glm::ivec2(SCREEN_X + 40, SCREEN_Y), texProgram);
-	key->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
-	key->setTileMap(map);
+	key1 = new Key();
+	key1->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	key1->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	key1->setTileMap(map);
+	key2 = new Key();
+	key2->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	key2->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	key2->setTileMap(map);
+	key3 = new Key();
+	key3->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	key3->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	key3->setTileMap(map);
 	paddle = new Paddle();
 	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	paddle->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	paddle->setPosition(glm::vec2(212, 400));
 	paddle->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
@@ -90,11 +100,29 @@ void Scene::update(int deltaTime)
 		bAnt = b;
 	winnie->update(deltaTime, map->getOffset(), map->getOffseR());
 
-	key->update(deltaTime, map->getOffset(), map->getOffseR());
+	if (map->getKey()) {
+		if(map->getOffset() == 1)
+			key1->setVisible(true);
+		else if (map->getOffset() == 2)
+			key2->setVisible(true);
+		else if (map->getOffset() == 3)
+			key3->setVisible(true);
+	}
+	key1->update(1, deltaTime, map->getOffset(), map->getOffseR());
+	key2->update(2, deltaTime, map->getOffset(), map->getOffseR());
+	key3->update(3, deltaTime, map->getOffset(), map->getOffseR());
 	paddle->update(deltaTime, r);
 	glm::vec2 a = paddle->getPosition();
 
-	ball->update(deltaTime, a, b, xBee);
+	if(map->getOffset() == 1)
+		ball->update(deltaTime, a, b, xBee, key1->getVisible());
+	else if (map->getOffset() == 2)
+		ball->update(deltaTime, a, b, xBee, key2->getVisible());
+	else if (map->getOffset() == 3)
+		ball->update(deltaTime, a, b, xBee, key3->getVisible());
+	else
+		ball->update(deltaTime, a, b, xBee, key3->getVisible());
+
 	bool restart = ball->getRestart();
 	r = restart;
 
@@ -125,7 +153,15 @@ void Scene::render()
 	map->prepareArrays(glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	map->render();
 	winnie->render();
-	key->render();
+	if (map->getOffset() == 1 || (map->getOffset() == 2 && map->getOffseR() < 62)) {
+		key1->render();
+	}
+	if (map->getOffset() == 2 || (map->getOffset() == 3 && map->getOffseR() < 93)) {
+		key2->render();
+	}
+	else if (map->getOffset() == 3) {
+		key3->render();
+	}
 	player->render();
 	ball->render();
 	paddle->render();

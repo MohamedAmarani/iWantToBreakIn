@@ -31,7 +31,7 @@ private:
 	void initShaders();
 
 private:
-	Key *key;
+	Key *key1, *key2, *key3;
 	Winnie *winnie;
 	TileMap *map;
 	Player *player;

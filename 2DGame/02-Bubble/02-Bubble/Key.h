@@ -15,11 +15,13 @@ class Key
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, int offset, int offsetR);
+	void update(int numKey, int deltaTime, int offset, int offsetR);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	void setVisible(bool key) { visible = key; }
+	bool getVisible() { return visible; }
 
 private:
 	bool bJumping;
@@ -28,7 +30,7 @@ private:
 	Texture spritesheet;
 	Sprite *sprite;
 	TileMap *map;
-
+	bool visible = false;
 };
 
 

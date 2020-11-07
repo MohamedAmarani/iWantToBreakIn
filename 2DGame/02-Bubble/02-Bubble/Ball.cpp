@@ -35,7 +35,7 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee)
+void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee, bool visibleK)
 {
 	if (didStart){
 		xSpeedA = xSpeed = 4.3329096379090570;
@@ -52,17 +52,18 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 
 	sprite->update(deltaTime);
 	double aux;
-	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1))
+	double u = ySpeed;
+	if (map->collisionMoveUp(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, visibleK))
 		ySpeedA = ySpeed = ySpeed * (-1);
-	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1))
-		ySpeedA = ySpeed = ySpeed*(-1);
-	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
+	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, visibleK))
+		ySpeedA = ySpeed = ySpeed * (-1);
+	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), posPlayer, glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		xSpeedA = xSpeed = aux; 
-	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
+	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), posPlayer, glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		ySpeedA = ySpeed = aux;
-	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))
+	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1, visibleK))
 		xSpeedA = xSpeed = xSpeed*(-1);
-	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1))
+	if (map->collisionMoveRight(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1, visibleK))
 		xSpeedA = xSpeed = xSpeed*(-1);
 
 	int a = map->amITr(posPlayer);
@@ -70,7 +71,7 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 	if (a == 0) {
 		visible = false;
 		xSpeed = ySpeed = 0;
-		posPlayer.y = 382;
+		posPlayer.y = 399;
 	}
 	else if (a == 1) {
 		visible = false;

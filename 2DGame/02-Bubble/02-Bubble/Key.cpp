@@ -11,7 +11,7 @@
 
 enum KeyAnims
 {
-	SPINNING, NOTHING
+	SPINNING, EXPLODING, NOTHING
 };
 
 
@@ -19,41 +19,63 @@ void Key::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	bJumping = false;
 
-	spritesheet.loadFromFile("images/key16_32.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheet.loadFromFile("images/key_16_32.png", TEXTURE_PIXEL_FORMAT_RGBA);
 
-	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1, 0.125), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(2);
+	sprite = Sprite::createSprite(glm::ivec2(24, 24), glm::vec2(1, 0.0833), &spritesheet, &shaderProgram);
+	sprite->setNumberAnimations(3);
 
-	sprite->setAnimationSpeed(SPINNING, 8);
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.875f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.75f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.625f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.5f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.375f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.25f));
-	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.125f));
+	sprite->setAnimationSpeed(SPINNING, 9);
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.5831f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.4998f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.4165f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.3332f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.2499f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.1666f));
+	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.0833f));
 	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.f));
 
-	sprite->setAnimationSpeed(NOTHING, 8);
-	sprite->addKeyframe(NOTHING, glm::vec2(1.f, 1.f));
+	sprite->setAnimationSpeed(EXPLODING, 4);
+	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.6663f));
+	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.7497f));
+	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.833f));
 
-	sprite->changeAnimation(NULL);
+	sprite->setAnimationSpeed(NOTHING, 8);
+	sprite->addKeyframe(NOTHING, glm::vec2(0.f, 0.9167f));
+
+	sprite->changeAnimation(NOTHING);
 	tileMapDispl = tileMapPos;
 }
 
-void Key::update(int deltaTime, int offset, int offsetR)
+void Key::update(int numKey, int deltaTime, int offset, int offsetR)
 {
-	sprite->setPosition(glm::vec2(246, (31 - (map->getOffseR() - 62)) * 16 - 300 +17));
-	int a = (31 - (map->getOffseR() - 62)) * 16 - 300;
-	sprite->update(deltaTime);
-	if ((map->getOffset() == 2 && map->getOffseR() != 62) || (map->getOffset() == 3 && map->getOffseR() != 93) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
-		if (((31 - (map->getOffseR() - 62)) * 16 - 300) > 15 && ((31 - (map->getOffseR() - 62)) * 16 - 300) < 27 * 16) {
-			sprite->setPosition(glm::vec2(230, (31 - (map->getOffseR() - 62)) * 16 - 300));
-			sprite->changeAnimation(SPINNING);
+	if (!visible) {
+		if (numKey == 1 && ((map->getOffset() == 2 && map->getOffseR() < 62) || (map->getOffset() == 1))) {
+			sprite->setPosition(glm::vec2(100, (31 - (map->getOffseR() - 62)) * 16 - 750 + 17));
+			int a = (31 - (map->getOffseR() - 93)) * 16 - 300;
+			sprite->update(deltaTime);
+			if (map->getOffset() == 1)
+				if (sprite->animation() != 0)
+					sprite->changeAnimation(SPINNING);
+		}
+		if (numKey == 2 && ((map->getOffset() == 3 && map->getOffseR() != 93) || (map->getOffset() == 2))) {
+			sprite->setPosition(glm::vec2(246, (31 - (map->getOffseR() - 62)) * 16 - 300 + 17));
+			int a = (31 - (map->getOffseR() - 62)) * 16 - 300;
+			sprite->update(deltaTime);
+			if (map->getOffset() == 2)
+				if (sprite->animation() != 0)
+					sprite->changeAnimation(SPINNING);
+		}
+		if (numKey == 3 && (map->getOffset() == 3)) {
+			sprite->setPosition(glm::vec2(246, (31 - (map->getOffseR() - 62)) * 16 + 117));
+			int a = (31 - (map->getOffseR() - 62)) * 16 - 300;
+			sprite->update(deltaTime);
+			if (map->getOffset() == 3)
+				if (sprite->animation() != 0)
+					sprite->changeAnimation(SPINNING);
 		}
 	}
-	else if (map->getOffset() != 2)
-		sprite->changeAnimation(NULL);
+	else
+		sprite->changeAnimation(NOTHING);
 }
 
 

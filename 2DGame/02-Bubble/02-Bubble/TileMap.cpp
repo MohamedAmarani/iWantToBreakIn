@@ -190,6 +190,7 @@ int TileMap::amITr(const glm::ivec2 &pos) {
 	if (pos.y < 15 && offset>0) {
 		++house;
 		--offset;
+		key = false;
 		return 0;
 	}
 	else if (pos.y > 26 * 16 && offset == 3) {
@@ -215,7 +216,7 @@ int TileMap::amITr(const glm::ivec2 &pos) {
 	return 3;
 }
 
-bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b)
+bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible)
 {
 
 	int x, x1, y0, y1;
@@ -224,11 +225,21 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		yPos = pos.y;
 	}
 
-		//checkear collision de pelota con winnie
-	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//checkear collision de pelota con winnie
+	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//	return true;
+	//}
+	//checkear collision de pelota con llave
+	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
+		key = true;
 		return true;
 	}
-	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
+		key = true;
+		return true;
+	}
+	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
+		key = true;
 		return true;
 	}
 
@@ -246,7 +257,6 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 6] = 0;
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 7] = 0;
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 8] = 0;
-			key = false;
 		}
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
 			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
@@ -259,40 +269,6 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
-				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset + 1 + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
 					honey += 100;
@@ -352,7 +328,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	return false;
 }
 
-bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) 
+bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible)
 {
 	int i = pos.x;
 
@@ -362,12 +338,23 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	}
 
 	//checkear collision de pelota con winnie
-	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//	return true;
+	//}
+	//checkear collision de pelota con llave
+	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
+		key = true;
 		return true;
 	}
-	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
+		key = true;
 		return true;
 	}
+	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
+		key = true;
+		return true;
+	}
+
 	int x0, x, y0, y1;
 
 	x0 = pos.x / tileSize.x;
@@ -390,40 +377,6 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
 				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset + 1 + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
 					honey += 100;
 					int u = x % 2;
@@ -481,7 +434,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	return false;
 }
 
-bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b) 
+bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible)
 {
 
 	int x0, x1, y, y1;
@@ -491,10 +444,20 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 	}
 
 	//checkear collision de pelota con winnie
-	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//	return true;
+	//}
+	//checkear collision de pelota con llave
+	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
+		key = true;
 		return true;
 	}
-	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
+		key = true;
+		return true;
+	}
+	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
+		key = true;
 		return true;
 	}
 
@@ -519,40 +482,6 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
 				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset + 1 + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
 					honey += 100;
 					int u = x % 2;
@@ -611,7 +540,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b)
 	return false;
 }
 
-bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) 
+bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible)
 {
 
 	int x0, x1, y, y0;
@@ -621,10 +550,20 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	}
 
 	//checkear collision de pelota con winnie
-	if (offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
+	//	return true;
+	//}
+	//checkear collision de pelota con llave
+	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
+		key = true;
 		return true;
 	}
-	if (offset == 2 && (pos.x + 16 >= 230) && (pos.x <= 230 + 24) && (pos.y + 16 >= 196) && (pos.y <= 196 + 24)) {
+	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
+		key = true;
+		return true;
+	}
+	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
+		key = true;
 		return true;
 	}
 
@@ -649,40 +588,6 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
 					Game::instance().playSound("sounds/block.mp3");
 				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 33 || map[(y + (offset * levelTile))*mapSize.x + x] == 35
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 37 || map[(y + (offset * levelTile))*mapSize.x + x] == 39)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset + 1 + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
-				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 34 || map[(y + (offset * levelTile))*mapSize.x + x] == 36
-					|| map[(y + (offset * levelTile))*mapSize.x + x] == 38 || map[(y + (offset * levelTile))*mapSize.x + x] == 40)) {
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					key = true;
-				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
 					honey += 100;
 					int u = x % 2;
@@ -741,7 +646,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	return false;
 }
 
-double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed)
+double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &posAnt, const glm::ivec2 &size, int b, int xSpeed, int ySpeed)
 {
 
 	int x0, x1, y, y0;
@@ -769,9 +674,8 @@ double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &
 
 	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
 
-
 	if (b == 1)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y)) {
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed >= 0) {
 			Game::instance().playSound("sounds/paddle.wav");
 			return speedX;
 		}
@@ -779,7 +683,7 @@ double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &
 
 }
 
-double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed)
+double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &posAnt, const glm::ivec2 &size, int b, int xSpeed, int ySpeed)
 {
 
 	int x0, x1, y, y0;
@@ -805,11 +709,9 @@ double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &
 
 	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
 
-
-	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y)) {
+	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed >= 0)
 		return speedY;
-	}
-	else
+	else 
 		return -100;
 
 }

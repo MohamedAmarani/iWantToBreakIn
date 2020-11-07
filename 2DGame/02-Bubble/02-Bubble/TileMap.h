@@ -39,13 +39,13 @@ public:
 
 	void setYPos(int a)  { yPos = a; }
 
-	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
+	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible) ;
 	int amITr(const glm::ivec2 &pos);
-	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
-	bool collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
-	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b) ;
-	double collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
-	double collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
+	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible) ;
+	bool collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible) ;
+	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int b, bool visible) ;
+	double collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &posAnt, const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
+	double collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &posAnt,const glm::ivec2 &size, int b, int xSpeed, int ySpeed);
 	bool collisionMoveDownPaddle(const glm::ivec2 &pos, const glm::ivec2 &size, const glm::ivec2 &paddlePos) const;
 	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 
@@ -56,6 +56,8 @@ public:
 	int getLives() { return lives; }
 
 	int getHoney() { return honey; }
+
+	int getKey() { return key; }
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -67,6 +69,8 @@ private:
 	glm::ivec2 position, mapSize, tilesheetSize;
 	int xPos;
 	int yPos;
+	int xPosAnt;
+	int yPosAnt;
 	glm::vec2 blockSize;
 	glm::vec2 tileSize;
 	Texture tilesheet;

@@ -76,11 +76,11 @@ void Winnie::update(int deltaTime, int offset, int offsetR)
 {
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
-	if ((map->getOffset() == 2 && map->getOffseR() != 62) || (map->getOffset() == 3 && map->getOffseR() != 93)) {
-		sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR() - 62)) * 16 - 200));
+	if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
+		sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
 		sprite->changeAnimation(SLEEPING);
 	}
-	else if(map->getOffset() != 2)
+	else if(map->getOffset() != 0)
 		sprite->changeAnimation(NOTHING);
 }
 

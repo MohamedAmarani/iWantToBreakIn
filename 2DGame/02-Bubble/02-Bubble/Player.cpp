@@ -62,9 +62,6 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->changeAnimation(MOVE_DOWN);
 	tileMapDispl = tileMapPos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
-	posPlayer.x = 212;
-	posPlayer.y = 400;
-
 }
 
 void Player::update(int deltaTime, bool restart)
@@ -90,7 +87,7 @@ void Player::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPlayer.y += speed;
 		posPlayer.x -= speed;
-		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0, false) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0, false))
 		{
 			posPlayer.y -= speed;
 			posPlayer.x += speed;
@@ -103,7 +100,7 @@ void Player::update(int deltaTime, bool restart)
 			sprite->changeAnimation(MOVE_DOWN);
 		posPlayer.y += speed;
 		posPlayer.x += speed;
-		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0, false) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0, false))
 		{
 			posPlayer.y -= speed;
 			posPlayer.x -= speed;
@@ -117,7 +114,7 @@ void Player::update(int deltaTime, bool restart)
 		didStart = true;
 		posPlayer.y -= speed;
 		posPlayer.x -= speed;
-		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0, false) || map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0, false))
 		{
 			posPlayer.y += speed;
 			posPlayer.x += speed;
@@ -131,7 +128,7 @@ void Player::update(int deltaTime, bool restart)
 		didStart = true;
 		posPlayer.y -= speed;
 		posPlayer.x += speed;
-		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
+		if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0, false) || map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0, false))
 		{
 			posPlayer.y += speed;
 			posPlayer.x -= speed;
@@ -145,7 +142,7 @@ void Player::update(int deltaTime, bool restart)
 		if (!Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) &&
 			!Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPlayer.x -= speed;
-			if (map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0))
+			if (map->collisionMoveLeft(posPlayer, glm::ivec2(32, 32), 0, false))
 			{
 				posPlayer.x += speed;
 				sprite->changeAnimation(STAND_LEFT);
@@ -159,7 +156,7 @@ void Player::update(int deltaTime, bool restart)
 		if (!Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			!Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT)) {
 			posPlayer.x += speed;
-			if (map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0))
+			if (map->collisionMoveRight(posPlayer, glm::ivec2(32, 32), 0, false))
 			{
 				posPlayer.x -= speed;
 				sprite->changeAnimation(STAND_RIGHT);
@@ -174,7 +171,7 @@ void Player::update(int deltaTime, bool restart)
 			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPlayer.y -= speed;
 			didStart = true;
-			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0))
+			if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0, false))
 			{
 				posPlayer.y += speed;
 				sprite->changeAnimation(STAND_UP);
@@ -188,7 +185,7 @@ void Player::update(int deltaTime, bool restart)
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 			posPlayer.y += speed;
-			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0))
+			if (map->collisionMoveDown(posPlayer, glm::ivec2(32, 32), 0, false))
 			{
 				posPlayer.y -= speed;
 				sprite->changeAnimation(STAND_DOWN);
