@@ -76,7 +76,7 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
 
-	if(chase && (map->getOffset() == 0) && map->getOffseR() == 0) {
+	if (chase && (map->getOffset() == 0) && map->getOffseR() == 0) {
 
 		if (sprite->animation() == 0)
 			sprite->changeAnimation(WAKING_UP);
@@ -114,8 +114,10 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 		if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
 			setPosition(glm::vec2(206, (31 - (map->getOffseR())) * 16 - 203));
 			sprite->setPosition(glm::vec2(206, (31 - (map->getOffseR())) * 16 - 203));
-			if(map->getOffset() == 0 && (map->getOffset() == 0))
-				Game::instance().playInterruptSound("sounds/snoring.wav");
+			if ((map->getOffset() == 0))
+				Game::instance().playInterruptSound("sounds/snoring3.wav");
+			else
+				Game::instance().stopSound();
 			sprite->changeAnimation(SLEEPING);
 		}
 		else if (map->getOffset() != 0)
@@ -138,4 +140,3 @@ void Winnie::setPosition(const glm::vec2 &pos)
 {
 	posPlayer = pos;
 }
-
