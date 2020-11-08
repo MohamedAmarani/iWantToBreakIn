@@ -231,12 +231,12 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	}
 
 	//checkear collision de pelota con winnie
-	if (!chase && offset == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
+	if (!chase && offset == 0 && offsetR == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
 		chase = true;
 		return true;
 	}
 	//checkear collision de pelota con llave
-	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
+	if (!visible && b == 1 && offset == 1 && offsetR == 31 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
 		if (!open3) {
 			Game::instance().playSound("sounds/open.mp3");
@@ -244,7 +244,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		}
 		return true;
 	}
-	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
+	if (!visible && b == 1 && offset == 2 && offsetR == 62 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
 		key = true;
 		if (!open2) {
 			Game::instance().playSound("sounds/open.mp3");
@@ -252,7 +252,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 		}
 		return true;
 	}
-	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
+	if (!visible && b == 1 && offset == 3 && offsetR == 93 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
 		key = true;
 		if (!open1) {
 			Game::instance().playSound("sounds/open.mp3");
