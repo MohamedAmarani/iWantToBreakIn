@@ -34,5 +34,3 @@ private:
 
 
 #endif // _WINNIE_INCLUDE
-
-

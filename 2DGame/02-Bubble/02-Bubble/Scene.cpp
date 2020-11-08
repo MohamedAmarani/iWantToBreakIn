@@ -27,9 +27,9 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	if(map != NULL)
+	if (map != NULL)
 		delete map;
-	if(player != NULL)
+	if (player != NULL)
 		delete player;
 	if (ball != NULL)
 		delete ball;
@@ -48,7 +48,7 @@ void Scene::init(int level)
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	ball->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX()+8, INIT_PLAYER_Y_TILES * map->getTileSizeY()-16));
+	ball->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX() + 8, INIT_PLAYER_Y_TILES * map->getTileSizeY() - 16));
 	ball->setTileMap(map);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -140,10 +140,10 @@ void Scene::update(int deltaTime)
 	if (Game::instance().getKey('u') && !pressedU) {
 		pressedU = true;
 		if ((map->getOffset() != 0)) {
-				map->setOffset(map->getOffset() - 1);
+			map->setOffset(map->getOffset() - 1);
 		}
 	}
-	else if(!Game::instance().getKey('u'))
+	else if (!Game::instance().getKey('u'))
 		pressedU = false;
 
 	if (!firstTime) {
@@ -223,13 +223,13 @@ void Scene::initShaders()
 	Shader vShader, fShader;
 
 	vShader.initFromFile(VERTEX_SHADER, "shaders/texture.vert");
-	if(!vShader.isCompiled())
+	if (!vShader.isCompiled())
 	{
 		cout << "Vertex Shader Error" << endl;
 		cout << "" << vShader.log() << endl << endl;
 	}
 	fShader.initFromFile(FRAGMENT_SHADER, "shaders/texture.frag");
-	if(!fShader.isCompiled())
+	if (!fShader.isCompiled())
 	{
 		cout << "Fragment Shader Error" << endl;
 		cout << "" << fShader.log() << endl << endl;
@@ -238,7 +238,7 @@ void Scene::initShaders()
 	texProgram.addShader(vShader);
 	texProgram.addShader(fShader);
 	texProgram.link();
-	if(!texProgram.isLinked())
+	if (!texProgram.isLinked())
 	{
 		cout << "Shader Linking Error" << endl;
 		cout << "" << texProgram.log() << endl << endl;
@@ -247,6 +247,3 @@ void Scene::initShaders()
 	vShader.free();
 	fShader.free();
 }
-
-
-

@@ -101,4 +101,3 @@ void Key::setPosition(const glm::vec2 &pos)
 {
 	posPlayer = pos;
 }
-
