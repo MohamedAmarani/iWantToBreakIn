@@ -78,8 +78,11 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 
 	if (chase && (map->getOffset() == 0) && map->getOffseR() == 0) {
 
-		if (sprite->animation() == 0)
+		if (sprite->animation() == 0) {
+			Game::instance().stopSound();
+			Game::instance().playSound("sounds/angry.mp3");
 			sprite->changeAnimation(WAKING_UP);
+		}
 		else if (started || (sprite->animation() == 1 && sprite->getKeyFrame() == 14) || (sprite->animation() == 3 || sprite->animation() == 4)) {
 			started = true;
 			Game::instance().stopSound();
