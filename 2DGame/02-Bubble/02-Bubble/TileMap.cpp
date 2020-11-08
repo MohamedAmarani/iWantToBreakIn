@@ -236,14 +236,26 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	//checkear collision de pelota con llave
 	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
+		if (!open3) {
+			Game::instance().playSound("sounds/open.mp3");
+			open3 = true;
+		}
 		return true;
 	}
 	if (!visible && b == 1 && offset == 2 && (pos.x + 16 > 230) && (pos.x < 230 + 24) && (pos.y + 16 > 196) && (pos.y < 196 + 24)) {
 		key = true;
+		if (!open2) {
+			Game::instance().playSound("sounds/open.mp3");
+			open2 = true;
+		}
 		return true;
 	}
 	if (!visible && b == 1 && offset == 3 && (pos.x + 16 > 231) && (pos.x < 231 + 24) && (pos.y + 16 > 101) && (pos.y < 101 + 24)) {
 		key = true;
+		if (!open1) {
+			Game::instance().playSound("sounds/open.mp3");
+			open1 = true;
+		}
 		return true;
 	}
 

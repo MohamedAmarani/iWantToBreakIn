@@ -85,7 +85,9 @@ private:
 	int house = 1;
 	int lives = 4;
 	int honey = 0;
-
+	bool open1 = false;
+	bool open2 = false;
+	bool open3 = false;
 };
 
 
