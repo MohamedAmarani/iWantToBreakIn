@@ -270,7 +270,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	int u;
 	for (int y = y0; y <= y1; y++)
 	{
-		if (key) {
+		if (key && offset != 0) {
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 5] = 0;
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 6] = 0;
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 7] = 0;

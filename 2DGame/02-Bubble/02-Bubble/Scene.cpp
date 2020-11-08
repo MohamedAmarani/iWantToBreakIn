@@ -137,16 +137,14 @@ void Scene::update(int deltaTime)
 		chase = false;
 	}
 
-	if (Game::instance().getKey('u')) {
+	if (Game::instance().getKey('u') && !pressedU) {
+		pressedU = true;
 		if ((map->getOffset() != 0)) {
-			if((map->getOffset() == 3))
-				map->setOffset(2);
-			else if ((map->getOffset() == 2))
-				map->setOffset(1);
-			else if ((map->getOffset() == 1))
-				map->setOffset(0);
+				map->setOffset(map->getOffset() - 1);
 		}
 	}
+	else if(!Game::instance().getKey('u'))
+		pressedU = false;
 
 	if (!firstTime) {
 		firstTime = true;

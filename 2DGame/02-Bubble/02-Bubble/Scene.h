@@ -47,6 +47,7 @@ private:
 	bool bAnt = false;
 	bool r = false;
 	bool chase = false;
+	bool pressedU = true;
 };
 
 

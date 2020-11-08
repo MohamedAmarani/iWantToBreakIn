@@ -75,13 +75,13 @@ void Key::update(int numKey, int deltaTime, int offset, int offsetR)
 		}
 	}
 	else {
-		if (sprite->animation() == 1 && sprite->getKeyFrame() == 2)
-			sprite->changeAnimation(NOTHING);
+		//if (sprite->animation() == 1 && sprite->getKeyFrame() == 2)
+		//	sprite->changeAnimation(NOTHING);
 
 		if (!collision) {
 			Game::instance().playSound("sounds/key.mp3");
 			collision = true;
-			sprite->changeAnimation(EXPLODING);
+			sprite->changeAnimation(NOTHING);
 		}
 	}
 }
