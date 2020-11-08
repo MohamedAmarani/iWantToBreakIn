@@ -35,6 +35,10 @@ int TileMap::getOffset() {
 	return offset;
 }
 
+void TileMap::setOffset(int off) {
+	offset = off;
+}
+
 int TileMap::getOffseR() {
 	return offsetR;
 }

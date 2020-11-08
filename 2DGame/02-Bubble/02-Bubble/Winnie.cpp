@@ -53,17 +53,17 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->setAnimationSpeed(NOTHING, 7);
 	sprite->addKeyframe(NOTHING, glm::vec2(0.9375f, 0.5f));
 
-	sprite->setAnimationSpeed(MOVE_LEFT, 2);
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.25f, 0.75f));
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.3125f, 0.75f));
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.375f, 0.75f));
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.4375f, 0.75f));
+	sprite->setAnimationSpeed(MOVE_LEFT, 8);
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.25f, 0.5f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.3125f, 0.5f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.375f, 0.5f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.4375f, 0.5f));
 
-	sprite->setAnimationSpeed(MOVE_RIGHT, 2);
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.f, 0.75f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.0625f, 0.75f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.125f, 0.75f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.1875f, 0.75f));
+	sprite->setAnimationSpeed(MOVE_RIGHT, 8);
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.f, 0.50f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.0625f, 0.50f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.125f, 0.50f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.1875f, 0.50f));
 
 	sprite->changeAnimation(NOTHING);
 	tileMapDispl = tileMapPos;
@@ -79,6 +79,14 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 			float speedX = posWasp.x - posPlayer.x;
 			float speedY = posWasp.y - posPlayer.y;
 			float maxSpeed = 2 * 0.5f;
+			if (speedX > 0.f) {
+				if (sprite->animation() != MOVE_RIGHT)
+					sprite->changeAnimation(MOVE_RIGHT);
+			}
+			else {
+				if (sprite->animation() != MOVE_LEFT)
+					sprite->changeAnimation(MOVE_LEFT);
+			}
 			if (speedX > maxSpeed)
 				speedX = maxSpeed;
 			if (speedX < -maxSpeed)

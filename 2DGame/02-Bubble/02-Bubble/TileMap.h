@@ -24,6 +24,7 @@ public:
 	~TileMap();
 
 	int getOffset();
+	void setOffset(int off);
 
 	int getOffseR();
 

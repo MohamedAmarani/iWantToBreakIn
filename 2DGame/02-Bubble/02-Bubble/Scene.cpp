@@ -137,6 +137,17 @@ void Scene::update(int deltaTime)
 		chase = false;
 	}
 
+	if (Game::instance().getKey('u')) {
+		if ((map->getOffset() != 0)) {
+			if((map->getOffset() == 3))
+				map->setOffset(2);
+			else if ((map->getOffset() == 2))
+				map->setOffset(1);
+			else if ((map->getOffset() == 1))
+				map->setOffset(0);
+		}
+	}
+
 	if (!firstTime) {
 		firstTime = true;
 		Game::instance().playSoundBGM("sounds/scene.wav");
