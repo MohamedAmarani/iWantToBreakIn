@@ -703,7 +703,7 @@ double TileMap::collisionMoveDownBallX(const glm::ivec2 &pos, const glm::ivec2 &
 	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
 
 	if (b == 1)
-		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed >= 0) {
+		if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed > 0) {
 			Game::instance().playSound("sounds/paddle.wav");
 			return speedX;
 		}
@@ -737,7 +737,7 @@ double TileMap::collisionMoveDownBallY(const glm::ivec2 &pos, const glm::ivec2 &
 
 	speedY = sqrt((speedXY*speedXY - speedX*speedX >= 0) ? speedXY*speedXY - speedX*speedX : 0) * (speedY > 0 ? -1 : 1);
 
-	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed >= 0)
+	if ((xPos < pos.x + size.x) && (xPos + 32 > pos.x) && (yPos < pos.y + size.y) && (yPos > pos.y) && ySpeed > 0)
 		return speedY;
 	else 
 		return -100;
