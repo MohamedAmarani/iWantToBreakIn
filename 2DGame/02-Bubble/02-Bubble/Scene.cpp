@@ -137,6 +137,7 @@ void Scene::update(int deltaTime)
 		winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 		winnie->setTileMap(map);
 		map->setOffset(3);
+		Game::instance().playSound("sounds/die.mp3");
 	}
 	else
 		collision = false;
