@@ -74,8 +74,13 @@ void Key::update(int numKey, int deltaTime, int offset, int offsetR)
 					sprite->changeAnimation(SPINNING);
 		}
 	}
-	else
+	else {
+		if (!collision) {
+			Game::instance().playSound("sounds/key.mp3");
+			collision = true;
+		}
 		sprite->changeAnimation(NOTHING);
+	}
 }
 
 

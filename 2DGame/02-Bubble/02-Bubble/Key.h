@@ -31,6 +31,7 @@ private:
 	Sprite *sprite;
 	TileMap *map;
 	bool visible = false;
+	bool collision = false;
 };
 
 
