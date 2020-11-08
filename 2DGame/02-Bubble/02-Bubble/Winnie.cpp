@@ -107,8 +107,10 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 	else {
 		if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
 			sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
-			if(map->getOffset() == 0 && (map->getOffset() == 0))
-				Game::instance().playInterruptSound("sounds/snoring.wav");
+			if((map->getOffset() == 0))
+				Game::instance().playInterruptSound("sounds/snoring3.wav");
+			else
+				Game::instance().stopSound();
 			sprite->changeAnimation(SLEEPING);
 		}
 		else if (map->getOffset() != 0)
