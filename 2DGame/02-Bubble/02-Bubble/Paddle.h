@@ -15,7 +15,7 @@ class Paddle
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, bool restart, bool collision);
+	void update(int deltaTime, bool restart, bool collision, int offset, int offsetR);
 	void render();
 	
 	void setTileMap(TileMap *tileMap);
@@ -31,6 +31,7 @@ private:
 	Sprite *sprite;
 	TileMap *map;
 	int speed = 3;
+	bool backing = false;
 };
 
 

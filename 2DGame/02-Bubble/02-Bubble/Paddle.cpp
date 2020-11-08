@@ -29,111 +29,115 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Paddle::update(int deltaTime, bool restart, bool collision)
+void Paddle::update(int deltaTime, bool restart, bool collision, int offset, int offsetR)
 {
 	map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false);
 	if (restart) {
 		posPaddle.x = 212;
 		posPaddle.y = 400;
+		backing = true;
 	}
+	if (offsetR == 93)
+		backing = false;
 	sprite->update(deltaTime);
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPaddle.y + 32) <= 27 * 16 - 2)
-	{
-		if (sprite->animation() != MOVE_DOWN)
-			sprite->changeAnimation(MOVE_DOWN);
-		posPaddle.y += speed;
-		posPaddle.x -= speed;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
+	if (!backing) {
+		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPaddle.y + 32) <= 27 * 16 - 2)
 		{
-			posPaddle.y -= speed;
-			posPaddle.x += speed;
-			sprite->changeAnimation(STAND_DOWN);
-		}
-	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && (posPaddle.y + 32) <= 27 * 16 - 2)
-	{
-		if (sprite->animation() != MOVE_DOWN)
-			sprite->changeAnimation(MOVE_DOWN);
-		posPaddle.y += speed;
-		posPaddle.x += speed;
-		if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
-		{
-			posPaddle.y -= speed;
-			posPaddle.x -= speed;
-			sprite->changeAnimation(STAND_DOWN);
-		}
-	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && posPaddle.y >= 17)
-	{
-		if (sprite->animation() != MOVE_DOWN)
-			sprite->changeAnimation(MOVE_DOWN);
-		posPaddle.y -= speed;
-		posPaddle.x -= speed;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
-		{
-			posPaddle.y += speed;
-			posPaddle.x += speed;
-			sprite->changeAnimation(STAND_DOWN);
-		}
-	}
-	if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && posPaddle.y >= 17)
-	{
-		if (sprite->animation() != MOVE_DOWN)
-			sprite->changeAnimation(MOVE_DOWN);
-		posPaddle.y -= speed;
-		posPaddle.x += speed;
-		if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
-		{
+			if (sprite->animation() != MOVE_DOWN)
+				sprite->changeAnimation(MOVE_DOWN);
 			posPaddle.y += speed;
 			posPaddle.x -= speed;
-			sprite->changeAnimation(STAND_DOWN);
-		}
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
-	{
-		if (Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
-			Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
-			posPaddle.x -= speed;
-			if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
-			{
-				posPaddle.x += speed;
-			}
-		}
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
-	{
-		if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
-			Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
-			posPaddle.x += speed;
-			if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
-			{
-				posPaddle.x -= speed;
-			}
-		}
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_UP) && posPaddle.y >= 17)
-	{
-		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
-			Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
-			posPaddle.y -= speed;
-			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false))
-			{
-				posPaddle.y += speed;
-			}
-		}
-	}
-	else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && (posPaddle.y + 32) <= 27 * 16 - 2)
-	{
-		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
-			Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
-			posPaddle.y += speed;
-			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false))
+			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
 			{
 				posPaddle.y -= speed;
+				posPaddle.x += speed;
+				sprite->changeAnimation(STAND_DOWN);
+			}
+		}
+		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && (posPaddle.y + 32) <= 27 * 16 - 2)
+		{
+			if (sprite->animation() != MOVE_DOWN)
+				sprite->changeAnimation(MOVE_DOWN);
+			posPaddle.y += speed;
+			posPaddle.x += speed;
+			if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
+			{
+				posPaddle.y -= speed;
+				posPaddle.x -= speed;
+				sprite->changeAnimation(STAND_DOWN);
+			}
+		}
+		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && posPaddle.y >= 17)
+		{
+			if (sprite->animation() != MOVE_DOWN)
+				sprite->changeAnimation(MOVE_DOWN);
+			posPaddle.y -= speed;
+			posPaddle.x -= speed;
+			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
+			{
+				posPaddle.y += speed;
+				posPaddle.x += speed;
+				sprite->changeAnimation(STAND_DOWN);
+			}
+		}
+		if (Game::instance().getSpecialKey(GLUT_KEY_UP) && Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && posPaddle.y >= 17)
+		{
+			if (sprite->animation() != MOVE_DOWN)
+				sprite->changeAnimation(MOVE_DOWN);
+			posPaddle.y -= speed;
+			posPaddle.x += speed;
+			if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false) || map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
+			{
+				posPaddle.y += speed;
+				posPaddle.x -= speed;
+				sprite->changeAnimation(STAND_DOWN);
+			}
+		}
+		else if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+		{
+			if (Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
+				Game::instance().getSpecialKey(GLUT_KEY_LEFT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
+				posPaddle.x -= speed;
+				if (map->collisionMoveLeft(posPaddle, glm::ivec2(32, 32), 2, false))
+				{
+					posPaddle.x += speed;
+				}
+			}
+		}
+		else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+		{
+			if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_UP) &&
+				Game::instance().getSpecialKey(GLUT_KEY_RIGHT) && !Game::instance().getSpecialKey(GLUT_KEY_DOWN)) {
+				posPaddle.x += speed;
+				if (map->collisionMoveRight(posPaddle, glm::ivec2(32, 32), 2, false))
+				{
+					posPaddle.x -= speed;
+				}
+			}
+		}
+		else if (Game::instance().getSpecialKey(GLUT_KEY_UP) && posPaddle.y >= 17)
+		{
+			if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
+				Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
+				posPaddle.y -= speed;
+				if (map->collisionMoveUp(posPaddle, glm::ivec2(32, 32), 2, false))
+				{
+					posPaddle.y += speed;
+				}
+			}
+		}
+		else if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && (posPaddle.y + 32) <= 27 * 16 - 2)
+		{
+			if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
+				Game::instance().getSpecialKey(GLUT_KEY_DOWN) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
+				posPaddle.y += speed;
+				if (map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false))
+				{
+					posPaddle.y -= speed;
+				}
 			}
 		}
 	}
-
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPaddle.x), float(tileMapDispl.y + posPaddle.y)));
 }
 

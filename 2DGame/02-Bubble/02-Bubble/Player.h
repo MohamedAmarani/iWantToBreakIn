@@ -15,7 +15,7 @@ class Player
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, bool restart, bool collision);
+	void update(int deltaTime, bool restart, bool collision, int offset, int offsetR);
 	void render();
 	bool getDidStart();
 	void setTileMap(TileMap *tileMap);
@@ -34,6 +34,7 @@ private:
 	int speed = 3;
 	bool didStart = false;
 	int count = 0;
+	bool backing = false;
 };
 
 

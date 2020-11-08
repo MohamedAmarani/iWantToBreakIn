@@ -87,7 +87,7 @@ void Scene::init(int level)
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
-	player->update(deltaTime, r, collision);
+	player->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
 	bool b = player->getDidStart();
 	int xBee = player->getX();
 	if (b)
@@ -111,7 +111,7 @@ void Scene::update(int deltaTime)
 	key1->update(1, deltaTime, map->getOffset(), map->getOffseR());
 	key2->update(2, deltaTime, map->getOffset(), map->getOffseR());
 	key3->update(3, deltaTime, map->getOffset(), map->getOffseR());
-	paddle->update(deltaTime, r, collision);
+	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
 	glm::vec2 a = paddle->getPosition();
 	glm::vec2 w = winnie->getPosition();
 
@@ -137,6 +137,7 @@ void Scene::update(int deltaTime)
 		winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 		winnie->setTileMap(map);
 		map->setOffset(3);
+		winnie->setStarted(false);
 	}
 	else
 		collision = false;
