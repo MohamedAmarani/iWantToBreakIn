@@ -33,7 +33,7 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(SLEEPING, glm::vec2(0.0625f, 0.25f));
 	sprite->addKeyframe(SLEEPING, glm::vec2(0.f, 0.25f));
 
-	sprite->setAnimationSpeed(WAKING_UP, 7);
+	sprite->setAnimationSpeed(WAKING_UP, 5);
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.9375f, 0.f));
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.8125f, 0.f));
 	sprite->addKeyframe(WAKING_UP, glm::vec2(0.75f, 0.f));
@@ -75,38 +75,44 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
 
-	if(chase && (map->getOffset() == 0)) {
-		Game::instance().stopSound();
-		float speedX = posWasp.x - posPlayer.x;
-		float speedY = posWasp.y - posPlayer.y;
-		float maxSpeed = 2 * 0.5f;
-		if (speedX > 0.f) {
-			if (sprite->animation() != MOVE_RIGHT)
-				sprite->changeAnimation(MOVE_RIGHT);
+	if(chase && (map->getOffset() == 0) && map->getOffseR() == 0) {
+
+		if (sprite->animation() == 0)
+			sprite->changeAnimation(WAKING_UP);
+		else if (started || (sprite->animation() == 1 && sprite->getKeyFrame() == 14) || (sprite->animation() == 3 || sprite->animation() == 4)) {
+			started = true;
+			Game::instance().stopSound();
+			float speedX = posWasp.x - posPlayer.x;
+			float speedY = posWasp.y - posPlayer.y;
+			float maxSpeed = 2 * 0.5f;
+			if (speedX > 0.f) {
+				if (sprite->animation() != MOVE_RIGHT)
+					sprite->changeAnimation(MOVE_RIGHT);
+			}
+			else {
+				if (sprite->animation() != MOVE_LEFT)
+					sprite->changeAnimation(MOVE_LEFT);
+			}
+			if (speedX > maxSpeed)
+				speedX = maxSpeed;
+			if (speedX < -maxSpeed)
+				speedX = -maxSpeed;
+
+			if (speedY > maxSpeed)
+				speedY = maxSpeed;
+			if (speedY < -maxSpeed)
+				speedY = -maxSpeed;
+
+			posPlayer.x += speedX;
+			posPlayer.y += speedY;
+			sprite->setPosition(glm::vec2(posPlayer.x, tileMapDispl.y + posPlayer.y));
 		}
-		else {
-			if (sprite->animation() != MOVE_LEFT)
-				sprite->changeAnimation(MOVE_LEFT);
-		}
-		if (speedX > maxSpeed)
-			speedX = maxSpeed;
-		if (speedX < -maxSpeed)
-			speedX = -maxSpeed;
-
-		if (speedY > maxSpeed)
-			speedY = maxSpeed;
-		if (speedY < -maxSpeed)
-			speedY = -maxSpeed;
-
-		posPlayer.x += speedX;
-		posPlayer.y += speedY;
-
-		sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 	}
 
 	else {
 		if ((map->getOffset() == 0 && map->getOffseR() != 0) || (map->getOffset() == 1 && map->getOffseR() != 31)) {
-			sprite->setPosition(glm::vec2(200, (31 - (map->getOffseR())) * 16 - 200));
+			setPosition(glm::vec2(206, (31 - (map->getOffseR())) * 16 - 203));
+			sprite->setPosition(glm::vec2(206, (31 - (map->getOffseR())) * 16 - 203));
 			if(map->getOffset() == 0 && (map->getOffset() == 0))
 				Game::instance().playInterruptSound("sounds/snoring.wav");
 			sprite->changeAnimation(SLEEPING);

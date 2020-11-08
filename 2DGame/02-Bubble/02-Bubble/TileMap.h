@@ -59,6 +59,8 @@ public:
 	int getHoney() { return honey; }
 
 	int getKey() { return key; }
+
+	int getChase() { return chase; }
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -77,7 +79,7 @@ private:
 	Texture tilesheet;
 	glm::vec2 tileTexSize;
 	int *map;
-	int offset = 3, offsetR = 93;
+	int offset = 4, offsetR = 124;
 	int levelTile;
 	int snitch;
 	bool key;
@@ -88,6 +90,7 @@ private:
 	bool open1 = false;
 	bool open2 = false;
 	bool open3 = false;
+	bool chase = false;
 };
 
 

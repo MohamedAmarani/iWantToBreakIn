@@ -29,7 +29,7 @@ private:
 	Sprite *sprite;
 	TileMap *map;
 	int speed;
-
+	bool started = false;
 };
 
 

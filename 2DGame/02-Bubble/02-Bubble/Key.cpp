@@ -35,7 +35,7 @@ void Key::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->addKeyframe(SPINNING, glm::vec2(0.f, 0.f));
 
 	sprite->setAnimationSpeed(EXPLODING, 4);
-	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.6663f));
+	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.6664f));
 	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.7497f));
 	sprite->addKeyframe(EXPLODING, glm::vec2(0.f, 0.833f));
 
@@ -75,11 +75,14 @@ void Key::update(int numKey, int deltaTime, int offset, int offsetR)
 		}
 	}
 	else {
+		if (sprite->animation() == 1 && sprite->getKeyFrame() == 2)
+			sprite->changeAnimation(NOTHING);
+
 		if (!collision) {
 			Game::instance().playSound("sounds/key.mp3");
 			collision = true;
+			sprite->changeAnimation(EXPLODING);
 		}
-		sprite->changeAnimation(NOTHING);
 	}
 }
 

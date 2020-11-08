@@ -129,7 +129,7 @@ void Scene::update(int deltaTime)
 	if (restart)
 		player->restartCount();
 
-	if (Game::instance().getKey('3')) {
+	if (map->getChase()) {
 		chase = true;
 	}
 

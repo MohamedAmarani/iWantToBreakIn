@@ -18,6 +18,7 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
+	offset = 3;
 	key = false;
 	xPos = 0;
 	yPos = 0;
@@ -230,9 +231,10 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	}
 
 	//checkear collision de pelota con winnie
-	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
-	//	return true;
-	//}
+	if (!chase && offset == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
+		chase = true;
+		return true;
+	}
 	//checkear collision de pelota con llave
 	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
@@ -357,9 +359,10 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	}
 
 	//checkear collision de pelota con winnie
-	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
-	//	return true;
-	//}
+	if (!chase && offset == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
+		chase = true;
+		return true;
+	}
 	//checkear collision de pelota con llave
 	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
@@ -466,9 +469,10 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 	}
 
 	//checkear collision de pelota con winnie
-	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
-	//	return true;
-	//}
+	if (!chase && offset == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
+		chase = true;
+		return true;
+	}
 	//checkear collision de pelota con llave
 	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
@@ -575,9 +579,10 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	}
 
 	//checkear collision de pelota con winnie
-	//if ( b == 1 && offset == 2 && (pos.x < 200 + 32) && (pos.x + 16 > 200) && (pos.y < 280 + 32) && (16 + pos.y > 280)) {
-	//	return true;
-	//}
+	if (!chase && offset == 0 && b == 1 && (pos.x < 192 + 28) && (pos.x + 16 > 192) && (pos.y < 274 + 16) && (16 + pos.y > 274)) {
+		chase = true;
+		return true;
+	}
 	//checkear collision de pelota con llave
 	if (!visible && b == 1 && offset == 1 && (pos.x + 16 > 84) && (pos.x < 84 + 24) && (pos.y + 16 > 243) && (pos.y < 243 + 24)) {
 		key = true;
