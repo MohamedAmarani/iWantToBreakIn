@@ -150,7 +150,7 @@ void Scene::update(int deltaTime)
 
 	if (!firstTime) {
 		firstTime = true;
-		Game::instance().playSoundBGM("sounds/scene.wav");
+		Game::instance().playSoundBGM("sounds/breakout.mp3");
 	}
 	if (Game::instance().getKey(27)) { //ESC
 		firstTime = false;
