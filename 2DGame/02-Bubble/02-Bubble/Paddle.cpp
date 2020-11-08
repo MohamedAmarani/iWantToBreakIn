@@ -29,7 +29,7 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Paddle::update(int deltaTime, bool restart)
+void Paddle::update(int deltaTime, bool restart, bool collision)
 {
 	map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false);
 	if (restart) {

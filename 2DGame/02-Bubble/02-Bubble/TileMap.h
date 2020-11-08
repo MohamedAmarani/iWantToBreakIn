@@ -60,7 +60,11 @@ public:
 
 	int getKey() { return key; }
 
-	int getChase() { return chase; }
+	bool getChase() { return chase; }
+
+	void setChase(bool b) { chase = b; }
+
+	void decrementLives() { --lives; }
 	
 private:
 	bool loadLevel(const string &levelFile);

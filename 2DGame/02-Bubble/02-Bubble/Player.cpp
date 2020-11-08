@@ -64,7 +64,7 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
-void Player::update(int deltaTime, bool restart)
+void Player::update(int deltaTime, bool restart, bool collision)
 {
 	if (restart) {
 		posPlayer.x = 212;

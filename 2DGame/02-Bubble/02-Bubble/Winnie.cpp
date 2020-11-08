@@ -70,8 +70,9 @@ void Winnie::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	speed = 0;
 }
 
-void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase)
+void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase, bool collision)
 {
+
 	int a = (31 - (map->getOffseR() - 62)) * 16 - 200;
 	sprite->update(deltaTime);
 

@@ -48,6 +48,7 @@ private:
 	bool r = false;
 	bool chase = false;
 	bool pressedU = true;
+	bool collision = false;
 };
 
 

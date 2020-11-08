@@ -87,7 +87,7 @@ void Scene::init(int level)
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
-	player->update(deltaTime, r);
+	player->update(deltaTime, r, collision);
 	bool b = player->getDidStart();
 	int xBee = player->getX();
 	if (b)
@@ -98,7 +98,7 @@ void Scene::update(int deltaTime)
 		b = false;
 	if (!bAnt)
 		bAnt = b;
-	winnie->update(deltaTime, map->getOffset(), map->getOffseR(), player->getPosition(), chase);
+	winnie->update(deltaTime, map->getOffset(), map->getOffseR(), player->getPosition(), chase, collision);
 
 	if (map->getKey()) {
 		if (map->getOffset() == 1)
@@ -111,8 +111,9 @@ void Scene::update(int deltaTime)
 	key1->update(1, deltaTime, map->getOffset(), map->getOffseR());
 	key2->update(2, deltaTime, map->getOffset(), map->getOffseR());
 	key3->update(3, deltaTime, map->getOffset(), map->getOffseR());
-	paddle->update(deltaTime, r);
+	paddle->update(deltaTime, r, collision);
 	glm::vec2 a = paddle->getPosition();
+	glm::vec2 w = winnie->getPosition();
 
 	if (map->getOffset() == 1)
 		ball->update(deltaTime, a, b, xBee, key1->getVisible());
@@ -124,6 +125,22 @@ void Scene::update(int deltaTime)
 		ball->update(deltaTime, a, b, xBee, key3->getVisible());
 
 	bool restart = ball->getRestart();
+
+	//colision winnie y player
+	if (chase && map->getOffset() == 0 && map->getOffseR() == 0 && (a.x < w.x + 32) && (a.x + 32 > w.x) && (a.y < w.y + 32) && (32 + a.y > w.y)) {
+		collision = true;
+		restart = true;
+		map->setChase(false);
+		map->decrementLives();
+		//winnie vuelve a dormir
+		winnie->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+		winnie->setTileMap(map);
+		map->setOffset(3);
+	}
+	else
+		collision = false;
+
 	r = restart;
 
 	if (restart)

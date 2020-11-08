@@ -15,7 +15,7 @@ class Paddle
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, bool restart);
+	void update(int deltaTime, bool restart, bool collision);
 	void render();
 	
 	void setTileMap(TileMap *tileMap);

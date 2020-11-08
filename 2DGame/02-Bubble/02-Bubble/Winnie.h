@@ -15,11 +15,12 @@ class Winnie
 
 public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase);
+	void update(int deltaTime, int offset, int offsetR, const glm::ivec2 &posWasp, bool chase, bool collision);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	glm::ivec2 getPosition() { return posPlayer; }
 
 private:
 	bool bJumping;
