@@ -56,6 +56,8 @@ public:
 
 	void playSoundBGM(const char* sound);
 	void playSound(const char* sound);
+	void playInterruptSound(const char* sound);
+	void Game::stopSound();
 
 private:
 	LevelSelection levelSelection;
@@ -69,6 +71,7 @@ private:
 									  // we can have access at any time
 	ISoundEngine* SoundEngine;
 	ISound* CurrentPlayingSound;
+	ISound* interrupSound;
 };
 
 

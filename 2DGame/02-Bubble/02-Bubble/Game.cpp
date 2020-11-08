@@ -141,3 +141,11 @@ void Game::playSound(const char * sound)
 {
 	ISound* aSound = SoundEngine->play2D(sound, false);
 }
+
+void  Game::playInterruptSound(const char* sound) {
+	interrupSound = SoundEngine->play2D(sound, true);
+}
+
+void Game::stopSound() {
+	SoundEngine->removeSoundSource("sounds/snoring.wav");
+}
