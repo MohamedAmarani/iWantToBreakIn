@@ -53,6 +53,10 @@ public:
 	int getPoints() { return points;}
 
 	int getHouse() { return house; }
+	
+	void setHouse(int recentHouse){
+		house = recentHouse;
+	}
 
 	int getLives() { return lives; }
 
