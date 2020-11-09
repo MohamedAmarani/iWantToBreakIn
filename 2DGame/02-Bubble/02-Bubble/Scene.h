@@ -49,6 +49,7 @@ private:
 	bool chase = false;
 	bool pressedU = true;
 	bool collision = false;
+	int count = 0;
 };
 
 

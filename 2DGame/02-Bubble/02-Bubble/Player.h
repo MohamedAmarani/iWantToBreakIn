@@ -18,11 +18,13 @@ public:
 	void update(int deltaTime, bool restart, bool collision, int offset, int offsetR);
 	void render();
 	bool getDidStart();
+	bool getBacking() { return backing; }
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
 	int getX();
 	void restartCount();
 	glm::ivec2 Player::getPosition();
+	void setDidStart(bool b) { didStart = b; }
 
 private:
 	bool bJumping;
@@ -33,7 +35,7 @@ private:
 	TileMap *map;
 	int speed = 3;
 	bool didStart = false;
-	int count = 0;
+	int count = 0, count1 = 0;
 	bool backing = false;
 };
 

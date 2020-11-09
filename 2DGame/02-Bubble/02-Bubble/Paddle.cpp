@@ -29,16 +29,16 @@ void Paddle::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Paddle::update(int deltaTime, bool restart, bool collision, int offset, int offsetR)
+void Paddle::update(int deltaTime, bool restart, bool collision, int offset, int offsetR, bool backing)
 {
 	map->collisionMoveDown(posPaddle, glm::ivec2(32, 32), 2, false);
 	if (restart) {
 		posPaddle.x = 212;
 		posPaddle.y = 400;
-		backing = true;
 	}
+
 	if (offsetR == 93)
-		backing = false;
+
 	sprite->update(deltaTime);
 	if (!backing) {
 		if (Game::instance().getSpecialKey(GLUT_KEY_DOWN) && Game::instance().getSpecialKey(GLUT_KEY_LEFT) && (posPaddle.y + 32) <= 27 * 16 - 2)

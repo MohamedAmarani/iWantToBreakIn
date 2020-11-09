@@ -89,6 +89,7 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
 	bool b = player->getDidStart();
+	bool ba = player->getBacking();
 	int xBee = player->getX();
 	if (b)
 		xBee = -1;
@@ -111,7 +112,7 @@ void Scene::update(int deltaTime)
 	key1->update(1, deltaTime, map->getOffset(), map->getOffseR());
 	key2->update(2, deltaTime, map->getOffset(), map->getOffseR());
 	key3->update(3, deltaTime, map->getOffset(), map->getOffseR());
-	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
+	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR(), ba);
 	glm::vec2 a = paddle->getPosition();
 	glm::vec2 w = winnie->getPosition();
 
@@ -136,19 +137,28 @@ void Scene::update(int deltaTime)
 		winnie->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		winnie->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 		winnie->setTileMap(map);
-		map->setOffset(3);
-
+		++count;
 		winnie->setStarted(false);
 		Game::instance().playSound("sounds/die.mp3");
 
 	}
 	else
 		collision = false;
+	if (count > 0)
+		++count;
 
 	r = restart;
 
-	if (restart)
-		player->restartCount();
+	if (restart) {
+		player->setDidStart(false);
+		if (count == 100 || count == 0)
+			player->restartCount();
+	}
+
+	if (count == 100) {
+		map->setOffset(3);
+		count = 0;
+	}
 
 	if (map->getChase()) {
 		chase = true;

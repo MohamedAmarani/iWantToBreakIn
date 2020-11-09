@@ -73,12 +73,22 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 void Player::update(int deltaTime, bool restart, bool collision, int offset, int offsetR)
 {
 	if (restart) {
+		sprite->changeAnimation(DIE);
 		posPlayer.x = 212;
 		posPlayer.y = 400;
 		backing = true;
 	}
-	if (offsetR == 93)
-		backing = false;
+	if (offsetR == 93) {
+		if(backing)
+			++count1;
+		if (backing && count1 == 100) {
+			sprite->changeAnimation(MOVE_DOWN);
+			backing = false;
+			count1 = 0;
+			count = 0;
+			didStart = false;
+		}
+	}
 	if (Game::instance().getKey(27)) { //ESC
 		count = 0;
 		didStart = false;
@@ -86,8 +96,9 @@ void Player::update(int deltaTime, bool restart, bool collision, int offset, int
 	sprite->update(deltaTime);
 	if (!didStart) {
 		++count;
-		if (count == 150) {
+		if (count == 150 && !backing) {
 			didStart = true;
+			count = 0;
 		}
 	}
 	if (!backing) {
