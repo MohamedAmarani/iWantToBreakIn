@@ -61,9 +61,13 @@ void Menu::update(int deltaTime)
 		cont = 0;
 		password = "";
 	}
-	if (Game::instance().getKey(32)) { //SPACE
+	if (Game::instance().getKey(32) && !pressedSpace) { //SPACE
 		Game::instance().setState(3 + 1);
 	}
+
+	if (!Game::instance().getKey(32))
+		pressedSpace = false;
+
 	if (Game::instance().getKey(27)) { //ESC
 		if (pos == 1) {
 			pos = 0;

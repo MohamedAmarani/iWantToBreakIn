@@ -86,6 +86,9 @@ void Scene::init(int level)
 
 void Scene::update(int deltaTime)
 {
+	if (map->getLives() == 0)
+		Game::instance().setState(1); //GAME OVER
+		
 	currentTime += deltaTime;
 	player->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
 	bool b = player->getDidStart();

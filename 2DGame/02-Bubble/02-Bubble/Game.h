@@ -8,7 +8,7 @@
 #include "Scene.h"
 #include "Credits.h"
 #include "Menu.h"
-#include "LevelSelection.h"
+#include "GameOver.h"
 
 #include <stdio.h>
 #include <irrKlang.h>
@@ -60,7 +60,7 @@ public:
 	void Game::stopSound();
 
 private:
-	LevelSelection levelSelection;
+	GameOver gameOver;
 	Info info;
 	Menu menu;
 	int state;

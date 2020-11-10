@@ -125,8 +125,6 @@ void Winnie::update(int deltaTime, int offset, int offsetR, const glm::ivec2 &po
 			if (!chase)
 				sprite->changeAnimation(SLEEPING);
 		}
-		else if (map->getOffset() != 0)
-			sprite->changeAnimation(NOTHING);
 	}
 }
 

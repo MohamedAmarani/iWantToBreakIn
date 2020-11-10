@@ -27,5 +27,6 @@ bool b;
 int cont = 0;
 string password = "";
 bool keys[256];
+bool pressedSpace = true;
 };
 

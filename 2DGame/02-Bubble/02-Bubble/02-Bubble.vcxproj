@@ -15,6 +15,7 @@
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameOver.h" />
     <ClInclude Include="Info.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="LevelSelection.h" />
@@ -35,6 +36,7 @@
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="Info.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="LevelSelection.cpp" />

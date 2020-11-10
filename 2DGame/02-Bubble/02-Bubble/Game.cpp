@@ -22,7 +22,7 @@ void Game::init()
 	credits.init();
 	menu.init();
 	info.init();
-	levelSelection.init();
+	gameOver.init();
 	state = 0;
 
 	playSoundBGM("sounds/summer.mp3");
@@ -34,7 +34,7 @@ bool Game::update(int deltaTime)
 	if (state == 0)
 		menu.update(deltaTime);
 	else if (state == 1) 
-		levelSelection.update(deltaTime);
+		gameOver.update(deltaTime);
 	else if (state == 2)
 		info.update(deltaTime);
 	else if (state == 3)
@@ -50,7 +50,7 @@ void Game::render()
 	if (state == 0)
 		menu.render();
 	else if (state == 1) 
-		levelSelection.render();
+		gameOver.render();
 	else if (state == 2)
 		info.render();
 	else if (state == 3)
@@ -109,10 +109,6 @@ void Game::setState(int s) {
 	state = s;
 	if (s > 3)
 		scene.init(s - 3);
-	if (state == 1) {
-		levelSelection.setReleased(false);
-		levelSelection.setReleasedESC(false);
-	}
 }
 
 void Game::playSoundBGM(const char * sound)
