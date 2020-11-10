@@ -38,7 +38,6 @@ void GameOver::init()
 	a = false;
 	b = false;
 	projection = glm::ortho(0.f, float(CAMERA_WIDTH - 1), float(CAMERA_HEIGHT - 1), 0.f);
-	Game::instance().playSoundBGM("sounds/gameover.mp3");
 }
 
 void GameOver::update(int deltaTime)
@@ -46,7 +45,7 @@ void GameOver::update(int deltaTime)
 	currentTime += deltaTime;
 
 	if (first) {
-		Game::instance().playSoundBGM("sounds/gameover.mp3");
+		Game::instance().playSound("sounds/gameover.mp3");
 		first = false;
 	}
 
@@ -67,7 +66,7 @@ void GameOver::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(menu);
-	if(cont >= 0 && cont <=40)
+	if (cont >= 0 && cont <= 40)
 		texto.render("PRESS [SPACE] TO GET BACK TO THE MENU", glm::vec2(135, 440), 12, glm::vec4(1, 1, 0, 1));
 	if (cont == 70)
 		cont = 0;
