@@ -42,7 +42,7 @@ void Scene::init(int level)
 {
 	initShaders();
 	string myLevel = "levels/level0";
-	village = 1;
+	village = level;
 	myLevel = myLevel + to_string(level) + ".txt";
 	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -140,6 +140,7 @@ void Scene::update(int deltaTime)
 		++count;
 		winnie->setStarted(false);
 		Game::instance().playSound("sounds/die.mp3");
+		map->setHouse(1);
 
 	}
 	else
@@ -172,6 +173,7 @@ void Scene::update(int deltaTime)
 		pressedU = true;
 		if ((map->getOffset() != 0)) {
 			map->setOffset(map->getOffset() - 1);
+			map->setHouse(map->getHouse() + 1);
 		}
 	}
 	else if (!Game::instance().getKey('u')) {

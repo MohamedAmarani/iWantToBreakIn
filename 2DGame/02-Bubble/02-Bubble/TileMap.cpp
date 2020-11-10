@@ -277,7 +277,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 			map[(3 * offset + (offset * levelTile))*mapSize.x + 8] = 0;
 		}
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
-			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
+			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3 || map[(y + (offset * levelTile))*mapSize.x + x] == 33)) {
 				Game::instance().playSound("sounds/choc.wav");
 			}
 			if (b != 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
@@ -285,7 +285,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 			}
 			if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 					if (map[(y + (offset * levelTile))*mapSize.x + x] > 16)
 						Game::instance().playSound("sounds/miel.wav");
 					else
@@ -326,7 +326,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 
 					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
 						points += 100;
@@ -388,7 +388,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 	for (int y = y0; y <= y1; y++)
 	{
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
-			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
+			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3 || map[(y + (offset * levelTile))*mapSize.x + x] == 33)) {
 				Game::instance().playSound("sounds/choc.wav");
 			}
 			if (b != 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
@@ -396,7 +396,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 			}
 			if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 					if (map[(y + (offset * levelTile))*mapSize.x + x] > 16)
 						Game::instance().playSound("sounds/miel.wav");
 					else
@@ -437,7 +437,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 
 					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
 						points += 100;
@@ -497,7 +497,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 	for (int x = x0; x <= x1; x++)
 	{
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
-			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
+			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3 || map[(y + (offset * levelTile))*mapSize.x + x] == 33)) {
 				Game::instance().playSound("sounds/choc.wav");
 			}
 			if (b != 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
@@ -505,7 +505,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 			}
 			if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 					if (map[(y + (offset * levelTile))*mapSize.x + x] > 16)
 						Game::instance().playSound("sounds/miel.wav");
 					else
@@ -546,7 +546,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 
 					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
 						points += 100;
@@ -607,7 +607,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	for (int x = x0; x <= x1; x++)
 	{
 		if (map[(y + (offset * levelTile))*mapSize.x + x] != 0) {
-			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
+			if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3 || map[(y + (offset * levelTile))*mapSize.x + x] == 33)) {
 				Game::instance().playSound("sounds/choc.wav");
 			}
 			if (b != 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 1 || map[(y + (offset * levelTile))*mapSize.x + x] == 2 || map[(y + (offset * levelTile))*mapSize.x + x] == 3)) {
@@ -615,7 +615,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 			}
 			if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 13 && map[(y + (offset * levelTile))*mapSize.x + x] != 14 && map[(y + (offset * levelTile))*mapSize.x + x] != 15
 				&& map[(y + (offset * levelTile))*mapSize.x + x] != 16) {
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3) {
+				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 					if (map[(y + (offset * levelTile))*mapSize.x + x] > 16)
 						Game::instance().playSound("sounds/miel.wav");
 					else
@@ -656,7 +656,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 2 && map[(y + (offset * levelTile))*mapSize.x + x] != 3
-					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18) {
+					&& map[(y + (offset * levelTile))*mapSize.x + x] != 17 && map[(y + (offset * levelTile))*mapSize.x + x] != 18 && map[(y + (offset * levelTile))*mapSize.x + x] != 33) {
 
 					if (map[(y + (offset * levelTile))*mapSize.x + x] < 13)
 						points += 100;
