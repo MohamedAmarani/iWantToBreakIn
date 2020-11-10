@@ -132,7 +132,7 @@ void Player::update(int deltaTime, bool restart, bool collision, int offset, int
 		{
 			if (sprite->animation() != MOVE_DOWN)
 				sprite->changeAnimation(MOVE_DOWN);
-			if (offset == 3 && offsetR == 93)
+			if ((offset == 3 && offsetR == 93) || (offset == 2 && offsetR == 62) || (offset == 1 && offsetR == 31) || (offset == 0 && offsetR == 0))
 				didStart = true;
 			posPlayer.y -= speed;
 			posPlayer.x -= speed;
@@ -147,7 +147,7 @@ void Player::update(int deltaTime, bool restart, bool collision, int offset, int
 		{
 			if (sprite->animation() != MOVE_DOWN)
 				sprite->changeAnimation(MOVE_DOWN);
-			if (offset == 3 && offsetR == 93)
+			if ((offset == 3 && offsetR == 93) || (offset == 2 && offsetR == 62) || (offset == 1 && offsetR == 31) || (offset == 0 && offsetR == 0))
 				didStart = true;
 			posPlayer.y -= speed;
 			posPlayer.x += speed;
@@ -193,7 +193,7 @@ void Player::update(int deltaTime, bool restart, bool collision, int offset, int
 			if (Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_RIGHT) &&
 				Game::instance().getSpecialKey(GLUT_KEY_UP) && !Game::instance().getSpecialKey(GLUT_KEY_LEFT)) {
 				posPlayer.y -= speed;
-				if (offset == 3 && offsetR == 93)
+				if ((offset == 3 && offsetR == 93) || (offset == 2 && offsetR == 62) || (offset == 1 && offsetR == 31) || (offset == 0 && offsetR == 0))
 					didStart = true;
 				if (map->collisionMoveUp(posPlayer, glm::ivec2(32, 32), 0, false))
 				{

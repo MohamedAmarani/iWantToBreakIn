@@ -117,13 +117,13 @@ void Scene::update(int deltaTime)
 	glm::vec2 w = winnie->getPosition();
 
 	if (map->getOffset() == 1)
-		ball->update(deltaTime, a, b, xBee, key1->getVisible());
+		ball->update(deltaTime, a, b, xBee, key1->getVisible(), map->getOffset(), map->getOffseR());
 	else if (map->getOffset() == 2)
-		ball->update(deltaTime, a, b, xBee, key2->getVisible());
+		ball->update(deltaTime, a, b, xBee, key2->getVisible(), map->getOffset(), map->getOffseR());
 	else if (map->getOffset() == 3)
-		ball->update(deltaTime, a, b, xBee, key3->getVisible());
+		ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
 	else
-		ball->update(deltaTime, a, b, xBee, key3->getVisible());
+		ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
 
 	bool restart = ball->getRestart();
 
@@ -174,8 +174,9 @@ void Scene::update(int deltaTime)
 			map->setOffset(map->getOffset() - 1);
 		}
 	}
-	else if (!Game::instance().getKey('u'))
+	else if (!Game::instance().getKey('u')) {
 		pressedU = false;
+	}
 
 	if (!firstTime) {
 		firstTime = true;
@@ -211,7 +212,7 @@ void Scene::render()
 		key3->render();
 	}
 	player->render();
-	ball->render();
+	ball->render(map->getOffset(), map->getOffseR());
 	paddle->render();
 
 	//The vec4 is color

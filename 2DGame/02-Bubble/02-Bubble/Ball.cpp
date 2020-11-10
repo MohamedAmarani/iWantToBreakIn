@@ -35,7 +35,7 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 }
 
-void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee, bool visibleK)
+void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee, bool visibleK, int offset, int offsetR)
 {
 	if (didStart){
 		xSpeedA = xSpeed = 4.3329096379090570;
@@ -86,17 +86,19 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 	else if (a == 4) {
 		restart = true;
 	}
-
-	posPlayer.x += xSpeed;
-	posPlayer.y += ySpeed;
+	if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR == 93)) {
+		posPlayer.x += xSpeed;
+		posPlayer.y += ySpeed;
+	}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
 }
 
-void Ball::render()
+void Ball::render(int offset, int offsetR)
 {
 	if(visible)
-		sprite->render();
+		if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR >= 93) || (xSpeed == 0 && ySpeed == 0))
+			sprite->render();
 }
 
 void Ball::setTileMap(TileMap *tileMap)
