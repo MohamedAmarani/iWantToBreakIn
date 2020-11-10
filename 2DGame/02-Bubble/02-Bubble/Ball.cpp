@@ -37,7 +37,7 @@ void Ball::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int xBee, bool visibleK, int offset, int offsetR)
 {
-	if (didStart){
+	if (didStart) {
 		xSpeedA = xSpeed = 4.3329096379090570;
 		ySpeedA = ySpeed = -3.6367422330589796;
 	}
@@ -89,6 +89,12 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 	if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR == 93)) {
 		posPlayer.x += xSpeed;
 		posPlayer.y += ySpeed;
+	}
+
+	if ((offset == 0 && offsetR == 0 && ySpeed == 0) || (offset == 1 && offsetR == 31 && ySpeed == 0) 
+		|| (offset == 2 && offsetR == 62 && ySpeed == 0) || (offset == 3 && offsetR == 93 && ySpeed == 0)) {
+		xSpeedA = xSpeed = 4.3329096379090570;
+		ySpeedA = ySpeed = -3.6367422330589796;
 	}
 
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPlayer.x), float(tileMapDispl.y + posPlayer.y)));
