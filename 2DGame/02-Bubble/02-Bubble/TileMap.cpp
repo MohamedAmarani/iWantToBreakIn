@@ -511,24 +511,15 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 					else
 						Game::instance().playSound("sounds/block.mp3");
 				}
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 17) {
-					honey += 100;
-					int u = x % 2;
-					if ((y + offset + 1) % 2 == 0)
-						u += 2;
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 17 || map[(y + (offset * levelTile))*mapSize.x + x] == 19 || 
+					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
+					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
+					map[(y + (offset * levelTile))*mapSize.x + x] == 39 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					if (map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
+						map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)
+						honey += 50;
 					else
-						u += 0;
-					map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
-					u = 0;
-					u = x % 2;
-					if ((y + offset + 1 + 1) % 2 == 0)
-						u += 2;
-					else
-						u += 0;
-					map[(y + 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
-				}
-				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] == 18) {
-					honey += 100;
+						honey += 100;
 					int u = x % 2;
 					if ((y + offset + 1) % 2 == 0)
 						u += 2;
@@ -542,6 +533,29 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 					else
 						u += 0;
 					map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
+				}
+				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 18 || map[(y + (offset * levelTile))*mapSize.x + x] == 20 ||
+					map[(y + (offset * levelTile))*mapSize.x + x] == 22 || map[(y + (offset * levelTile))*mapSize.x + x] == 24 || 
+					map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
+					map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)) {
+					if (map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
+						map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)
+						honey += 50;
+					else
+						honey += 100;
+						int u = x % 2;
+						if ((y + offset + 1) % 2 == 0)
+							u += 2;
+						else
+							u += 0;
+						map[(y + (offset * levelTile))*mapSize.x + x] = 13 + u;
+						u = 0;
+						u = x % 2;
+						if ((y + offset + 1 - 1) % 2 == 0)
+							u += 2;
+						else
+							u += 0;
+						map[(y - 1 + (offset * levelTile))*mapSize.x + x] = 13 + u;
 				}
 				if (b == 1 && map[(y + (offset * levelTile))*mapSize.x + x] != 8 && map[(y + (offset * levelTile))*mapSize.x + x] != 10
 					&& map[(y + (offset * levelTile))*mapSize.x + x] != 11 && map[(y + (offset * levelTile))*mapSize.x + x] != 1
