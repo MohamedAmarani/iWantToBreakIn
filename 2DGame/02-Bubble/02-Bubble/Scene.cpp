@@ -48,6 +48,7 @@ void Scene::init(int level)
 	village = level;
 	myLevel = myLevel + to_string(level) + ".txt";
 	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	map->setLevel(village);
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
 	ball->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -274,6 +275,11 @@ void Scene::render()
 
 	text.render("HOUSE:", glm::vec2(506, 376), 24, glm::vec4(1, 1, 1, 1));
 	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));
+
+	/*string houseValue = "0" + to_string(map->getHoneyLevel1());
+
+	text.render("HOUSE:", glm::vec2(506, 376), 24, glm::vec4(1, 1, 1, 1));
+	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));*/
 
 	text.render("GOD MODE:", glm::vec2(504, 440), 16, glm::vec4(1, 1, 1, 1));
 	if (!s)

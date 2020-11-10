@@ -75,6 +75,9 @@ public:
 	void setS(bool b) { s = b; }
 
 	void decrementLives() { --lives; }
+	int getHoneyLevel1() { return honeyLevel1; }
+
+	void setLevel(int lev) { level = lev; }
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -106,6 +109,8 @@ private:
 	bool open3 = false;
 	bool chase = false;
 	bool s = false;
+	int honeyLevel1 = 18;
+	int level = 1;
 };
 
 
