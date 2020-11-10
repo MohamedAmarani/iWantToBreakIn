@@ -45,19 +45,21 @@ void Menu::update(int deltaTime)
 {
 	currentTime += deltaTime;
 
-	if (Game::instance().getKey(13)) //ENTER
+	if (Game::instance().getKey(13)) { //ENTER
 		if (password == "EASY")
 			Game::instance().setState(3 + 2);
 		else if (password == "ANGRY")
 			Game::instance().setState(3 + 3);
 		else
 			password = "";
+	}
 
 	if (Game::instance().getKey(112) || Game::instance().getKey(80)) { //P
 		if (pos == 0)
 			keys[80] = false;
 		pos = 1;
 		cont = 0;
+		password = "";
 	}
 	if (Game::instance().getKey(32)) { //SPACE
 		Game::instance().setState(3 + 1);
@@ -70,11 +72,20 @@ void Menu::update(int deltaTime)
 		}
 	}
 
+	if (Game::instance().getKey(49))  //1
+		Game::instance().setState(3 + 1);
+
+	if (Game::instance().getKey(50))  //2
+		Game::instance().setState(3 + 2);
+
+	if (Game::instance().getKey(51))  //3
+		Game::instance().setState(3 + 3);
+
 	if (pos == 1) { //leer input de password
 		for (int i = 65; i <= 90; ++i)
 			if (Game::instance().getKey(i) && keys[i]) {
 				keys[i] = false;
-				if (password.size() < 4)
+				if (password.size() < 5)
 					password += i;
 			}
 			else if (!Game::instance().getKey(i))
@@ -82,7 +93,7 @@ void Menu::update(int deltaTime)
 		for (int i = 97; i <= 122; ++i)
 			if (Game::instance().getKey(i) && keys[i]) {
 				keys[i] = false;
-				if (password.size() < 4)
+				if (password.size() < 5)
 					password += i - 32;
 			}
 			else if (!Game::instance().getKey(i))

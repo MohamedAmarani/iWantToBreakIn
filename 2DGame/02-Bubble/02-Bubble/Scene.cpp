@@ -180,6 +180,21 @@ void Scene::update(int deltaTime)
 		pressedU = false;
 	}
 
+	if (Game::instance().getKey('g') && !pressedG) {
+		pressedG = true;
+		if (!s) {
+			s = true;
+			map->setS(true);
+		}
+		else {
+			s = false;
+			map->setS(false);
+		}
+	}
+	else if (!Game::instance().getKey('g')) {
+		pressedG = false;
+	}
+
 	if (!firstTime) {
 		firstTime = true;
 		Game::instance().playSoundBGM("sounds/breakout.mp3");
@@ -249,7 +264,10 @@ void Scene::render()
 	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));
 
 	text.render("GOD MODE:", glm::vec2(504, 440), 16, glm::vec4(1, 1, 1, 1));
-	text.render("FALSE", glm::vec2(566, 456), 12, glm::vec4(1, 1, 1, 1));
+	if (!s)
+		text.render("FALSE", glm::vec2(566, 456), 12, glm::vec4(1, 1, 1, 1));
+	else
+		text.render("TRUE", glm::vec2(566, 456), 12, glm::vec4(1, 1, 1, 1));
 }
 
 void Scene::initShaders()

@@ -1,36 +1,36 @@
 ﻿  TileMap.cpp
 c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(34): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
 c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.h(36): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(264): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(265): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(266): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(268): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(270): warning C4101: 'u': unreferenced local variable
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(382): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(383): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(384): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(386): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(490): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(491): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(492): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(494): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(496): warning C4101: 'u': unreferenced local variable
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(614): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(615): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(616): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(618): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(620): warning C4101: 'u': unreferenced local variable
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(701): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(702): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(703): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(705): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(738): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(739): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(740): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(741): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(773): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(774): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(775): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(267): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(269): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(271): warning C4101: 'u': unreferenced local variable
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(397): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(398): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(399): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(401): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(519): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(520): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(521): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(523): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(525): warning C4101: 'u': unreferenced local variable
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(643): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(644): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(645): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(647): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(649): warning C4101: 'u': unreferenced local variable
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(744): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(745): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(746): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(748): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(781): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(782): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(783): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(784): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(816): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(817): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\tilemap.cpp(818): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
 TexturedQuad.obj : warning LNK4020: a type record in 'c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\debug\vc140.pdb' is corrupted; some symbols and types may not be accessible from the debugger
 Texture.obj : warning LNK4020: a type record in 'c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\debug\vc140.pdb' is corrupted; some symbols and types may not be accessible from the debugger
 Text.obj : warning LNK4020: a type record in 'c:\users\moha1\desktop\b\iwanttobreakin\2dgame\02-bubble\02-bubble\debug\vc140.pdb' is corrupted; some symbols and types may not be accessible from the debugger

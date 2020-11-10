@@ -68,6 +68,8 @@ public:
 
 	void setChase(bool b) { chase = b; }
 
+	void setS(bool b) { s = b; }
+
 	void decrementLives() { --lives; }
 	
 private:
@@ -99,6 +101,7 @@ private:
 	bool open2 = false;
 	bool open3 = false;
 	bool chase = false;
+	bool s = false;
 };
 
 

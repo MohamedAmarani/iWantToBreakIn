@@ -48,8 +48,10 @@ private:
 	bool r = false;
 	bool chase = false;
 	bool pressedU = true;
+	bool pressedG = true;
 	bool collision = false;
 	int count = 0;
+	bool s = false;
 };
 
 

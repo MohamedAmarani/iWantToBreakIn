@@ -31,14 +31,6 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
-	if (Game::instance().getKey(49)) { //1
-		scene.init(1);
-		state = 1;
-	}
-	if (Game::instance().getKey(50)) { //2
-		scene.init(2);
-		state = 1;
-	}
 	if (state == 0)
 		menu.update(deltaTime);
 	else if (state == 1) 
