@@ -514,7 +514,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 				if (b == 1 && (map[(y + (offset * levelTile))*mapSize.x + x] == 17 || map[(y + (offset * levelTile))*mapSize.x + x] == 19 || 
 					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
-					map[(y + (offset * levelTile))*mapSize.x + x] == 39 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
 					if (map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
 						map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)
 						honey += 50;
