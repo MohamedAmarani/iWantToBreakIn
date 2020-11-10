@@ -38,7 +38,6 @@ void GameOver::init()
 	a = false;
 	b = false;
 	projection = glm::ortho(0.f, float(CAMERA_WIDTH - 1), float(CAMERA_HEIGHT - 1), 0.f);
-	Game::instance().playSoundBGM("sounds/gameover.mp3");
 }
 
 void GameOver::update(int deltaTime)
@@ -46,7 +45,7 @@ void GameOver::update(int deltaTime)
 	currentTime += deltaTime;
 
 	if (first) {
-		Game::instance().playSoundBGM("sounds/gameover.mp3");
+		Game::instance().playSound("sounds/gameover.mp3");
 		first = false;
 	}
 
