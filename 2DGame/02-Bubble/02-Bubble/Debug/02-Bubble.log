@@ -1,12 +1,46 @@
-﻿  Portal.cpp
+﻿  TileMap.cpp
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(34): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(36): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(265): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(266): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(267): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(269): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(271): warning C4101: 'u': unreferenced local variable
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(399): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(400): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(401): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(403): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(521): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(522): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(523): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(525): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(527): warning C4101: 'u': unreferenced local variable
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(645): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(646): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(647): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(649): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(651): warning C4101: 'u': unreferenced local variable
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(746): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(747): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(748): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(750): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(783): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(784): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(785): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(786): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(818): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(819): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.cpp(820): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  Compiling...
+  Scene.cpp
 c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(34): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
 c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(36): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
   Generating Code...
   Skipping... (no relevant changes detected)
   main.cpp
   Winnie.cpp
-  TileMap.cpp
-  Scene.cpp
+  Portal.cpp
   Player.cpp
   Paddle.cpp
   Menu.cpp

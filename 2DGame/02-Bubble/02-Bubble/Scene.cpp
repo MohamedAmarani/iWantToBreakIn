@@ -243,7 +243,7 @@ void Scene::render()
 	player->render();
 	ball->render(map->getOffset(), map->getOffseR());
 	paddle->render();
-	portal->render();
+	//portal->render();
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
 

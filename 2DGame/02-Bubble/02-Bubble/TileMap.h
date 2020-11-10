@@ -52,6 +52,8 @@ public:
 
 	int getPoints() { return points;}
 
+	void setPoints(int newPoints) { points = newPoints; }
+
 	int getHouse() { return house; }
 	
 	void setHouse(int recentHouse){
@@ -61,6 +63,8 @@ public:
 	int getLives() { return lives; }
 
 	int getHoney() { return honey; }
+
+	void setHoney(int points) { honey += points; }
 
 	int getKey() { return key; }
 
