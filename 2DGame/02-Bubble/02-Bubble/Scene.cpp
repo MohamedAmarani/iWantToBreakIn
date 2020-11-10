@@ -20,6 +20,7 @@ Scene::Scene()
 	winnie = NULL;
 	ball = NULL;
 	paddle = NULL;
+	portal = NULL;
 	key1 = NULL;
 	key2 = NULL;
 	key3 = NULL;
@@ -35,6 +36,8 @@ Scene::~Scene()
 		delete ball;
 	if (paddle != NULL)
 		delete paddle;
+	if (portal != NULL)
+		delete portal;
 }
 
 
@@ -74,6 +77,10 @@ void Scene::init(int level)
 	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	paddle->setPosition(glm::vec2(212, 400));
 	paddle->setTileMap(map);
+	portal = new Portal();
+	portal->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	portal->setPosition(glm::vec2(212, 400));
+	portal->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
 
@@ -118,6 +125,8 @@ void Scene::update(int deltaTime)
 	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR(), ba);
 	glm::vec2 a = paddle->getPosition();
 	glm::vec2 w = winnie->getPosition();
+
+	portal->update(deltaTime);
 
 	if (map->getOffset() == 1)
 		ball->update(deltaTime, a, b, xBee, key1->getVisible(), map->getOffset(), map->getOffseR());
@@ -234,7 +243,7 @@ void Scene::render()
 	player->render();
 	ball->render(map->getOffset(), map->getOffseR());
 	paddle->render();
-
+	portal->render();
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
 

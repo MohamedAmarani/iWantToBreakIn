@@ -11,6 +11,7 @@
 #include "Text.h"
 #include "Winnie.h"
 #include "Key.h"
+#include "Portal.h"
 
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
@@ -37,6 +38,7 @@ private:
 	Player *player;
 	Ball *ball;
 	Paddle *paddle;
+	Portal *portal;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
