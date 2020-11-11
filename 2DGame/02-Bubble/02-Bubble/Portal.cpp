@@ -13,7 +13,7 @@
 
 enum PortalAnims
 {
-	IDLE, EAT_BALL, EXPULSE_BALL
+	IDLE, EAT_BALL, EXPULSE_BALL, NOTHING
 };
 
 
@@ -23,7 +23,7 @@ void Portal::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	spritesheet.loadFromFile("images/portalWithBall.png", TEXTURE_PIXEL_FORMAT_RGBA);
 
 	sprite = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.1, 0.25), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(3);
+	sprite->setNumberAnimations(4);
 
 
 	sprite->setAnimationSpeed(IDLE, 8);

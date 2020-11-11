@@ -52,6 +52,8 @@ public:
 
 	int getPoints() { return points;}
 
+	void setPoints(int newPoints) { points = newPoints; }
+
 	int getHouse() { return house; }
 	
 	void setHouse(int recentHouse){
@@ -62,6 +64,8 @@ public:
 
 	int getHoney() { return honey; }
 
+	void setHoney(int points) { honey += points; }
+
 	int getKey() { return key; }
 
 	bool getChase() { return chase; }
@@ -71,6 +75,11 @@ public:
 	void setS(bool b) { s = b; }
 
 	void decrementLives() { --lives; }
+	int getHoneyLevel1() { return honeyLevel1; }
+	int getHoneyLevel2() { return honeyLevel2; }
+	int getHoneyLevel3() { return honeyLevel3; }
+
+	void setLevel(int lev) { level = lev; }
 	
 private:
 	bool loadLevel(const string &levelFile);
@@ -102,6 +111,10 @@ private:
 	bool open3 = false;
 	bool chase = false;
 	bool s = false;
+	int honeyLevel1 = 18;
+	int honeyLevel2 = 12;
+	int honeyLevel3 = 30;
+	int level = 1;
 };
 
 

@@ -1,4 +1,4 @@
-﻿  GameOver.cpp
+﻿  Scene.cpp
 c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(34): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
 c:\users\zyy\desktop\4th grade 1\vj\game2d\2dgame\02-bubble\02-bubble\tilemap.h(36): warning C4244: 'return': conversion from 'const float' to 'int', possible loss of data
 SOIL.lib(image_DXT.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'SOIL.lib(image_DXT.obj)' or at 'C:\Users\zyy\Desktop\4th grade 1\VJ\Game2d\2DGame\02-Bubble\Debug\vc100.pdb'; linking object as if no debug info

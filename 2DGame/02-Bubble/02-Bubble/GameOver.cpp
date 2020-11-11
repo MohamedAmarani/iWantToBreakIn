@@ -66,7 +66,7 @@ void GameOver::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(menu);
-	if(cont >= 0 && cont <=40)
+	if (cont >= 0 && cont <= 40)
 		texto.render("PRESS [SPACE] TO GET BACK TO THE MENU", glm::vec2(135, 440), 12, glm::vec4(1, 1, 0, 1));
 	if (cont == 70)
 		cont = 0;
