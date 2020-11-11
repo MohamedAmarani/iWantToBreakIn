@@ -9,6 +9,7 @@
 #include "Credits.h"
 #include "Menu.h"
 #include "GameOver.h"
+#include "Win.h"
 
 #include <stdio.h>
 #include <irrKlang.h>
@@ -60,6 +61,7 @@ public:
 	void Game::stopSound();
 
 private:
+	Win win;
 	GameOver gameOver;
 	Info info;
 	Menu menu;

@@ -79,6 +79,10 @@ public:
 	int getHoneyLevel2() { return honeyLevel2; }
 	int getHoneyLevel3() { return honeyLevel3; }
 
+	int getHitHoney() { return hitHoney; }
+
+	void resetHitHoney() { hitHoney = 0; }
+
 	void setLevel(int lev) { level = lev; }
 	
 private:
@@ -115,6 +119,7 @@ private:
 	int honeyLevel2 = 12;
 	int honeyLevel3 = 30;
 	int level = 1;
+	int hitHoney = 0;
 };
 
 

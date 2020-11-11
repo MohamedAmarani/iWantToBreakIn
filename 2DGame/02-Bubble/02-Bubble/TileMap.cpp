@@ -18,6 +18,7 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
+	hitHoney = 0;
 	offset = 3;
 	key = false;
 	xPos = 0;
@@ -301,6 +302,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -330,6 +332,7 @@ bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + (offset * levelTile))*mapSize.x + x] == 22 || map[(y + (offset * levelTile))*mapSize.x + x] == 24 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -443,6 +446,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -472,6 +476,7 @@ bool TileMap::collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size, 
 					map[(y + (offset * levelTile))*mapSize.x + x] == 22 || map[(y + (offset * levelTile))*mapSize.x + x] == 24 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -583,6 +588,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -612,6 +618,7 @@ bool TileMap::collisionMoveUp(glm::ivec2 &pos, const glm::ivec2 &size, int b, bo
 					map[(y + (offset * levelTile))*mapSize.x + x] == 22 || map[(y + (offset * levelTile))*mapSize.x + x] == 24 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -724,6 +731,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + (offset * levelTile))*mapSize.x + x] == 21 || map[(y + (offset * levelTile))*mapSize.x + x] == 23 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 25 || map[(y + (offset * levelTile))*mapSize.x + x] == 27 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 29 || map[(y + (offset * levelTile))*mapSize.x + x] == 31)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))
@@ -753,6 +761,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 					map[(y + (offset * levelTile))*mapSize.x + x] == 22 || map[(y + (offset * levelTile))*mapSize.x + x] == 24 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 26 || map[(y + (offset * levelTile))*mapSize.x + x] == 28 ||
 					map[(y + (offset * levelTile))*mapSize.x + x] == 30 || map[(y + (offset * levelTile))*mapSize.x + x] == 32)) {
+					++hitHoney;
 					if ((level == 1) && (honeyLevel1 != 0))
 						--honeyLevel1;
 					else if ((level == 2) && (honeyLevel2 != 0))

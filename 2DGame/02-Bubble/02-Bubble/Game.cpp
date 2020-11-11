@@ -31,7 +31,9 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
-	if (state == 0)
+	if (state == -1)
+		win.update(deltaTime);
+	else if (state == 0)
 		menu.update(deltaTime);
 	else if (state == 1) 
 		gameOver.update(deltaTime);
@@ -47,7 +49,9 @@ bool Game::update(int deltaTime)
 void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (state == 0)
+	if (state == -1)
+		win.render();
+	else if (state == 0)
 		menu.render();
 	else if (state == 1) 
 		gameOver.render();
@@ -106,6 +110,8 @@ bool Game::getSpecialKey(int key) const
 }
 
 void Game::setState(int s) {
+	if (state > 3)
+		win.init(state);
 	state = s;
 	if (s > 3)
 		scene.init(s - 3);

@@ -31,6 +31,7 @@
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedQuad.h" />
     <ClInclude Include="TileMap.h" />
+    <ClInclude Include="Win.h" />
     <ClInclude Include="Winnie.h" />
   </ItemGroup>
   <ItemGroup>
@@ -54,6 +55,7 @@
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedQuad.cpp" />
     <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="Win.cpp" />
     <ClCompile Include="Winnie.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

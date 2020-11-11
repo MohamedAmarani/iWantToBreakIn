@@ -10,8 +10,6 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-	void setReleased(bool b);
-	void setReleasedESC(bool b);
 
 private:
 	void initShaders();

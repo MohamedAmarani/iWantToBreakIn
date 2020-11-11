@@ -43,6 +43,7 @@ Scene::~Scene()
 
 void Scene::init(int level)
 {
+	Olevel = level;
 	initShaders();
 	string myLevel = "levels/level0";
 	village = level;
@@ -94,6 +95,19 @@ void Scene::init(int level)
 
 void Scene::update(int deltaTime)
 {
+	if (map->getHitHoney() == 1 && Olevel == 1) {
+		Game::instance().setState(-1); //YOU WIN
+		map->resetHitHoney();
+	}
+	else if (map->getHitHoney() == 12 && Olevel == 2) {
+		Game::instance().setState(1); //YOU WIN
+		map->resetHitHoney();
+	}
+	else if (map->getHitHoney() == 30 && Olevel == 3) {
+		Game::instance().setState(1); //YOU WIN
+		map->resetHitHoney();
+	}
+
 	if (map->getLives() == 0)
 		Game::instance().setState(1); //GAME OVER
 		

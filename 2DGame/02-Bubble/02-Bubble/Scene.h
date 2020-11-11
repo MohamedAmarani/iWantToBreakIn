@@ -54,6 +54,8 @@ private:
 	bool collision = false;
 	int count = 0;
 	bool s = false;
+	int countHoney = 0;
+	int Olevel = 0;
 };
 
 
