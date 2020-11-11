@@ -76,6 +76,8 @@ public:
 
 	void decrementLives() { --lives; }
 	int getHoneyLevel1() { return honeyLevel1; }
+	int getHoneyLevel2() { return honeyLevel2; }
+	int getHoneyLevel3() { return honeyLevel3; }
 
 	void setLevel(int lev) { level = lev; }
 	
@@ -110,6 +112,8 @@ private:
 	bool chase = false;
 	bool s = false;
 	int honeyLevel1 = 18;
+	int honeyLevel2 = 12;
+	int honeyLevel3 = 30;
 	int level = 1;
 };
 

@@ -276,7 +276,7 @@ void Scene::render()
 	text.render("HOUSE:", glm::vec2(506, 376), 24, glm::vec4(1, 1, 1, 1));
 	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));
 
-	/*string houseValue = "0" + to_string(map->getHoneyLevel1());
+	/*string houseValue = "0" + to_string(map->getHoneyLevel3());
 
 	text.render("HOUSE:", glm::vec2(506, 376), 24, glm::vec4(1, 1, 1, 1));
 	text.render(houseValue, glm::vec2(580, 400), 24, glm::vec4(1, 1, 1, 1));*/
