@@ -95,7 +95,7 @@ void Scene::init(int level)
 
 void Scene::update(int deltaTime)
 {
-	if (map->getHitHoney() == 1 && Olevel == 1) {
+	if (map->getHitHoney() == 18 && Olevel == 1) {
 		Game::instance().setState(-1); //YOU WIN
 		map->resetHitHoney();
 	}
