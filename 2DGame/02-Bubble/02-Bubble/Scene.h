@@ -27,6 +27,7 @@ public:
 	void init(int level);
 	void update(int deltaTime);
 	void render();
+	void setFirstTime() { firstTime = false; }
 
 private:
 	void initShaders();

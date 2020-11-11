@@ -99,18 +99,21 @@ void Scene::update(int deltaTime)
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
 		Game::instance().stopBGM();
+		firstTime = false;
 		map->resetHitHoney();
 	}
 	else if (map->getHitHoney() == 12 && Olevel == 2) {
 		Game::instance().setState(1); //YOU WIN
 		Game::instance().stopSound();
 		Game::instance().stopBGM();
+		firstTime = false;
 		map->resetHitHoney();
 	}
 	else if (map->getHitHoney() == 30 && Olevel == 3) {
 		Game::instance().setState(1); //YOU WIN
 		Game::instance().stopSound();
 		Game::instance().stopBGM();
+		firstTime = false;
 		map->resetHitHoney();
 	}
 
