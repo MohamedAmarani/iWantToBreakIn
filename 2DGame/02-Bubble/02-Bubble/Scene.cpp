@@ -75,14 +75,34 @@ void Scene::init(int level)
 	key3->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	key3->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
 	key3->setTileMap(map);
+	portal1 = new Portal();
+	portal1->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 1);
+	portal1->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal1->setTileMap(map);
+	portal2 = new Portal();
+	portal2->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 2);
+	portal2->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal2->setTileMap(map);
+	portal3 = new Portal();
+	portal3->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 3);
+	portal3->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal3->setTileMap(map);
+	portal4 = new Portal();
+	portal4->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 4);
+	portal4->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal4->setTileMap(map);
+	portal5 = new Portal();
+	portal5->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 5);
+	portal5->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal5->setTileMap(map);
+	portal6 = new Portal();
+	portal6->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, 6);
+	portal6->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSizeX(), INIT_PLAYER_Y_TILES * map->getTileSizeY()));
+	portal6->setTileMap(map);
 	paddle = new Paddle();
 	paddle->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	paddle->setPosition(glm::vec2(212, 400));
 	paddle->setTileMap(map);
-	portal = new Portal();
-	portal->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	portal->setPosition(glm::vec2(212, 400));
-	portal->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
 
@@ -110,7 +130,18 @@ void Scene::update(int deltaTime)
 
 	if (map->getLives() == 0)
 		Game::instance().setState(1); //GAME OVER
+
+	glm::vec2 posAux = ball->getPosition();
+
+	if(map->getOffset() == 3 && map->getOffseR() == 93 && pos)
 		
+	portal1->update(deltaTime, 1, map->getOffset(), map->getOffseR(), false, false);
+	portal2->update(deltaTime, 2, map->getOffset(), map->getOffseR(), false, false);
+	portal3->update(deltaTime, 3, map->getOffset(), map->getOffseR(), false, false);
+	portal4->update(deltaTime, 4, map->getOffset(), map->getOffseR(), false, false);
+	portal5->update(deltaTime, 5, map->getOffset(), map->getOffseR(), false, false);
+	portal6->update(deltaTime, 6, map->getOffset(), map->getOffseR(), false, false);
+
 	currentTime += deltaTime;
 	player->update(deltaTime, r, collision, map->getOffset(), map->getOffseR());
 	bool b = player->getDidStart();
@@ -140,8 +171,6 @@ void Scene::update(int deltaTime)
 	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR(), ba);
 	glm::vec2 a = paddle->getPosition();
 	glm::vec2 w = winnie->getPosition();
-
-	portal->update(deltaTime);
 
 	if (map->getOffset() == 1)
 		ball->update(deltaTime, a, b, xBee, key1->getVisible(), map->getOffset(), map->getOffseR());
@@ -258,7 +287,12 @@ void Scene::render()
 	player->render();
 	ball->render(map->getOffset(), map->getOffseR());
 	paddle->render();
-	portal->render();
+	portal1->render();
+	portal2->render();
+	portal3->render();
+	portal4->render();
+	portal5->render();
+	portal6->render();
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
 

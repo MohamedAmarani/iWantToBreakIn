@@ -32,6 +32,7 @@ private:
 	void initShaders();
 
 private:
+	Portal *portal1, *portal2, *portal3, *portal4, *portal5, *portal6;
 	Key *key1, *key2, *key3;
 	Winnie *winnie;
 	TileMap *map;

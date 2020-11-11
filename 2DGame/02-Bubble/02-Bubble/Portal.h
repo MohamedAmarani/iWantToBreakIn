@@ -14,8 +14,8 @@ class Portal
 {
 
 public:
-	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	void update(int deltaTime);
+	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, int n);
+	void update(int deltaTime, int numPortal, int offset, int offsetR, bool enter, bool exit);
 	void render();
 
 	void setTileMap(TileMap *tileMap);
@@ -31,6 +31,7 @@ private:
 	TileMap *map;
 	int speed = 3;
 	int count1 = 0;
+	int num = 0;
 };
 
 
