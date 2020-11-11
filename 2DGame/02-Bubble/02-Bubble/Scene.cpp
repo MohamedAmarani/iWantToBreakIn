@@ -182,7 +182,7 @@ void Scene::update(int deltaTime)
 		chase = false;
 	}
 
-	if (Game::instance().getKey('u') && !pressedU) {
+	if (Game::instance().getKey('u') && !pressedU && player->getDidStart()) {
 		pressedU = true;
 		if ((map->getOffset() != 0)) {
 			map->setOffset(map->getOffset() - 1);
