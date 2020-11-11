@@ -133,7 +133,7 @@ void Scene::update(int deltaTime)
 
 	glm::vec2 posAux = ball->getPosition();
 
-	if(map->getOffset() == 3 && map->getOffseR() == 93 && pos)
+	//if(map->getOffset() == 3 && map->getOffseR() == 93 && pos)
 		
 	portal1->update(deltaTime, 1, map->getOffset(), map->getOffseR(), false, false);
 	portal2->update(deltaTime, 2, map->getOffset(), map->getOffseR(), false, false);
