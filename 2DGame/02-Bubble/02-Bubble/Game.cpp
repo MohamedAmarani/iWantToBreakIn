@@ -146,7 +146,5 @@ void Game::stopSound() {
 }
 
 void Game::stopBGM() {
-	if (CurrentPlayingSound != NULL) {
-		CurrentPlayingSound->stop();
-	}
+	SoundEngine->removeSoundSource("sounds/breakout.mp3");
 }
