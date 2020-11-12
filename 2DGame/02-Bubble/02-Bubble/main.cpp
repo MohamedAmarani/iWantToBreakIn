@@ -79,6 +79,11 @@ static void idleCallback()
 		glutPostRedisplay();
 	}
 }
+static void resize(int width, int height) {
+	// we ignore the params and do:
+	glutReshapeWindow(640, 480);
+}
+
 
 
 int main(int argc, char **argv)
@@ -98,6 +103,7 @@ int main(int argc, char **argv)
 	glutSpecialUpFunc(specialUpCallback);
 	glutMouseFunc(mouseCallback);
 	glutMotionFunc(motionCallback);
+	glutReshapeFunc(resize);
 
 	// GLEW will take care of OpenGL extension functions
 	glewExperimental = GL_TRUE;

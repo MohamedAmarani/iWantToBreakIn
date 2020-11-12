@@ -289,7 +289,7 @@ void Scene::update(int deltaTime)
 	glm::ivec2 pP1 = portal1->getPosition();
 	glm::ivec2 pP2 = portal2->getPosition();
 
-	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 107) && (pB.x < 107 + 35) && (pB.y + 16 > 126) && (pB.y < 126 + 35) && !eating1 && !expulsing2) {
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 8 > 107 + 5) && (pB.x < 107 + 35 + 5) && (pB.y + 8 > 126 + 5) && (pB.y < 126 + 35 + 5) && !eating1 && !expulsing2) {
 		disappear = true;
 		portal1->setAnimation(1); //eat_ball
 		eating1 = true;
@@ -316,7 +316,7 @@ void Scene::update(int deltaTime)
 		expulsing2 = false;
 	}
 
-	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 272) && (pB.x < 272 + 35) && (pB.y + 16 > 309) && (pB.y < 309 + 35) && !eating2 && !expulsing1) {
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 8 > 272 + 5) && (pB.x < 272 + 35 + 5) && (pB.y + 8 > 309 + 5) && (pB.y < 309 + 35 + 5) && !eating2 && !expulsing1) {
 		disappear = true;
 		portal2->setAnimation(1); //eat_ball
 		eating2 = true;
@@ -369,10 +369,7 @@ void Scene::render()
 	}
 	portal1->render();
 	portal2->render();
-	portal3->render();
-	portal4->render();
-	portal5->render();
-	portal6->render();
+
 	player->render();
 	paddle->render();
 	if (!disappear)
