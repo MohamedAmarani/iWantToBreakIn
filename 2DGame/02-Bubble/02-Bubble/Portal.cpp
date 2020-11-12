@@ -71,7 +71,6 @@ void Portal::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, in
 	sprite->addKeyframe(EAT_BALL, glm::vec2(0.8f, 0.75f));
 
 	sprite->setAnimationSpeed(EXPULSE_BALL, 8);
-	sprite->addKeyframe(EXPULSE_BALL, glm::vec2(0.9f, 0.75f));
 	sprite->addKeyframe(EXPULSE_BALL, glm::vec2(0.8f, 0.75f));
 	sprite->addKeyframe(EXPULSE_BALL, glm::vec2(0.7f, 0.75f));
 	sprite->addKeyframe(EXPULSE_BALL, glm::vec2(0.6f, 0.75f));
@@ -154,4 +153,17 @@ void Portal::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posPortal.x), float(tileMapDispl.y + posPortal.y)));
 }
 
+void Portal::setAnimation(int a)
+{
+	sprite->changeAnimation(a);
+}
 
+bool Portal::stoppedEating()
+{
+	return (sprite->animation() == 1 && sprite->getKeyFrame() == 18);
+}
+
+bool Portal::stoppedExpulsing()
+{
+	return (sprite->animation() == 2 && sprite->getKeyFrame() == 18);
+}

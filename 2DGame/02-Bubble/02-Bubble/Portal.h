@@ -20,7 +20,11 @@ public:
 
 	void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	glm::ivec2 getPosition() { return posPortal; }
 
+	void setAnimation (int a);
+	bool stoppedEating();
+	bool stoppedExpulsing();
 
 private:
 	bool bJumping;

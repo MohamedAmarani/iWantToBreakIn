@@ -22,6 +22,8 @@ public:
 	void setPosition(const glm::vec2 &pos);
 	glm::vec2 getPosition() { return posPlayer; }
 	bool getRestart();
+	int getXs() { return xSpeed; }
+	int getYs() { return ySpeed; }
 
 private:
 	bool bJumping, visible;

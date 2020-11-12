@@ -57,6 +57,9 @@ private:
 	bool s = false;
 	int countHoney = 0;
 	int Olevel = 0;
+	bool eating1 = false, eating2 = false, eating3 = false, eating4 = false, eating5 = false, eating6 = false;
+	bool expulsing1 = false, expulsing2 = false, expulsing3 = false, expulsing4 = false, expulsing5 = false, expulsing6 = false;
+	bool disappear = false;
 };
 
 

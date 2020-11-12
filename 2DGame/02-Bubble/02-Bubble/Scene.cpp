@@ -190,15 +190,17 @@ void Scene::update(int deltaTime)
 	paddle->update(deltaTime, r, collision, map->getOffset(), map->getOffseR(), ba);
 	glm::vec2 a = paddle->getPosition();
 	glm::vec2 w = winnie->getPosition();
-
-	if (map->getOffset() == 1)
-		ball->update(deltaTime, a, b, xBee, key1->getVisible(), map->getOffset(), map->getOffseR());
-	else if (map->getOffset() == 2)
-		ball->update(deltaTime, a, b, xBee, key2->getVisible(), map->getOffset(), map->getOffseR());
-	else if (map->getOffset() == 3)
-		ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
-	else
-		ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
+	 
+	if (!disappear) {
+		if (map->getOffset() == 1)
+			ball->update(deltaTime, a, b, xBee, key1->getVisible(), map->getOffset(), map->getOffseR());
+		else if (map->getOffset() == 2)
+			ball->update(deltaTime, a, b, xBee, key2->getVisible(), map->getOffset(), map->getOffseR());
+		else if (map->getOffset() == 3)
+			ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
+		else
+			ball->update(deltaTime, a, b, xBee, key3->getVisible(), map->getOffset(), map->getOffseR());
+	}
 
 	bool restart = ball->getRestart();
 
@@ -282,6 +284,65 @@ void Scene::update(int deltaTime)
 
 	if (map->getHouse() != 4)
 		Game::instance().stopSound();
+
+	glm::ivec2 pB = ball->getPosition();
+	glm::ivec2 pP1 = portal1->getPosition();
+	glm::ivec2 pP2 = portal2->getPosition();
+
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 107) && (pB.x < 107 + 64) && (pB.y + 16 > 117) && (pB.y < 117 + 64) && !eating1 && !expulsing2) {
+		disappear = true;
+		portal1->setAnimation(1); //eat_ball
+		eating1 = true;
+	}
+	if (eating1 && portal1->stoppedEating()) {
+		eating1 = false;
+		portal1->setAnimation(0); //idle
+		portal2->setAnimation(2); //EXPULSE_BALL
+		expulsing2 = true;
+	}
+	if (expulsing2 && portal2->stoppedExpulsing()) {
+		disappear = false;
+		portal2->setAnimation(0); //idle
+		int xs = ball->getXs();
+		int ys = ball->getYs();
+		if (xs >= 0 && ys >= 0)
+			ball->setPosition(glm::vec2(353, 385));//set pos ball
+		else if (xs >= 0 && ys < 0)
+			ball->setPosition(glm::vec2(188, 287));//set pos ball
+		else if (xs < 0 && ys >= 0)
+			ball->setPosition(glm::vec2(353, 385));//set pos ball
+		else if (xs < 0 && ys < 0)
+			ball->setPosition(glm::vec2(255, 287));//set pos ball
+		expulsing2 = false;
+	}
+
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 272) && (pB.x < 272 + 64) && (pB.y + 16 > 304) && (pB.y < 304 + 64) && !eating2 && !expulsing1) {
+		disappear = true;
+		portal2->setAnimation(1); //eat_ball
+		eating2 = true;
+	}
+	if (eating2 && portal2->stoppedEating()) {
+		eating2 = false;
+		portal2->setAnimation(0); //idle
+		portal1->setAnimation(2); //EXPULSE_BALL
+		expulsing1 = true;
+	}
+	if (expulsing1 && portal1->stoppedExpulsing()) {
+		disappear = false;
+		portal1->setAnimation(0); //idle
+		int xs = ball->getXs();
+		int ys = ball->getYs();
+		if (xs>=0 && ys>=0)
+			ball->setPosition(glm::vec2(188, 198));//set pos ball
+		else if (xs >= 0 && ys < 0)
+			ball->setPosition(glm::vec2(188, 100));//set pos ball
+		else if (xs < 0 && ys >= 0)
+			ball->setPosition(glm::vec2(90, 198));//set pos ball
+		else if (xs < 0 && ys < 0)
+			ball->setPosition(glm::vec2(90, 100));//set pos ball
+		expulsing1 = false;
+	}
+
 }
 
 void Scene::render()
@@ -314,7 +375,8 @@ void Scene::render()
 	portal6->render();
 	player->render();
 	paddle->render();
-	ball->render(map->getOffset(), map->getOffseR());
+	if (!disappear)
+		ball->render(map->getOffset(), map->getOffseR());
 
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
