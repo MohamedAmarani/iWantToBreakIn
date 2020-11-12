@@ -9,7 +9,7 @@ public:
 	~GameOver();
 	void init();
 	void update(int deltaTime);
-	void render();
+	void render(int honey);
 
 private:
 	void initShaders();

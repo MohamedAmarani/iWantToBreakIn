@@ -5,6 +5,7 @@
 #include "Credits.h"
 #include "Game.h"
 #include <GL/glut.h>
+#include <string>
 
 
 
@@ -56,7 +57,7 @@ void GameOver::update(int deltaTime)
 	++cont;
 }
 
-void GameOver::render()
+void GameOver::render(int honey)
 {
 	glm::mat4 modelview;
 	texProgram.use();
@@ -66,8 +67,11 @@ void GameOver::render()
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	fondo->render(menu);
-	if (cont >= 0 && cont <= 40)
+	if (cont >= 0 && cont <= 40) {
+		string score = "Your score:" + to_string(honey);
+		texto.render(score, glm::vec2(135, 420), 12, glm::vec4(1, 1, 0, 1));
 		texto.render("PRESS [SPACE] TO GET BACK TO THE MENU", glm::vec2(135, 440), 12, glm::vec4(1, 1, 0, 1));
+	}
 	if (cont == 70)
 		cont = 0;
 }

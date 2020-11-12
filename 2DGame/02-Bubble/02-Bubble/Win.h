@@ -9,7 +9,7 @@ public:
 	~Win();
 	void init(int state);
 	void update(int deltaTime);
-	void render();
+	void render(int honey);
 
 private:
 	void initShaders();

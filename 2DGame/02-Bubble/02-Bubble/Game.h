@@ -55,6 +55,7 @@ public:
 	bool getSpecialKey(int key) const;
 	void setState(int state);
 	void setHoney(int h) { honey = h; };
+	int getHoney() { return honey; };
 	void setPoints(int p) { points = p; };
 	void setLives(int l) { lives = l; };
 

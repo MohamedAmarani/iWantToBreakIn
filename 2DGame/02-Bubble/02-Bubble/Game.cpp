@@ -53,11 +53,11 @@ void Game::render()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	if (state == -1)
-		win.render();
+		win.render(honey);
 	else if (state == 0)
 		menu.render();
 	else if (state == 1) 
-		gameOver.render();
+		gameOver.render(honey);
 	else if (state == 2)
 		info.render();
 	else if (state == 3)
