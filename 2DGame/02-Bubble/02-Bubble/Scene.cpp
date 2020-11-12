@@ -289,7 +289,7 @@ void Scene::update(int deltaTime)
 	glm::ivec2 pP1 = portal1->getPosition();
 	glm::ivec2 pP2 = portal2->getPosition();
 
-	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 107) && (pB.x < 107 + 64) && (pB.y + 16 > 117) && (pB.y < 117 + 64) && !eating1 && !expulsing2) {
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 107) && (pB.x < 107 + 35) && (pB.y + 16 > 126) && (pB.y < 126 + 35) && !eating1 && !expulsing2) {
 		disappear = true;
 		portal1->setAnimation(1); //eat_ball
 		eating1 = true;
@@ -306,17 +306,17 @@ void Scene::update(int deltaTime)
 		int xs = ball->getXs();
 		int ys = ball->getYs();
 		if (xs >= 0 && ys >= 0)
-			ball->setPosition(glm::vec2(353, 385));//set pos ball
+			ball->setPosition(glm::vec2(329, 361));//set pos ball
 		else if (xs >= 0 && ys < 0)
-			ball->setPosition(glm::vec2(188, 287));//set pos ball
+			ball->setPosition(glm::vec2(329, 287));//set pos ball
 		else if (xs < 0 && ys >= 0)
-			ball->setPosition(glm::vec2(353, 385));//set pos ball
+			ball->setPosition(glm::vec2(188, 361));//set pos ball
 		else if (xs < 0 && ys < 0)
-			ball->setPosition(glm::vec2(255, 287));//set pos ball
+			ball->setPosition(glm::vec2(188, 287));//set pos ball
 		expulsing2 = false;
 	}
 
-	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 272) && (pB.x < 272 + 64) && (pB.y + 16 > 304) && (pB.y < 304 + 64) && !eating2 && !expulsing1) {
+	if (map->getOffset() == 1 && map->getOffseR() == 31 && (pB.x + 16 > 272) && (pB.x < 272 + 35) && (pB.y + 16 > 309) && (pB.y < 309 + 35) && !eating2 && !expulsing1) {
 		disappear = true;
 		portal2->setAnimation(1); //eat_ball
 		eating2 = true;
@@ -333,11 +333,11 @@ void Scene::update(int deltaTime)
 		int xs = ball->getXs();
 		int ys = ball->getYs();
 		if (xs>=0 && ys>=0)
-			ball->setPosition(glm::vec2(188, 198));//set pos ball
+			ball->setPosition(glm::vec2(164, 174));//set pos ball
 		else if (xs >= 0 && ys < 0)
-			ball->setPosition(glm::vec2(188, 100));//set pos ball
+			ball->setPosition(glm::vec2(164, 100));//set pos ball
 		else if (xs < 0 && ys >= 0)
-			ball->setPosition(glm::vec2(90, 198));//set pos ball
+			ball->setPosition(glm::vec2(90, 174));//set pos ball
 		else if (xs < 0 && ys < 0)
 			ball->setPosition(glm::vec2(90, 100));//set pos ball
 		expulsing1 = false;

@@ -23,7 +23,7 @@ void Portal::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram, in
 	bJumping = false;
 	spritesheet.loadFromFile("images/portalWithBall (2).png", TEXTURE_PIXEL_FORMAT_RGBA);
 
-	sprite = Sprite::createSprite(glm::ivec2(64, 64), glm::vec2(0.1, 0.25), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(50, 50), glm::vec2(0.1, 0.25), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(4);
 
 
