@@ -30,7 +30,7 @@ void Credits::init()
 	glm::vec2 geom[2] = { glm::vec2(0.f, 0.f), glm::vec2(640.f, 480.f) };
 	glm::vec2 texCoords[2] = { glm::vec2(0.f, 0.f), glm::vec2(1.f, 1.f) };
 	fondo = TexturedQuad::createTexturedQuad(geom, texCoords, texProgram);
-	credits.loadFromFile("images/credits.jpg", TEXTURE_PIXEL_FORMAT_RGBA);
+	credits.loadFromFile("images/credits.png", TEXTURE_PIXEL_FORMAT_RGBA);
 
 
 	projection = glm::ortho(0.f, float(CAMERA_WIDTH - 1), float(CAMERA_HEIGHT - 1), 0.f);
