@@ -24,7 +24,7 @@ public:
 	Scene();
 	~Scene();
 
-	void init(int level);
+	void init(int level, int honey, int points, int lives);
 	void update(int deltaTime);
 	void render();
 

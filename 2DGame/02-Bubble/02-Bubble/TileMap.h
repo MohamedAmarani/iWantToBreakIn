@@ -18,9 +18,9 @@ class TileMap
 
 public:
 	// Tile maps can only be created inside an OpenGL context
-	static TileMap *createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program);
+	static TileMap *createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program, int honey, int points, int lives);
 
-	TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program);
+	TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program, int honey, int points, int lives);
 	~TileMap();
 
 	int getOffset();
@@ -108,7 +108,7 @@ private:
 	bool key;
 	int points = 0;
 	int house = 1;
-	int lives = 4;
+	int lives = 0;
 	int honey = 0;
 	bool open1 = false;
 	bool open2 = false;

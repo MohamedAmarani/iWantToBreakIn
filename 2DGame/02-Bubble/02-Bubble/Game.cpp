@@ -5,6 +5,9 @@
 
 void Game::init()
 {
+	lives = 0;
+	honey = 0;
+	points = 0;
 	bPlay = true;
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	SoundEngine = createIrrKlangDevice();
@@ -113,8 +116,12 @@ void Game::setState(int s) {
 	if (state > 3)
 		win.init(state);
 	state = s;
-	if (s > 3)
-		scene.init(s - 3);
+	if (s > 3) {
+		if (s > 4)
+			scene.init(s - 3, honey, points, lives);
+		else
+			scene.init(s - 3, 0, 0, 4);
+	}
 }
 
 void Game::playSoundBGM(const char * sound)

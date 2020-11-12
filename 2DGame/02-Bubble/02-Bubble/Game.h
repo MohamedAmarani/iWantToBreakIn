@@ -54,6 +54,9 @@ public:
 	bool getKey(int key) const;
 	bool getSpecialKey(int key) const;
 	void setState(int state);
+	void setHoney(int h) { honey = h; };
+	void setPoints(int p) { points = p; };
+	void setLives(int l) { lives = l; };
 
 	void playSoundBGM(const char* sound);
 	void playSound(const char* sound);
@@ -75,6 +78,9 @@ private:
 	ISoundEngine* SoundEngine;
 	ISound* CurrentPlayingSound;
 	ISound* interrupSound;
+	int honey;
+	int points;
+	int lives;
 };
 
 

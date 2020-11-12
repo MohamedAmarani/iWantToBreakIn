@@ -41,14 +41,15 @@ Scene::~Scene()
 }
 
 
-void Scene::init(int level)
+void Scene::init(int level, int honey, int points, int lives)
 {
+	s = false;
 	Olevel = level;
 	initShaders();
 	string myLevel = "levels/level0";
 	village = level;
 	myLevel = myLevel + to_string(level) + ".txt";
-	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	map = TileMap::createTileMap(myLevel, glm::vec2(SCREEN_X, SCREEN_Y), texProgram, honey, points, lives);
 	map->setLevel(village);
 	//map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	ball = new Ball();
@@ -116,18 +117,25 @@ void Scene::init(int level)
 void Scene::update(int deltaTime)
 {
 	if (map->getHitHoney() == 18 && Olevel == 1) {
+		Game::instance().setHoney(map->getHoney());
+		Game::instance().setPoints(map->getPoints());
+		Game::instance().setLives(map->getLives() + 1);
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
 		firstTime = false;
 		map->resetHitHoney();
 	}
 	else if (map->getHitHoney() == 12 && Olevel == 2) {
+		Game::instance().setHoney(map->getHoney());
+		Game::instance().setPoints(map->getPoints());
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
 		firstTime = false;
 		map->resetHitHoney();
 	}
 	else if (map->getHitHoney() == 30 && Olevel == 3) {
+		Game::instance().setHoney(map->getHoney());
+		Game::instance().setPoints(map->getPoints());
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
 		firstTime = false;
@@ -290,15 +298,16 @@ void Scene::render()
 	else if (map->getOffset() == 3) {
 		key3->render();
 	}
-	player->render();
-	ball->render(map->getOffset(), map->getOffseR());
-	paddle->render();
 	portal1->render();
 	portal2->render();
 	portal3->render();
 	portal4->render();
 	portal5->render();
 	portal6->render();
+	player->render();
+	paddle->render();
+	ball->render(map->getOffset(), map->getOffseR());
+
 	//The vec4 is color
 	text.render("HONEY:", glm::vec2(508, 40), 24, glm::vec4(1, 1, 1, 1));
 
