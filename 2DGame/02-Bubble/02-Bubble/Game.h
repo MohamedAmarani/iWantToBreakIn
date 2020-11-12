@@ -59,6 +59,7 @@ public:
 	void playSound(const char* sound);
 	void playInterruptSound(const char* sound);
 	void Game::stopSound();
+	void Game::stopBGM();
 
 private:
 	Win win;
