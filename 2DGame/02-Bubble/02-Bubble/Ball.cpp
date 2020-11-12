@@ -87,14 +87,12 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 		restart = true;
 	}
 	if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR == 93)) {
-		if ((posPlayer.x + xSpeed < 397.649567 + 16) && (posPlayer.x + xSpeed > 33)) {
 			posPlayer.x += xSpeed;
 			posPlayer.y += ySpeed;
-		}
 	}
 
-	if ((offset == 0 && offsetR == 0 && ySpeed == 0) || (offset == 1 && offsetR == 31 && ySpeed == 0) 
-		|| (offset == 2 && offsetR == 62 && ySpeed == 0) || (offset == 3 && offsetR == 93 && ySpeed == 0)) {
+	if (((offset == 0 && offsetR == 0 && ySpeed == 0) || (offset == 1 && offsetR == 31 && ySpeed == 0) 
+		|| (offset == 2 && offsetR == 62 && ySpeed == 0) || (offset == 3 && offsetR == 93 && ySpeed == 0)) && visible) {
 		xSpeedA = xSpeed = 4.3329096379090570;
 		ySpeedA = ySpeed = -3.6367422330589796;
 	}
