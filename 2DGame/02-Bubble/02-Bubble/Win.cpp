@@ -78,10 +78,10 @@ void Win::render(int honey)
 	fondo->render(menu);
 	string aux = "THE PASSWORD OF THE LEVEL " + to_string(level) + " IS " + password;
 	if (level - 1 < 3 && level != 0)
-		texto.render(aux, glm::vec2(200, 420), 12, glm::vec4(1, 1, 0, 1));
+		texto.render(aux, glm::vec2(135, 420), 12, glm::vec4(1, 1, 0, 1));
 	else {
 		string score = "Your score:" + to_string(honey);
-		texto.render(score, glm::vec2(135, 420), 12, glm::vec4(1, 1, 0, 1));
+		texto.render(score, glm::vec2(308, 420), 12, glm::vec4(1, 1, 0, 1));
 	}
 	if (cont >= 0 && cont <= 40)
 		texto.render("PRESS [SPACE] TO CONTINUE", glm::vec2(185, 440), 12, glm::vec4(1, 1, 0, 1));
