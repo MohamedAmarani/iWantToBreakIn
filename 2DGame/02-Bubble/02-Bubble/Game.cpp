@@ -144,3 +144,7 @@ void  Game::playInterruptSound(const char* sound) {
 void Game::stopSound() {
 	SoundEngine->removeSoundSource("sounds/snoring3.wav");
 }
+
+void Game::stopBGM() {
+	SoundEngine->removeSoundSource("sounds/breakout.mp3");
+}

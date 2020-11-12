@@ -58,7 +58,7 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 	if (map->collisionMoveDown(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), glm::ivec2(16, 16), 1, visibleK))
 		ySpeedA = ySpeed = ySpeed * (-1);
 	if ((aux = map->collisionMoveDownBallX(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), posPlayer, glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
-		xSpeedA = xSpeed = aux; 
+		xSpeedA = xSpeed = aux;
 	if ((aux = map->collisionMoveDownBallY(glm::ivec2(posPlayer.x, posPlayer.y + ySpeed), posPlayer, glm::ivec2(16, 16), 1, xSpeed, ySpeed)) != -100)
 		ySpeedA = ySpeed = aux;
 	if (map->collisionMoveLeft(glm::ivec2(posPlayer.x + xSpeed, posPlayer.y), glm::ivec2(16, 16), 1, visibleK))
@@ -78,7 +78,7 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 		xSpeed = ySpeed = 0;
 		posPlayer.y = 34;
 	}
-	else if (a == 2){
+	else if (a == 2) {
 		visible = true;
 		xSpeed = xSpeedA;
 		ySpeed = ySpeedA;
@@ -87,13 +87,11 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 		restart = true;
 	}
 	if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR == 93)) {
-		if ((posPlayer.x + xSpeed < 397.649567 + 16) && (posPlayer.x + xSpeed > 33)) {
-			posPlayer.x += xSpeed;
-			posPlayer.y += ySpeed;
-		}
+		posPlayer.x += xSpeed;
+		posPlayer.y += ySpeed;
 	}
 
-	if ((offset == 0 && offsetR == 0 && ySpeed == 0) || (offset == 1 && offsetR == 31 && ySpeed == 0) 
+	if ((offset == 0 && offsetR == 0 && ySpeed == 0) || (offset == 1 && offsetR == 31 && ySpeed == 0)
 		|| (offset == 2 && offsetR == 62 && ySpeed == 0) || (offset == 3 && offsetR == 93 && ySpeed == 0)) {
 		xSpeedA = xSpeed = 4.3329096379090570;
 		ySpeedA = ySpeed = -3.6367422330589796;
@@ -104,7 +102,7 @@ void Ball::update(int deltaTime, const glm::vec2 &posPaddle, bool didStart, int 
 
 void Ball::render(int offset, int offsetR)
 {
-	if(visible)
+	if (visible)
 		if ((offset == 0 && offsetR == 0) || (offset == 1 && offsetR == 31) || (offset == 2 && offsetR == 62) || (offset == 3 && offsetR >= 93) || (xSpeed == 0 && ySpeed == 0))
 			sprite->render();
 }

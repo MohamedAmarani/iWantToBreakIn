@@ -50,7 +50,7 @@ void Win::update(int deltaTime)
 	currentTime += deltaTime;
 
 	if (first) {
-		Game::instance().playSound("sounds/win.mp3");
+		Game::instance().playSound("sounds/win.wav");
 		first = false;
 	}
 
