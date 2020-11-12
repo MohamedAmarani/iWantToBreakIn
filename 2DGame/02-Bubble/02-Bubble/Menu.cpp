@@ -131,7 +131,7 @@ void Menu::render()
 		if (cont >= 50)
 			cont = 0;
 		texto.render("OR P FOR PASSWORD", glm::vec2(186, 400), 20, glm::vec4(1, 1, 1, 1));
-		texto.render("INSTRUCCTION(PRESS I)", glm::vec2(160, 440), 20, glm::vec4(1, 1, 1, 1));
+		texto.render("INSTRUCTIONS(PRESS I)", glm::vec2(160, 440), 20, glm::vec4(1, 1, 1, 1));
 		texto.render("CREDITS(PRESS C)", glm::vec2(186, 460), 20, glm::vec4(1, 1, 1, 1));
 	}
 	else {
