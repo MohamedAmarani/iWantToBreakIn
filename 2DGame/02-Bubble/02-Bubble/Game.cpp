@@ -115,7 +115,7 @@ void Game::setState(int s) {
 		win.init(state);
 	state = s;
 	if (s > 3) {
-		if (s > 4)
+		if(lives != 0)
 			scene.init(s - 3, honey, points, lives);
 		else
 			scene.init(s - 3, 0, 0, 4);
