@@ -106,7 +106,7 @@ void Scene::init(int level, int honey, int points, int lives)
 	paddle->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
-
+	Game::instance().playSoundBGM("sounds/breakout.mp3");
 	// Select which font you want to use
 	//if (!text.init("fonts/OpenSans-Regular.ttf"))
 	if (!text.init("fonts/joystixMonospace.ttf"))
@@ -122,6 +122,7 @@ void Scene::update(int deltaTime)
 		Game::instance().setLives(map->getLives() + 1);
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
+		Game::instance().stopBGM();
 		firstTime = false;
 		map->resetHitHoney();
 	}
@@ -130,6 +131,7 @@ void Scene::update(int deltaTime)
 		Game::instance().setPoints(map->getPoints());
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
+		Game::instance().stopBGM();
 		firstTime = false;
 		map->resetHitHoney();
 	}
@@ -138,12 +140,15 @@ void Scene::update(int deltaTime)
 		Game::instance().setPoints(map->getPoints());
 		Game::instance().setState(-1); //YOU WIN
 		Game::instance().stopSound();
+		Game::instance().stopBGM();
 		firstTime = false;
 		map->resetHitHoney();
 	}
 
-	if (map->getLives() == 0)
+	if (map->getLives() == 0) {
+		Game::instance().stopBGM();
 		Game::instance().setState(1); //GAME OVER
+	}
 
 	glm::vec2 posAux = ball->getPosition();
 
@@ -267,13 +272,16 @@ void Scene::update(int deltaTime)
 
 	if (!firstTime) {
 		firstTime = true;
-		Game::instance().playSoundBGM("sounds/breakout.mp3");
+		//Game::instance().playSoundBGM("sounds/breakout.mp3");
 	}
 	if (Game::instance().getKey(27)) { //ESC
 		firstTime = false;
 		Game::instance().playSoundBGM("sounds/summer.mp3");
 		Game::instance().setState(0);
 	}
+
+	if (map->getHouse() != 4)
+		Game::instance().stopSound();
 }
 
 void Scene::render()

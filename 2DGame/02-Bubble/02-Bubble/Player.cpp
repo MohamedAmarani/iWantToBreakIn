@@ -77,6 +77,7 @@ void Player::update(int deltaTime, bool restart, bool collision, int offset, int
 		posPlayer.x = 212;
 		posPlayer.y = 400;
 		backing = true;
+		Game::instance().playSound("sounds/die.mp3");
 	}
 	if (offsetR == 93) {
 		if(backing)

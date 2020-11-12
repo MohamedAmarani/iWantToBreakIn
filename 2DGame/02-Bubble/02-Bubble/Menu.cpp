@@ -54,6 +54,13 @@ void Menu::update(int deltaTime)
 			password = "";
 	}
 
+	if (Game::instance().getKey('c')) {
+			Game::instance().setState(3);
+	}
+	if (Game::instance().getKey('i')) {
+		Game::instance().setState(2);
+	}
+
 	if (Game::instance().getKey(112) || Game::instance().getKey(80)) { //P
 		if (pos == 0)
 			keys[80] = false;
@@ -119,11 +126,13 @@ void Menu::render()
 	++cont;
 	if (pos == 0) {
 		if (cont >= 20) {
-			texto.render("PRESS FIRE TO START", glm::vec2(170, 400), 20, glm::vec4(1, 1, 1, 1));
+			texto.render("PRESS FIRE TO START", glm::vec2(170, 380), 20, glm::vec4(1, 1, 1, 1));
 		}
 		if (cont >= 50)
 			cont = 0;
-		texto.render("OR P FOR PASSWORD", glm::vec2(186, 420), 20, glm::vec4(1, 1, 1, 1));
+		texto.render("OR P FOR PASSWORD", glm::vec2(186, 400), 20, glm::vec4(1, 1, 1, 1));
+		texto.render("INSTRUCCTION(PRESS I)", glm::vec2(160, 440), 20, glm::vec4(1, 1, 1, 1));
+		texto.render("CREDITS(PRESS C)", glm::vec2(186, 460), 20, glm::vec4(1, 1, 1, 1));
 	}
 	else {
 		texto.render("ENTER PASSWORD : " + password, glm::vec2(130, 400), 20, glm::vec4(1, 1, 1, 1));

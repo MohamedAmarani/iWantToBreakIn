@@ -70,8 +70,6 @@ void Game::keyPressed(int key)
 {
 	//if(key == 27) // Escape code
 	//bPlay = false;
-	if(key == '1')
-		SoundEngine->removeSoundSource("sounds/summer.mp3");
 	keys[key] = true;
 }
 
